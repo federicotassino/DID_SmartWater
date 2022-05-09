@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_plants_to_addPlant"
             app:destination="@id/addPlant" />
+        <action
+            android:id="@+id/action_plants_to_plants_SpecificPlant"
+            app:destination="@id/plants_SpecificPlant" />
     </fragment>
     <fragment
         android:id="@+id/addPlant"
@@ -49,6 +52,9 @@
         <action
             android:id="@+id/action_settings_to_plants"
             app:destination="@id/plants" />
+        <action
+            android:id="@+id/action_settings_to_settings_WifiEsp2"
+            app:destination="@id/settings_WifiEsp2" />
     </fragment>
     <fragment
         android:id="@+id/profile"
@@ -64,5 +70,47 @@
         <action
             android:id="@+id/action_profile_to_plants"
             app:destination="@id/plants" />
+        <action
+            android:id="@+id/action_profile_to_profile_StoricoPiante"
+            app:destination="@id/profile_StoricoPiante" />
+        <action
+            android:id="@+id/action_profile_to_profile_GestioneAccount"
+            app:destination="@id/profile_GestioneAccount" />
+    </fragment>
+    <fragment
+        android:id="@+id/plants_SpecificPlant"
+        android:name="it.polito.did.did_smartwater.ui.main.Plants_SpecificPlant"
+        android:label="fragment_plants__specific_plant"
+        tools:layout="@layout/fragment_plants__specific_plant" >
+        <action
+            android:id="@+id/action_plants_SpecificPlant_to_plants"
+            app:destination="@id/plants" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_GestioneAccount"
+        android:name="it.polito.did.did_smartwater.ui.main.Profile_GestioneAccountù"
+        android:label="fragment_profile__gestione_account"
+        tools:layout="@layout/fragment_profile__gestione_account" >
+        <action
+            android:id="@+id/action_profile_GestioneAccount_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile_StoricoPiante"
+        android:name="it.polito.did.did_smartwater.ui.main.Profile_StoricoPiante"
+        android:label="fragment_profile__storico_piante"
+        tools:layout="@layout/fragment_profile__storico_piante" >
+        <action
+            android:id="@+id/action_profile_StoricoPiante_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings_WifiEsp2"
+        android:name="it.polito.did.did_smartwater.ui.main.Settings_WifiEsp"
+        android:label="fragment_settings__wifi_esp"
+        tools:layout="@layout/fragment_settings__wifi_esp" >
+        <action
+            android:id="@+id/action_settings_WifiEsp2_to_settings"
+            app:destination="@id/settings" />
     </fragment>
 </navigation>

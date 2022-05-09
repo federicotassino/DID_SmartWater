@@ -11,7 +11,7 @@ import it.polito.did.did_smartwater.model.Plant
 
 class ItemAdapter(
     private val context: Context,
-    private val dataset: List<Plant>
+    private val dataset: List<Plant>,
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {

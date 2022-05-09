@@ -56,6 +56,7 @@ class Plants : Fragment(R.layout.plants) {
 
         plantList.text = viewModel.plantsList
 
+        //debug dimensione lista (da togliere)
         plantListSize.text = DataSource().loadPlants().size.toString()
 
         recyclerView.adapter = ItemAdapter(requireContext(), myDataSet)
