@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import it.polito.did.did_smartwater.R
 
@@ -17,14 +16,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Settings.newInstance] factory method to
+ * Use the [Settings_WifiEsp.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Settings : Fragment(R.layout.fragment_settings) {
+class Settings_WifiEsp : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    private val viewModel by activityViewModels<MainViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,31 +32,23 @@ class Settings : Fragment(R.layout.fragment_settings) {
         }
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_settings__wifi_esp, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonPlants = view.findViewById<Button>(R.id.buttonPlants)
-        val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
-        val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
-        val buttonWifi = view.findViewById<Button>(R.id.buttonWifi)
+        val buttonBack = view.findViewById<Button>(R.id.buttonBack)
 
-        buttonPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_plants)
-        }
-
-        buttonAddPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_addPlant)
-        }
-
-        buttonProfile.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_profile)
-        }
-
-        buttonWifi.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
+        buttonBack.setOnClickListener(){
+            findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
         }
     }
-
 
     companion object {
         /**
@@ -67,12 +57,12 @@ class Settings : Fragment(R.layout.fragment_settings) {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Settings.
+         * @return A new instance of fragment Settings_WifiEsp.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Settings().apply {
+            Settings_WifiEsp().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

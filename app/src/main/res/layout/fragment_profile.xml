@@ -54,6 +54,26 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonSettings" />
 
+        <Button
+            android:id="@+id/buttonAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Manage account"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonStoricoPiante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Plant Collection"
+            app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buttonAccount" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

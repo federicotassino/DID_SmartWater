@@ -40,6 +40,8 @@ class Profile : Fragment(R.layout.fragment_profile) {
         val buttonPlants = view.findViewById<Button>(R.id.buttonPlants)
         val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
         val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
+        val buttonAccount = view.findViewById<Button>(R.id.buttonAccount)
+        val buttonStoricoPiante = view.findViewById<Button>(R.id.buttonStoricoPiante)
 
         buttonPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_profile_to_plants)
@@ -51,6 +53,14 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
         buttonSettings.setOnClickListener(){
             findNavController().navigate(R.id.action_profile_to_settings)
+        }
+
+        buttonAccount.setOnClickListener(){
+            findNavController().navigate(R.id.action_profile_to_profile_GestioneAccount)
+        }
+
+        buttonStoricoPiante.setOnClickListener(){
+            findNavController().navigate(R.id.action_profile_to_profile_StoricoPiante)
         }
     }
 
