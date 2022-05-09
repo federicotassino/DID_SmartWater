@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">DID_SmartWater</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Piante</string>
+    <string name="plant1">Pianta 1</string>
+    <string name="plant2">Pianta 2</string>
+    <string name="plant3">Pianta 3</string>
+    <string name="plant4">Pianta 4</string>
+    <string name="plant5">Pianta 5</string>
+    <string name="plant6">Pianta 6</string>
+    <string name="plant7">Pianta 7</string>
+    <string name="plant8">Pianta 8</string>
+    <string name="plant9">Pianta 9</string>
+    <string name="plant10">Pianta 10</string>
 </resources>

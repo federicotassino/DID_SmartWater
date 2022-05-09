@@ -10,7 +10,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
+import it.polito.did.did_smartwater.adapter.ItemAdapter
+import it.polito.did.did_smartwater.data.DataSource
 
 class Plants : Fragment(R.layout.plants) {
 
@@ -26,7 +29,6 @@ class Plants : Fragment(R.layout.plants) {
 
     private val viewModel by activityViewModels<MainViewModel>()
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -34,6 +36,10 @@ class Plants : Fragment(R.layout.plants) {
         val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
         val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
         val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
+        val plantList = view.findViewById<TextView>(R.id.plantList)
+        val plantListSize = view.findViewById<TextView>(R.id.textViewListSize)
+        val myDataSet = DataSource().loadPlants()
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         buttonAddPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_plants_to_addPlant)
@@ -47,8 +53,12 @@ class Plants : Fragment(R.layout.plants) {
             findNavController().navigate(R.id.action_plants_to_profile)
         }
 
-        val plantList = view.findViewById<TextView>(R.id.plantList)
+
         plantList.text = viewModel.plantsList
+
+        plantListSize.text = DataSource().loadPlants().size.toString()
+
+        recyclerView.adapter = ItemAdapter(requireContext(), myDataSet)
     }
 
 }
