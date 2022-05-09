@@ -3,11 +3,66 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/plants">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="it.polito.did.did_smartwater.ui.main.MainFragment"
-        android:label="main_fragment"
-        tools:layout="@layout/main_fragment" />
+        android:id="@+id/plants"
+        android:name="it.polito.did.did_smartwater.ui.main.Plants"
+        android:label="plants"
+        tools:layout="@layout/plants">
+        <action
+            android:id="@+id/action_plants_to_settings"
+            app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_plants_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_plants_to_addPlant"
+            app:destination="@id/addPlant" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPlant"
+        android:name="it.polito.did.did_smartwater.ui.main.AddPlant"
+        android:label="fragment_add_plant"
+        tools:layout="@layout/fragment_add_plant" >
+        <action
+            android:id="@+id/action_addPlant_to_settings"
+            app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_addPlant_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_addPlant_to_plants"
+            app:destination="@id/plants" />
+    </fragment>
+    <fragment
+        android:id="@+id/settings"
+        android:name="it.polito.did.did_smartwater.ui.main.Settings"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settings_to_addPlant"
+            app:destination="@id/addPlant" />
+        <action
+            android:id="@+id/action_settings_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_settings_to_plants"
+            app:destination="@id/plants" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="it.polito.did.did_smartwater.ui.main.Profile"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_addPlant"
+            app:destination="@id/addPlant" />
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_profile_to_plants"
+            app:destination="@id/plants" />
+    </fragment>
 </navigation>
