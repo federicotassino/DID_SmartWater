@@ -8,7 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
@@ -25,6 +28,14 @@ class Plants : Fragment(R.layout.plants) {
             f.arguments = b
             return f
         }
+
+        fun onItemClickedCompanion() {
+           //can't call findNavController
+        }
+    }
+
+    fun onItemClicked(position: Int){
+        findNavController().navigate(R.id.action_plants_to_plants_SpecificPlant)
     }
 
     private val viewModel by activityViewModels<MainViewModel>()
@@ -41,6 +52,8 @@ class Plants : Fragment(R.layout.plants) {
         val myDataSet = DataSource().loadPlants()
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
+        //recyclerView.addOnItemTouchListener(new RecyclerItemClickListener)
+
         buttonAddPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_plants_to_addPlant)
         }
@@ -54,7 +67,7 @@ class Plants : Fragment(R.layout.plants) {
         }
 
 
-        plantList.text = viewModel.plantsList
+        plantList.text = myDataSet[0].name
 
         //debug dimensione lista (da togliere)
         plantListSize.text = DataSource().loadPlants().size.toString()

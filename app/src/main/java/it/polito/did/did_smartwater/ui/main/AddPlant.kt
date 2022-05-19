@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import it.polito.did.did_smartwater.R
@@ -38,6 +39,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        //menu bar references
         val buttonPlants = view.findViewById<Button>(R.id.buttonPlants)
         val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
         val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
@@ -54,11 +56,19 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             findNavController().navigate(R.id.action_addPlant_to_profile)
         }
 
+        //views references
         val textPlantName = view.findViewById<EditText>(R.id.plantName)
+        val buttonManual = view.findViewById<RadioButton>(R.id.buttonManual)
+        val buttonScheduled = view.findViewById<RadioButton>(R.id.buttonScheduled)
+        val buttonAutomatic = view.findViewById<RadioButton>(R.id.buttonAutomatic)
+        val textPlantNote = view.findViewById<EditText>(R.id.plantNote)
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
 
         buttonAdd.setOnClickListener(){
-            viewModel.plantsList = viewModel.plantsList.plus("\n").plus(textPlantName.text.toString())
+            //viewModel.plantsList = viewModel.plantsList.plus("\n").plus(textPlantName.text.toString())
+            //prendere nome dalla view
+            //prendere radioButton selezionato
+            //prendere note dalla view
         }
     }
 
