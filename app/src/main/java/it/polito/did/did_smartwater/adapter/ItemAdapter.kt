@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.model.Plant
+import it.polito.did.did_smartwater.ui.main.Plants
 
 class ItemAdapter(
     private val context: Context,
@@ -28,7 +31,11 @@ class ItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text =  context.resources.getString(item.stringResourceId)
+        holder.textView.text =  dataset[position].name
+        holder.textView.setOnClickListener(){
+            //Plants.onItemClickedCompanion()
+            holder.textView.text = "Cliccato"
+        }
     }
 
     override fun getItemCount(): Int {
