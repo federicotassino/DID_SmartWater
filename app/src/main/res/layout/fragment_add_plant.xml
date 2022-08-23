@@ -48,10 +48,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView2"
+                    android:imeOptions="actionDone"/>
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/textViewIrrigation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
@@ -69,7 +70,7 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5">
+                    app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation">
 
                     <RadioButton
                         android:id="@+id/buttonManual"
@@ -190,14 +191,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
-            <Button
+            <ImageView
                 android:id="@+id/buttonPlants"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="0.8"
-                android:text="Plants"
+                android:layout_width="82dp"
+                android:layout_height="68dp"
+                android:src="@drawable/menu_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/buttonAddPlants"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
