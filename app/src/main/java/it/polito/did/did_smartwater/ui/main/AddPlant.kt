@@ -1,16 +1,17 @@
 package it.polito.did.did_smartwater.ui.main
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
-import androidx.annotation.NonNull
-import androidx.core.view.marginTop
+import android.widget.TextView.OnEditorActionListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import it.polito.did.did_smartwater.R
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +41,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         super.onViewCreated(view, savedInstanceState)
 
         //menu bar references
-        val buttonPlants = view.findViewById<Button>(R.id.buttonPlants)
+        val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
         val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
         val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
 
@@ -58,6 +59,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
         //views references
         val textPlantName = view.findViewById<EditText>(R.id.plantName)
+        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
         val buttonManual = view.findViewById<RadioButton>(R.id.buttonManual)
         val buttonScheduled = view.findViewById<RadioButton>(R.id.buttonScheduled)
         val buttonAutomatic = view.findViewById<RadioButton>(R.id.buttonAutomatic)
@@ -75,6 +77,27 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val textPlantNote = view.findViewById<EditText>(R.id.plantNote)
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
         val dateDebug = view.findViewById<TextView>(R.id.dateDebug)    //debug per data select
+
+        //variabili per nuova pianta
+        var newPlantName = ""
+        var newPlantIrrigation = -1
+        var newPlantStartDate = ""
+        var newPlantDays = -1
+        var newPlantNote = ""
+
+        textPlantName.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent -> //triggered when done editing (as clicked done on keyboard)
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                textPlantName.clearFocus()
+            }
+            false
+        })
+
+        textPlantNote.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent -> //triggered when done editing (as clicked done on keyboard)
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                textPlantNote.clearFocus()
+            }
+            false
+        })
 
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
@@ -117,6 +140,41 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             //prendere nome dalla view
             //prendere radioButton selezionato
             //prendere note dalla view
+            newPlantName = textPlantName.text.toString()
+            if(radioGroup.checkedRadioButtonId==buttonManual.id)
+                newPlantIrrigation = 0
+            if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
+                newPlantIrrigation = 1
+                newPlantDays = pickerDays.value
+            }
+            if(radioGroup.checkedRadioButtonId==buttonAutomatic.id)
+                newPlantIrrigation = 2
+            newPlantNote = textPlantNote.text.toString()
+
+            if(newPlantName == ""){
+                Snackbar
+                    .make(buttonAdd, "Please, choose a name", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xff7f0000.toInt())
+                    .show()
+            }
+            else if(newPlantIrrigation == -1){
+                Snackbar
+                    .make(buttonAdd, "Please, choose an irrigation mode", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xff7f0000.toInt())
+                    .show()
+            }
+            else if(newPlantIrrigation == 1 && newPlantDays == -1){
+                Snackbar
+                    .make(buttonAdd, "Please, specify irrigation days", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xff7f0000.toInt())
+                    .show()
+            }
+            else{
+                Snackbar
+                    .make(buttonAdd, "Plant added succesfully!", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xff00BB2D.toInt())
+                    .show()
+            }
         }
     }
 
