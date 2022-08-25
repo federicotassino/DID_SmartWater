@@ -2,7 +2,6 @@ package it.polito.did.did_smartwater.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -51,7 +50,7 @@ class Plants_SpecificPlant : Fragment() {
         buttonProfile.setOnClickListener(){
             findNavController().navigate(R.id.action_addPlant_to_profile)
         }
-        val buttonWater = view.findViewById<Button>(R.id.buttonIrrigate)
+        val buttonWater = view.findViewById<Button>(R.id.buttonAdd)
         val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
         val buttonManual = view.findViewById<RadioButton>(R.id.buttonManual)
         val buttonScheduled = view.findViewById<RadioButton>(R.id.buttonScheduled)

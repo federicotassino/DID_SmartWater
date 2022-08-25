@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.*
+import androidx.navigation.fragment.findNavController
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +31,62 @@ class SpecificPlant : Fragment() {
         }
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //menu bar references
+        val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
+        val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
+        val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
+        val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
+
+        buttonPlants.setOnClickListener(){
+            findNavController().navigate(R.id.action_specificPlant_to_plants)
+        }
+
+        buttonAddPlants.setOnClickListener(){
+            findNavController().navigate(R.id.action_specificPlant_to_addPlant)
+        }
+
+        buttonSettings.setOnClickListener(){
+            findNavController().navigate(R.id.action_specificPlant_to_settings)
+        }
+
+        buttonProfile.setOnClickListener(){
+            findNavController().navigate(R.id.action_specificPlant_to_profile)
+        }
+
+        //views references
+        val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
+        val buttonManual = view.findViewById<RadioButton>(R.id.buttonManual)
+        val buttonScheduled = view.findViewById<RadioButton>(R.id.buttonScheduled)
+        val buttonAutomatic = view.findViewById<RadioButton>(R.id.buttonAutomatic)
+        val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
+        calendarView.setVisibility(View.GONE)
+
+        //inserire codice per spostare le note di conseguenza
+
+        val pickerDays = view.findViewById<NumberPicker>(R.id.pickerDays)
+        pickerDays.minValue = 1
+        pickerDays.maxValue = 30
+        pickerDays.setVisibility(View.GONE)
+
+        buttonScheduled.setOnClickListener(){
+            calendarView.setVisibility(View.VISIBLE)
+            pickerDays.setVisibility(View.VISIBLE)
+        }
+
+        buttonManual.setOnClickListener(){
+            calendarView.setVisibility(View.GONE)
+            pickerDays.setVisibility(View.GONE)
+        }
+
+        buttonAutomatic.setOnClickListener(){
+            calendarView.setVisibility(View.GONE)
+            pickerDays.setVisibility(View.GONE)
+        }
+
+
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
