@@ -3,6 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'com.google.gms.google-services'  // Google Services plugin
+
+
 android {
     compileSdk 32
 
@@ -48,4 +51,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
+
+    //librerie per firebase
+    implementation platform('com.google.firebase:firebase-bom:30.3.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-auth-ktx'
 }
