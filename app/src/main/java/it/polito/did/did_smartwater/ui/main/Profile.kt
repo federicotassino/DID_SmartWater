@@ -1,13 +1,21 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,6 +50,28 @@ class Profile : Fragment(R.layout.fragment_profile) {
         val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
         val buttonAccount = view.findViewById<Button>(R.id.buttonAccount)
         val buttonStoricoPiante = view.findViewById<Button>(R.id.buttonStoricoPiante)
+
+        val textviewFB = view.findViewById<TextView>(R.id.TV)
+        val db = Firebase.database.reference
+        val ref = db.child("message")
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                textviewFB.text = post.toString()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        ref.addValueEventListener(postListener)
+
+
+
+
 
         buttonPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_profile_to_plants)
