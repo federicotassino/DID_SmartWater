@@ -51,6 +51,7 @@ class Plants : Fragment(R.layout.plants) {
         val plantListSize = view.findViewById<TextView>(R.id.textViewListSize)
         val myDataSet = DataSource().loadPlants()
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val buttonNavigateToSpecificPlants = view.findViewById<TextView>(R.id.TospecificPlants)
 
         //recyclerView.addOnItemTouchListener(new RecyclerItemClickListener)
 
@@ -66,6 +67,10 @@ class Plants : Fragment(R.layout.plants) {
             findNavController().navigate(R.id.action_plants_to_profile)
         }
 
+        //per accedere a specific plant
+        buttonNavigateToSpecificPlants.setOnClickListener(){
+            findNavController().navigate(R.id.action_plants_to_specificPlant)
+        }
 
         plantList.text = myDataSet[0].name
 

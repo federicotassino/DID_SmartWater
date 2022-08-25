@@ -75,7 +75,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         pickerDays.maxValue = 30
         pickerDays.setVisibility(View.GONE)
         val textPlantNote = view.findViewById<EditText>(R.id.plantNote)
-        val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
+        val buttonAdd = view.findViewById<Button>(R.id.buttonIrrigate)
         val dateDebug = view.findViewById<TextView>(R.id.dateDebug)    //debug per data select
 
         //variabili per nuova pianta

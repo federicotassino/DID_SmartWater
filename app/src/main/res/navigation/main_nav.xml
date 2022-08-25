@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_plants_to_plants_SpecificPlant"
             app:destination="@id/plants_SpecificPlant" />
+        <action
+            android:id="@+id/action_plants_to_specificPlant"
+            app:destination="@id/specificPlant" />
     </fragment>
     <fragment
         android:id="@+id/addPlant"
@@ -113,4 +116,9 @@
             android:id="@+id/action_settings_WifiEsp2_to_settings"
             app:destination="@id/settings" />
     </fragment>
+    <fragment
+        android:id="@+id/specificPlant"
+        android:name="it.polito.did.did_smartwater.SpecificPlant"
+        android:label="fragment_specific_plant"
+        tools:layout="@layout/fragment_specific_plant" />
 </navigation>
