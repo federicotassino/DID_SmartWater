@@ -6,6 +6,7 @@ data class Plant(
     val irrigationMode: Int,
     val startDate: String,
     val irrigationDays: Int,
+    val humidityLevel: Float,
     val note: String
     ) {
 }

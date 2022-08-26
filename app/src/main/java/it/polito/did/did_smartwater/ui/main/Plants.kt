@@ -67,7 +67,7 @@ class Plants : Fragment(R.layout.plants) {
             findNavController().navigate(R.id.action_plants_to_profile)
         }
 
-        //per accedere a specific plant
+        //per accedere a specific plant DA RIVEDERE
         buttonNavigateToSpecificPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_plants_to_specificPlant)
         }

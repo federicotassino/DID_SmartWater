@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import app.futured.donut.DonutProgressView
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import it.polito.did.did_smartwater.ui.main.MainViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +38,13 @@ class SpecificPlant : Fragment() {
         }
     }
 
+    private val viewModel by activityViewModels<MainViewModel>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val db= Firebase.database.reference
+
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
         val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
@@ -70,7 +79,7 @@ class SpecificPlant : Fragment() {
         val donutHumidity = view.findViewById<DonutProgressView>(R.id.donut_view)
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
 
-        var humidityLevel = 0.5
+        var humidityLevel = viewModel.humidityTest
         //inserire codice per spostare le note di conseguenza
 
         val pickerDays = view.findViewById<NumberPicker>(R.id.pickerDays)
@@ -83,12 +92,14 @@ class SpecificPlant : Fragment() {
             calendarView.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
+            db.child("irrigationMode").setValue(1)
         }
 
         buttonManual.setOnClickListener(){
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
+            db.child("irrigationMode").setValue(0)
 
         }
 
@@ -96,10 +107,12 @@ class SpecificPlant : Fragment() {
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
+            db.child("irrigationMode").setValue(2)
         }
 
         buttonWater.setOnClickListener(){
             //scrivere l'avviso di irrigare sul DB
+            db.child("ToWater").setValue(true)  //settarlo a false da ESP dopo aver irrigato
             Snackbar
             .make(buttonWater, "Watering your plant...", Snackbar.LENGTH_LONG)
             .setBackgroundTint(0xff00BB2D.toInt())
