@@ -121,10 +121,7 @@ class SpecificPlant : Fragment() {
 
         //codice per aggiornare la progressbar
         //da fare: lettura del livello dal DB
-        donutHumidity.addAmount("section 1", humidityLevel.toFloat(), color = Color.parseColor("#03BFFA"))
-
-
-
+        donutHumidity.addAmount("section 1", humidityLevel.toFloat(), color = Color.parseColor("#356CFF"))
 
     }
     override fun onCreateView(

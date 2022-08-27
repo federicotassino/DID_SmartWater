@@ -113,7 +113,7 @@
                     android:id="@+id/textViewNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="60dp"
+                    android:layout_marginTop="100dp"
                     android:text="Note"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -151,14 +151,14 @@
 
                 <app.futured.donut.DonutProgressView
                     android:id="@+id/donut_view"
-                    app:donut_gapWidth="20"
+                    android:layout_width="148dp"
+                    android:layout_height="151dp"
+                    android:layout_marginTop="596dp"
                     app:donut_gapAngle="270"
+                    app:donut_gapWidth="20"
                     app:donut_strokeWidth="16dp"
-                    android:layout_width="83dp"
-                    android:layout_height="79dp"
-                    android:layout_marginTop="623dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.635"
+                    app:layout_constraintHorizontal_bias="0.512"
                     app:layout_constraintStart_toEndOf="@+id/textHumidity"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -170,6 +170,16 @@
                     android:text="Humidity level:"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup"
                     tools:layout_editor_absoluteX="52dp" />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/albero_umidita_con_cerchio"
+                    app:layout_constraintEnd_toEndOf="@+id/donut_view"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/donut_view"
+                    app:layout_constraintTop_toTopOf="@+id/donut_view" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
