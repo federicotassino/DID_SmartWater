@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
@@ -44,9 +45,10 @@ class Plants : Fragment(R.layout.plants) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
-        val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
-        val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
+        val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
+        val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
+        val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
+
         val plantList = view.findViewById<TextView>(R.id.plantList)
         val plantListSize = view.findViewById<TextView>(R.id.textViewListSize)
         val myDataSet = DataSource().loadPlants()

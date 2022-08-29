@@ -7,91 +7,103 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.Plants">
 
-    <TextView
-        android:id="@+id/textViewListSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="210dp"
-        android:layout_height="111dp"
-        android:layout_marginTop="4dp"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.968"
-        app:layout_constraintStart_toEndOf="@+id/message"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:context=".MainActivity" />
+        <TextView
+            android:id="@+id/plantList"
+            android:layout_width="131dp"
+            android:layout_height="86dp"
+            android:layout_marginTop="50dp"
+            android:text="Basilico"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/message" />
 
-    <TextView
-        android:id="@+id/message"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Plants"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textViewListSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/plantList"
-        android:layout_width="131dp"
-        android:layout_height="86dp"
-        android:text="Basilico"
-        app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="210dp"
+            android:layout_height="111dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".MainActivity" />
 
-    <Button
-        android:id="@+id/buttonPlants"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="0.8"
-        android:text="Plants"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonAddPlants"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Plants"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TospecificPlants" />
 
-    <Button
-        android:id="@+id/buttonProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="0.8"
-        android:text="Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <TextView
+            android:id="@+id/TospecificPlants"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:text="Navigate to Specific Plant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
-    <Button
-        android:id="@+id/buttonSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:scaleX="0.8"
-        android:text="Settings"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#90E17D"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-    <Button
-        android:id="@+id/buttonAddPlants"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="4dp"
-        android:scaleX="0.8"
-        android:text="Add Plant"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSettings" />
+            <ImageView
+                android:id="@+id/buttonProfile"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/profilo_custom_spento"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/TospecificPlants"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Navigate to Specific Plant"
-        app:layout_constraintBottom_toTopOf="@+id/message"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            <ImageView
+                android:id="@+id/buttonSettings"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/ingranaggio_custom_spento"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
+
+            <ImageView
+                android:id="@+id/buttonAddPlants"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/add_custom_spento"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonPlants" />
+
+            <ImageView
+                android:id="@+id/buttonPlants"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:scrollbarThumbHorizontal="@drawable/menu_custom_acceso"
+                android:scrollbarThumbVertical="@drawable/menu_custom_acceso"
+                android:scrollbarTrackVertical="@drawable/menu_custom_acceso"
+                android:src="@drawable/menu_custom_acceso"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

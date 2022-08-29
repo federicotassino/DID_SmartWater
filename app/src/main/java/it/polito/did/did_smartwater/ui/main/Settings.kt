@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import it.polito.did.did_smartwater.R
@@ -37,9 +38,10 @@ class Settings : Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonPlants = view.findViewById<Button>(R.id.buttonPlants)
-        val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
-        val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
+        val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
+        val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
+        val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
+
         val buttonWifi = view.findViewById<Button>(R.id.buttonWifi)
 
         buttonPlants.setOnClickListener(){

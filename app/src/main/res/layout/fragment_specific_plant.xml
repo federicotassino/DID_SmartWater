@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SpecificPlant">
+
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -49,36 +51,40 @@
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="271dp"
+                    android:layout_height="89dp"
                     android:layout_marginTop="40dp"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation">
 
+
                     <RadioButton
                         android:id="@+id/buttonManual"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Manual"
-                        tools:layout_editor_absoluteX="67dp"
-                        tools:layout_editor_absoluteY="360dp" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/irrigation_manual_selector"
+                        android:button="@null"
+                        android:scaleX="1.25"
+                        android:scaleY="1.25" />
 
                     <RadioButton
                         android:id="@+id/buttonScheduled"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Scheduled" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/irrigation_scheduled_selector"
+                        android:button="@null" />
 
                     <RadioButton
                         android:id="@+id/buttonAutomatic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Automatic"
-                        tools:layout_editor_absoluteX="242dp"
-                        tools:layout_editor_absoluteY="360dp" />
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:background="@drawable/irrigation_auto_selector"
+                        android:button="@null"
+                        android:scaleX="1.25"
+                        android:scaleY="1.25" />
                 </RadioGroup>
 
                 <CalendarView
@@ -195,40 +201,41 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:id="@+id/buttonPlants"
-                android:layout_width="82dp"
-                android:layout_height="68dp"
-                android:src="@drawable/menu_custom_spento"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
                 android:id="@+id/buttonProfile"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="0.8"
-                android:text="Profile"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/profilo_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <Button
+            <ImageView
                 android:id="@+id/buttonSettings"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:scaleX="0.8"
-                android:text="Settings"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/ingranaggio_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
 
-            <Button
+            <ImageView
                 android:id="@+id/buttonAddPlants"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="4dp"
-                android:scaleX="0.8"
-                android:text="Add Plant"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/add_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/buttonSettings" />
+                app:layout_constraintStart_toEndOf="@+id/buttonPlants" />
+
+            <ImageView
+                android:id="@+id/buttonPlants"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:scrollbarThumbHorizontal="@drawable/menu_custom_acceso"
+                android:scrollbarThumbVertical="@drawable/menu_custom_acceso"
+                android:scrollbarTrackVertical="@drawable/menu_custom_acceso"
+                android:src="@drawable/menu_custom_acceso"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

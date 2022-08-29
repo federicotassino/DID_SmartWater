@@ -47,9 +47,9 @@ class SpecificPlant : Fragment() {
 
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
-        val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
-        val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
-        val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
+        val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
+        val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
+        val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_specificPlant_to_plants)

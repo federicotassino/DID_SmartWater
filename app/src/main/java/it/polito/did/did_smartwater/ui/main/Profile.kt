@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -45,9 +46,10 @@ class Profile : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val buttonPlants = view.findViewById<Button>(R.id.buttonPlants)
-        val buttonAddPlants = view.findViewById<Button>(R.id.buttonAddPlants)
-        val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
+        val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
+        val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
+        val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
+
         val buttonAccount = view.findViewById<Button>(R.id.buttonAccount)
         val buttonStoricoPiante = view.findViewById<Button>(R.id.buttonStoricoPiante)
 

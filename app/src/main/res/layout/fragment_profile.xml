@@ -7,82 +7,101 @@
     tools:context=".ui.main.Profile">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Profile" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/buttonPlants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="0.8"
-            android:text="Plants"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAddPlants"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <Button
-            android:id="@+id/buttonProfile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="0.8"
-            android:text="Profile"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/buttonSettings"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleX="0.8"
-            android:text="Settings"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
-
-        <Button
-            android:id="@+id/buttonAddPlants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="4dp"
-            android:scaleX="0.8"
-            android:text="Add Plant"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonSettings" />
-
-        <Button
-            android:id="@+id/buttonAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Manage account"
-            app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/buttonStoricoPiante"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Plant Collection"
-            app:layout_constraintBottom_toTopOf="@+id/buttonSettings"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonAccount" />
-
         <TextView
-            android:id="@+id/TV"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Profile" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <Button
+                android:id="@+id/buttonAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="200dp"
+                android:text="Manage account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/buttonStoricoPiante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp"
+                android:text="Plant Collection"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/buttonAccount" />
+
+            <TextView
+                android:id="@+id/TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Username: "
+                app:layout_constraintBottom_toTopOf="@+id/buttonAccount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Username: "
-            app:layout_constraintBottom_toTopOf="@+id/buttonAccount"
+            android:background="#90E17D"
+            app:layout_constraintBottom_toBottomOf="@+id/textView"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/buttonProfile"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:scaleX="1.2"
+                android:scaleY="1.2"
+                android:src="@drawable/profilo_custom_acceso"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <ImageView
+                android:id="@+id/buttonSettings"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/ingranaggio_custom_spento"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
+
+            <ImageView
+                android:id="@+id/buttonAddPlants"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:src="@drawable/add_custom_spento"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonPlants" />
+
+            <ImageView
+                android:id="@+id/buttonPlants"
+                android:layout_width="100dp"
+                android:layout_height="68dp"
+                android:scrollbarThumbHorizontal="@drawable/menu_custom_spento"
+                android:scrollbarThumbVertical="@drawable/menu_custom_spento"
+                android:scrollbarTrackVertical="@drawable/menu_custom_spento"
+                android:src="@drawable/menu_custom_spento"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

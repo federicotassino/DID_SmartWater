@@ -3,18 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_add_plant.xml" value="0.2" />
+        <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_add_plant.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_plants__specific_plant.xml" value="0.33" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_profile.xml" value="0.18802083333333333" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_profile__gestione_account.xml" value="0.33" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_specific_plant.xml" value="0.33" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/plants.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/drawable/irrigation_checked_button.xml" value="0.24" />
+        <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/drawable/irrigation_manual_selector.xml" value="0.104" />
+        <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/drawable/irrigation_scheduled_selector.xml" value="0.104" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_add_plant.xml" value="0.264" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_plants__specific_plant.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_profile.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_profile__gestione_account.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_profile__storico_piante.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_settings.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_settings__wifi_esp.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_specific_plant.xml" value="0.264" />
+        <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/irrigation_button.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/main_activity.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/main_fragment.xml" value="0.24010416666666667" />
         <entry key="..\:/Users/feder/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/plant_item.xml" value="0.25416666666666665" />
