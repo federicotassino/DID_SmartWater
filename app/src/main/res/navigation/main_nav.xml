@@ -20,9 +20,6 @@
             android:id="@+id/action_plants_to_addPlant"
             app:destination="@id/addPlant" />
         <action
-            android:id="@+id/action_plants_to_plants_SpecificPlant"
-            app:destination="@id/plants_SpecificPlant" />
-        <action
             android:id="@+id/action_plants_to_specificPlant"
             app:destination="@id/specificPlant" />
     </fragment>
@@ -79,15 +76,6 @@
         <action
             android:id="@+id/action_profile_to_profile_GestioneAccount"
             app:destination="@id/profile_GestioneAccount" />
-    </fragment>
-    <fragment
-        android:id="@+id/plants_SpecificPlant"
-        android:name="it.polito.did.did_smartwater.ui.main.Plants_SpecificPlant"
-        android:label="fragment_plants__specific_plant"
-        tools:layout="@layout/fragment_plants__specific_plant" >
-        <action
-            android:id="@+id/action_plants_SpecificPlant_to_plants"
-            app:destination="@id/plants" />
     </fragment>
     <fragment
         android:id="@+id/profile_GestioneAccount"

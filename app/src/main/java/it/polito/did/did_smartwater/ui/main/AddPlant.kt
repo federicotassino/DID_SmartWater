@@ -42,8 +42,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
-        val buttonSettings = view.findViewById<Button>(R.id.buttonSettings)
-        val buttonProfile = view.findViewById<Button>(R.id.buttonProfile)
+        val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
+        val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_addPlant_to_plants)

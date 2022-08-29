@@ -35,7 +35,7 @@ class Plants : Fragment(R.layout.plants) {
     }
 
     fun onItemClicked(position: Int){
-        findNavController().navigate(R.id.action_plants_to_plants_SpecificPlant)
+        findNavController().navigate(R.id.action_plants_to_specificPlant)
     }
 
     private val viewModel by activityViewModels<MainViewModel>()
