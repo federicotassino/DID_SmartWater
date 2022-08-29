@@ -62,4 +62,7 @@ dependencies {
 
     //donut library
     implementation("app.futured.donut:donut:2.2.2")
+
+    //FirebaseProfileService
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
 }

@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.adapter.ItemAdapter
 import it.polito.did.did_smartwater.data.DataSource
+import it.polito.did.did_smartwater.model.Plant
 
 class Plants : Fragment(R.layout.plants) {
 
@@ -51,9 +53,17 @@ class Plants : Fragment(R.layout.plants) {
 
         val plantList = view.findViewById<TextView>(R.id.plantList)
         val plantListSize = view.findViewById<TextView>(R.id.textViewListSize)
+        val testPlantName = view.findViewById<TextView>(R.id.testPlantName)
         val myDataSet = DataSource().loadPlants()
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val buttonNavigateToSpecificPlants = view.findViewById<TextView>(R.id.TospecificPlants)
+
+        //viewModel + Firebase
+        //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
+        val plantObserver = Observer<Plant> {
+            newName -> testPlantName.text = newName.name
+        }
+        //viewModel.currentPlant.observe(viewLifecycleOwner, plantObserver)  Qua si rompe!!
 
         //recyclerView.addOnItemTouchListener(new RecyclerItemClickListener)
 
