@@ -14,22 +14,23 @@ import it.polito.did.did_smartwater.model.Plant
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-
-    //varibili
-    public var humidityTest = 0.5f
-    //collegamento a FB
-    val db = Firebase.database.reference
-    val ref = db.child("humidity")
-
-    public var plantsList = "Orchidea"
-
     //viewModel + Firebase
+    //val currentPlant : MutableLiveData<Plant> by lazy { MutableLiveData<Plant>().also { initialize() } }
     val currentPlant = MutableLiveData<Plant>()
+    var test = 5
 
     init {
         viewModelScope.launch {
-            currentPlant.value = FirebaseProfileService.getProfileData()
+            //currentPlant.value = FirebaseProfileService.getProfileData()
+            //Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
+
+            test = FirebaseProfileService.getTest()!!
+            Log.d("NomePianta", "Nome della pianta: " + test)
         }
     }
+
+    /*fun initialize(){
+        currentPlant.value = FirebaseProfileService.getProfileData()
+        Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
+    }*/
 }

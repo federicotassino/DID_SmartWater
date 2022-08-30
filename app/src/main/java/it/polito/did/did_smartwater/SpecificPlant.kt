@@ -79,7 +79,7 @@ class SpecificPlant : Fragment() {
         val donutHumidity = view.findViewById<DonutProgressView>(R.id.donut_view)
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
 
-        var humidityLevel = viewModel.humidityTest
+
         //inserire codice per spostare le note di conseguenza
 
         val pickerDays = view.findViewById<NumberPicker>(R.id.pickerDays)
@@ -121,7 +121,7 @@ class SpecificPlant : Fragment() {
 
         //codice per aggiornare la progressbar
         //da fare: lettura del livello dal DB
-        donutHumidity.addAmount("section 1", humidityLevel.toFloat(), color = Color.parseColor("#356CFF"))
+        //donutHumidity.addAmount("section 1", humidityLevel.toFloat(), color = Color.parseColor("#356CFF"))
 
     }
     override fun onCreateView(

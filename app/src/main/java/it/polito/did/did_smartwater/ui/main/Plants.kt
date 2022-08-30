@@ -1,25 +1,20 @@
 package it.polito.did.did_smartwater.ui.main
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.adapter.ItemAdapter
 import it.polito.did.did_smartwater.data.DataSource
 import it.polito.did.did_smartwater.model.Plant
+
 
 class Plants : Fragment(R.layout.plants) {
 
@@ -41,10 +36,34 @@ class Plants : Fragment(R.layout.plants) {
         findNavController().navigate(R.id.action_plants_to_specificPlant)
     }
 
-    private val viewModel by activityViewModels<MainViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //val vm by activityViewModels<MainViewModel>()
+        //vm.initialize()
+    }
+
+    //private val vm by viewModels<MainViewModel>()
+    //val vm = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+    //private val viewModel by activityViewModels<MainViewModel>()
+    //val vm: MainViewModel = ViewModelProvider(this).get(MainViewModel.class)
+    private lateinit var viewModel: MainViewModel
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //viewModel.initialize()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //reference viewModel
+        //val viewModel by activityViewModels<MainViewModel>()
+        //vm = ViewModelProvider(activity).get(MainViewModel::class.java)
+        //val viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
 
         val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
@@ -60,10 +79,12 @@ class Plants : Fragment(R.layout.plants) {
 
         //viewModel + Firebase
         //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
+        //viewModel.initialize()
+        Log.d("viewModel", viewModelRoutesFragment.test.toString())
         val plantObserver = Observer<Plant> {
             newName -> testPlantName.text = newName.name
         }
-        //viewModel.currentPlant.observe(viewLifecycleOwner, plantObserver)  Qua si rompe!!
+        //viewModel.currentPlant.observe(viewLifecycleOwner, plantObserver)  //Qua si rompe!!
 
         //recyclerView.addOnItemTouchListener(new RecyclerItemClickListener)
 

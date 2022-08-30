@@ -1,5 +1,6 @@
 package it.polito.did.did_smartwater.model
 
+import android.util.Log
 import com.google.firebase.firestore.DocumentSnapshot
 
 data class Plant(
@@ -20,6 +21,7 @@ data class Plant(
             val irrigationDays = getString("irrigationDays")!!.toInt()
             val humidityLevel = getString("humidityLevel")!!.toFloat()
             val note = getString("note")!!
+            Log.d(null, name)
             return Plant(stringResourceId, name, irrigationMode, startDate, irrigationDays, humidityLevel, note)
         }
     }
