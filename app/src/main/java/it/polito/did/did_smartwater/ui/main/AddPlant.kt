@@ -1,5 +1,6 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import it.polito.did.did_smartwater.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -36,6 +39,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             param2 = it.getString(ARG_PARAM2)
         }
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,14 +81,29 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         pickerDays.setVisibility(View.GONE)
         val textPlantNote = view.findViewById<EditText>(R.id.plantNote)
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
-        val dateDebug = view.findViewById<TextView>(R.id.dateDebug)    //debug per data select
+        val dateDebug = view.findViewById<TextView>(R.id.dateDebug) //debug per data select
+
+        //time picker
+        val buttonTime = view.findViewById<Button>(R.id.buttonTime)
+        val pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
+        buttonTime.setOnClickListener(){
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker : TimePicker, hour: Int, minute: Int ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
+            }
+            TimePickerDialog(activity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
 
         //variabili per nuova pianta
         var newPlantName = ""
         var newPlantIrrigation = -1
         var newPlantStartDate = ""
+        var newPlantStartTime = ""
         var newPlantDays = -1
         var newPlantNote = ""
+
 
         textPlantName.setOnEditorActionListener(OnEditorActionListener { textView, actionId, keyEvent -> //triggered when done editing (as clicked done on keyboard)
             if (actionId == EditorInfo.IME_ACTION_DONE) {
