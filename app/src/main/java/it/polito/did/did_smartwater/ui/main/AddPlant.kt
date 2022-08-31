@@ -85,7 +85,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
         //time picker
         val buttonTime = view.findViewById<Button>(R.id.buttonTime)
+        buttonTime.setVisibility(View.GONE)
         val pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
+        pickedTimeText.setVisibility(View.GONE)
         buttonTime.setOnClickListener(){
             val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker : TimePicker, hour: Int, minute: Int ->
@@ -125,6 +127,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             dateDebug.text = "Seleziona data inizio"
             textViewGiorni.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
+            buttonTime.setVisibility(View.VISIBLE)
+            pickedTimeText.setVisibility(View.VISIBLE)
         }
 
         buttonManual.setOnClickListener(){
@@ -166,6 +170,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
                 newPlantIrrigation = 1
                 newPlantDays = pickerDays.value
+                newPlantStartDate = dateDebug.text.toString()
+                newPlantStartTime = pickedTimeText.text.toString()
             }
             if(radioGroup.checkedRadioButtonId==buttonAutomatic.id)
                 newPlantIrrigation = 2
@@ -189,6 +195,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
+
             else{
                 Snackbar
                     .make(buttonAdd, "Plant added succesfully!", Snackbar.LENGTH_LONG)
