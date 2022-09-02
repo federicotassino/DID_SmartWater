@@ -10,6 +10,7 @@ import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import it.polito.did.did_smartwater.R
 import java.text.SimpleDateFormat
@@ -82,6 +83,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val textPlantNote = view.findViewById<EditText>(R.id.plantNote)
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
         val dateDebug = view.findViewById<TextView>(R.id.dateDebug) //debug per data select
+        val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
+        sliderHumidity.setVisibility(View.GONE)
 
         //time picker
         val buttonTime = view.findViewById<Button>(R.id.buttonTime)
@@ -104,6 +107,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         var newPlantStartDate = ""
         var newPlantStartTime = ""
         var newPlantDays = -1
+        var newPlantHumidity = 50
         var newPlantNote = ""
 
 
@@ -129,6 +133,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickerDays.setVisibility(View.VISIBLE)
             buttonTime.setVisibility(View.VISIBLE)
             pickedTimeText.setVisibility(View.VISIBLE)
+            sliderHumidity.setVisibility(View.GONE)
         }
 
         buttonManual.setOnClickListener(){
@@ -136,13 +141,17 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             layoutParams.setMargins(0, 40, 0, 0)
             textViewGiorni.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
+            sliderHumidity.setVisibility(View.GONE)
+            buttonTime.setVisibility(View.GONE)
         }
 
         buttonAutomatic.setOnClickListener(){
             calendarView.setVisibility(View.GONE)
-            layoutParams.setMargins(0, 40, 0, 0)
+            layoutParams.setMargins(0, 200, 0, 0)
             textViewGiorni.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
+            sliderHumidity.setVisibility(View.VISIBLE)
+            buttonTime.setVisibility(View.GONE)
         }
 
         calendarView
@@ -173,8 +182,10 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 newPlantStartDate = dateDebug.text.toString()
                 newPlantStartTime = pickedTimeText.text.toString()
             }
-            if(radioGroup.checkedRadioButtonId==buttonAutomatic.id)
+            if(radioGroup.checkedRadioButtonId==buttonAutomatic.id) {
                 newPlantIrrigation = 2
+                newPlantHumidity = sliderHumidity.value.toInt()
+            }
             newPlantNote = textPlantNote.text.toString()
 
             if(newPlantName == ""){

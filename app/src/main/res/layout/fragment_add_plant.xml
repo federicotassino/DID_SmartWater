@@ -128,6 +128,24 @@
                     app:layout_constraintStart_toEndOf="@+id/textViewGiorni"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/seekbarHumidity"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="346dp"
+                    android:layout_height="66dp"
+                    android:layout_marginTop="40dp"
+                    android:max="10"
+                    android:progress="3"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0"
+                    android:stepSize="5.0"
+                    app:trackHeight="10dp"
+                    app:thumbRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.506"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
                 <TextView
                     android:id="@+id/textViewNote"
                     android:layout_width="wrap_content"

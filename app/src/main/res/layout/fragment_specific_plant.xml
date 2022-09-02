@@ -41,21 +41,21 @@
                     android:id="@+id/textViewIrrigation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="200dp"
                     android:text="Irrigation Mode"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.099"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/specificPlantName" />
+                    app:layout_constraintTop_toBottomOf="@+id/textHumidity" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
                     android:layout_width="271dp"
                     android:layout_height="89dp"
                     android:layout_marginTop="40dp"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation">
@@ -96,6 +96,28 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
+                <Button
+                    android:id="@+id/buttonTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="90dp"
+                    android:text="Select time"
+                    app:layout_constraintEnd_toStartOf="@+id/pickerDays"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/textViewGiorni" />
+
+                <TextView
+                    android:id="@+id/pickedTimeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="TextView"
+                    app:layout_constraintEnd_toStartOf="@+id/pickerDays"
+                    app:layout_constraintHorizontal_bias="0.291"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/buttonTime" />
+
                 <TextView
                     android:id="@+id/textViewGiorni"
                     android:layout_width="wrap_content"
@@ -115,17 +137,35 @@
                     app:layout_constraintStart_toEndOf="@+id/textViewGiorni"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
+                <com.google.android.material.slider.Slider
+                    android:id="@+id/seekbarHumidity"
+                    style="@style/Widget.AppCompat.SeekBar.Discrete"
+                    android:layout_width="346dp"
+                    android:layout_height="66dp"
+                    android:layout_marginTop="40dp"
+                    android:max="10"
+                    android:progress="3"
+                    android:valueFrom="0.0"
+                    android:valueTo="100.0"
+                    android:stepSize="5.0"
+                    app:trackHeight="10dp"
+                    app:thumbRadius="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.506"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
                 <TextView
                     android:id="@+id/textViewNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="770dp"
                     android:text="Note"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textHumidity" />
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
                 <EditText
                     android:id="@+id/plantNote"
@@ -150,31 +190,32 @@
                     android:id="@+id/buttonWater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="200dp"
                     android:text="Water!"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.45"
                     app:layout_constraintStart_toEndOf="@+id/textViewIrrigation"
-                    tools:layout_editor_absoluteY="90dp" />
+                    app:layout_constraintTop_toBottomOf="@+id/textHumidity" />
 
                 <app.futured.donut.DonutProgressView
                     android:id="@+id/donut_view"
                     android:layout_width="148dp"
                     android:layout_height="151dp"
-                    android:layout_marginTop="596dp"
                     app:donut_gapAngle="270"
                     app:donut_gapWidth="20"
                     app:donut_strokeWidth="16dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.512"
                     app:layout_constraintStart_toEndOf="@+id/textHumidity"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintTop_toTopOf="@+id/textHumidity" />
 
                 <TextView
                     android:id="@+id/textHumidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="650dp"
+                    android:layout_marginTop="50dp"
                     android:text="Humidity level:"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/specificPlantName"
                     tools:layout_editor_absoluteX="52dp" />
 
                 <ImageView
@@ -186,6 +227,15 @@
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="@+id/donut_view"
                     app:layout_constraintTop_toTopOf="@+id/donut_view" />
+
+                <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="300dp"
+                    android:text="TextView"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewNote"
+                    tools:layout_editor_absoluteX="63dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

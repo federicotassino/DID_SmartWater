@@ -1,5 +1,6 @@
 package it.polito.did.did_smartwater
 
+import android.app.TimePickerDialog
 import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +11,13 @@ import android.widget.*
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import app.futured.donut.DonutProgressView
+import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.ui.main.MainViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -76,8 +80,15 @@ class SpecificPlant : Fragment() {
         buttonWater.setVisibility(View.GONE)
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
         calendarView.setVisibility(View.GONE)
+        val textViewGiorni = view.findViewById<TextView>(R.id.textViewGiorni)
+        textViewGiorni.setVisibility(View.GONE)
+        val textViewNote = view.findViewById<TextView>(R.id.textViewNote)
+        val layoutParams = textViewNote.layoutParams as ViewGroup.MarginLayoutParams
+        layoutParams.setMargins(0, 40, 0, 0)
         val donutHumidity = view.findViewById<DonutProgressView>(R.id.donut_view)
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
+        val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
+        sliderHumidity.setVisibility(View.GONE)
 
 
         //inserire codice per spostare le note di conseguenza
@@ -87,12 +98,33 @@ class SpecificPlant : Fragment() {
         pickerDays.maxValue = 30
         pickerDays.setVisibility(View.GONE)
 
+        //time picker
+        val buttonTime = view.findViewById<Button>(R.id.buttonTime)
+        buttonTime.setVisibility(View.GONE)
+        val pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
+        pickedTimeText.setVisibility(View.GONE)
+        buttonTime.setOnClickListener(){
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener{ timePicker : TimePicker, hour: Int, minute: Int ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
+            }
+            TimePickerDialog(activity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(
+                Calendar.MINUTE), true).show()
+        }
+
         //far leggere da DB la modalità e selezionarla subito
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
+            textViewGiorni.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
             db.child("irrigationMode").setValue(1)
+            sliderHumidity.setVisibility(View.GONE)
+            layoutParams.setMargins(0, 1500, 0, 0)
+            buttonTime.setVisibility(View.VISIBLE)
+            pickedTimeText.setVisibility(View.VISIBLE)
         }
 
         buttonManual.setOnClickListener(){
@@ -100,7 +132,11 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
             db.child("irrigationMode").setValue(0)
-
+            sliderHumidity.setVisibility(View.GONE)
+            layoutParams.setMargins(0, 40, 0, 0)
+            buttonTime.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
+            textViewGiorni.setVisibility(View.GONE)
         }
 
         buttonAutomatic.setOnClickListener(){
@@ -108,6 +144,11 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
             db.child("irrigationMode").setValue(2)
+            sliderHumidity.setVisibility(View.VISIBLE)
+            layoutParams.setMargins(0, 300, 0, 0)
+            buttonTime.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
+            textViewGiorni.setVisibility(View.GONE)
         }
 
         buttonWater.setOnClickListener(){
