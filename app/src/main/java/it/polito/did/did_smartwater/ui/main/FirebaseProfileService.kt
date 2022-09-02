@@ -9,17 +9,36 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.model.Plant
-import it.polito.did.did_smartwater.model.Plant.Companion.toPlant
 import kotlinx.coroutines.tasks.await
 
 object FirebaseProfileService {
     private const val TAG = "FirebaseProfileService"
     suspend fun getProfileData(): Plant? {
+        /* con Firestore che non abbiamo
         val db = FirebaseFirestore.getInstance()
-        return db.collection("piantaTest").document().get().await().toPlant()
+        return try {
+            db.collection("piantaTest").document().get().await().toPlant()
+        }
+        catch (e: Exception){
+            Log.e("Error firebase", "Errore firebase", e)
+            null
+        }*/
 
-        //val db = Firebase.database.reference
+        try {
+            val db = Firebase.database.reference
+            var id = db.child("piantaTest").child("id").get().await().value.toString().toInt()
+            var name = db.child("piantaTest").child("name").get().await().value.toString()
+            var irrigationMode = db.child("piantaTest").child("irrigationMode").get().await().value.toString().toInt()
+            var startDate = db.child("piantaTest").child("startDate").get().await().value.toString()
+            var irrigationDays = db.child("piantaTest").child("irrigationDays").get().await().value.toString().toInt()
+            var humidityLevel = db.child("piantaTest").child("humidityLevel").get().await().value.toString().toFloat()
+            var note = db.child("piantaTest").child("note").get().await().value.toString()
 
+            return Plant(id, name, irrigationMode, startDate, irrigationDays, humidityLevel, note)
+        }
+        catch (e: Exception){
+            return null
+        }
     }
 
     suspend fun getTest(): Int? {

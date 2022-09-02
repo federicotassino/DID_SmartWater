@@ -2,6 +2,7 @@ package it.polito.did.did_smartwater.model
 
 import android.util.Log
 import com.google.firebase.firestore.DocumentSnapshot
+import java.lang.Exception
 
 data class Plant(
     val stringResourceId: Int,
@@ -13,16 +14,21 @@ data class Plant(
     val note: String
     ) {
     companion object{
-        fun DocumentSnapshot.toPlant(): Plant? {
-            val stringResourceId = getString("id")!!.toInt()
-            val name = getString("name")!!
-            val irrigationMode = getString("irrigationMode")!!.toInt()
-            val startDate = getString("startDate")!!
-            val irrigationDays = getString("irrigationDays")!!.toInt()
-            val humidityLevel = getString("humidityLevel")!!.toFloat()
-            val note = getString("note")!!
-            Log.d(null, name)
-            return Plant(stringResourceId, name, irrigationMode, startDate, irrigationDays, humidityLevel, note)
-        }
+        /*fun DocumentSnapshot.toPlant(): Plant? {
+            try {
+                val stringResourceId = getString("id")!!.toInt()
+                val name = getString("name")!!
+                val irrigationMode = getString("irrigationMode")!!.toInt()
+                val startDate = getString("startDate")!!
+                val irrigationDays = getString("irrigationDays")!!.toInt()
+                val humidityLevel = getString("humidityLevel")!!.toFloat()
+                val note = getString("note")!!
+                Log.d(null, name)
+                return Plant(stringResourceId, name, irrigationMode, startDate, irrigationDays, humidityLevel, note)
+            }
+            catch (e: Exception){
+                return null
+            }
+        }*/
     }
 }

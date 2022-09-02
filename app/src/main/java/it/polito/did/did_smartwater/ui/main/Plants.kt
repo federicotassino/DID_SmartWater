@@ -14,6 +14,8 @@ import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.adapter.ItemAdapter
 import it.polito.did.did_smartwater.data.DataSource
 import it.polito.did.did_smartwater.model.Plant
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 class Plants : Fragment(R.layout.plants) {
@@ -51,12 +53,13 @@ class Plants : Fragment(R.layout.plants) {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        //viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         //viewModel.initialize()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         //reference viewModel
         //val viewModel by activityViewModels<MainViewModel>()
@@ -65,6 +68,11 @@ class Plants : Fragment(R.layout.plants) {
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
+        GlobalScope.launch {
+            viewModelRoutesFragment.updateViewModel()
+        }
+
+        //viewModelRoutesFragment.updateViewModel()
 
         val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
         val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
@@ -80,11 +88,12 @@ class Plants : Fragment(R.layout.plants) {
         //viewModel + Firebase
         //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
         //viewModel.initialize()
-        Log.d("viewModel", viewModelRoutesFragment.test.toString())
-        val plantObserver = Observer<Plant> {
-            newName -> testPlantName.text = newName.name
+        val plantObserver = Observer<Plant> { newName ->
+            testPlantName.text = newName.name
         }
-        //viewModel.currentPlant.observe(viewLifecycleOwner, plantObserver)  //Qua si rompe!!
+        viewModelRoutesFragment.currentPlant.observe(viewLifecycleOwner, plantObserver)  //Qua si rompe!!
+
+        //testPlantName.text = viewModelRoutesFragment.currentPlant.value?.name
 
         //recyclerView.addOnItemTouchListener(new RecyclerItemClickListener)
 

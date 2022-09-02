@@ -12,6 +12,7 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.model.Plant
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.newCoroutineContext
 
 class MainViewModel : ViewModel() {
     //viewModel + Firebase
@@ -21,7 +22,7 @@ class MainViewModel : ViewModel() {
 
     init {
         viewModelScope.launch {
-            //currentPlant.value = FirebaseProfileService.getProfileData()
+            currentPlant.value = FirebaseProfileService.getProfileData()
             //Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
 
             test = FirebaseProfileService.getTest()!!
@@ -29,8 +30,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    /*fun initialize(){
-        currentPlant.value = FirebaseProfileService.getProfileData()
-        Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
-    }*/
+    suspend fun updateViewModel(){
+            currentPlant.postValue(FirebaseProfileService.getProfileData())
+    }
 }
