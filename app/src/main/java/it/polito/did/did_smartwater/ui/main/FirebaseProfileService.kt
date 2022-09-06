@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.model.Plant
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.awaitAll
 
 object FirebaseProfileService {
     private const val TAG = "FirebaseProfileService"

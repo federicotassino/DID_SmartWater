@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import app.futured.donut.DonutProgressView
 import com.google.android.material.slider.Slider
@@ -16,6 +17,8 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.ui.main.MainViewModel
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,6 +51,12 @@ class SpecificPlant : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val db= Firebase.database.reference
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
+        GlobalScope.launch {
+            viewModelRoutesFragment.updateViewModel()
+        }
 
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
@@ -114,13 +123,21 @@ class SpecificPlant : Fragment() {
                 Calendar.MINUTE), true).show()
         }
 
+        //lettura humidity dal viewmodel aggiornato a inizio attività
+        donutHumidity.cap = 100f
+        donutHumidity.addAmount(
+            sectionName = "Humidity",
+            amount = viewModelRoutesFragment.currentPlant.value!!.humidityLevel,
+            color = Color.parseColor("#356CFF") // Optional, pass color if you want to create new section
+        )
+
         //far leggere da DB la modalità e selezionarla subito
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
             textViewGiorni.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
-            db.child("irrigationMode").setValue(1)
+            db.child("piantaTest").child("irrigationMode").setValue(1)
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 1500, 0, 0)
             buttonTime.setVisibility(View.VISIBLE)
@@ -131,7 +148,7 @@ class SpecificPlant : Fragment() {
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
-            db.child("irrigationMode").setValue(0)
+            db.child("piantaTest").child("irrigationMode").setValue(0)
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 40, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -143,7 +160,7 @@ class SpecificPlant : Fragment() {
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
-            db.child("irrigationMode").setValue(2)
+            db.child("piantaTest").child("irrigationMode").setValue(2)
             sliderHumidity.setVisibility(View.VISIBLE)
             layoutParams.setMargins(0, 300, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -161,8 +178,8 @@ class SpecificPlant : Fragment() {
         }
 
         //codice per aggiornare la progressbar
-        //da fare: lettura del livello dal DB
-        //donutHumidity.addAmount("section 1", humidityLevel.toFloat(), color = Color.parseColor("#356CFF"))
+
+
 
     }
     override fun onCreateView(

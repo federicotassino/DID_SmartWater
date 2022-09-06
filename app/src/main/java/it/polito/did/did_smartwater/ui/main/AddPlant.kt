@@ -9,10 +9,14 @@ import android.widget.*
 import android.widget.TextView.OnEditorActionListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.R
+import it.polito.did.did_smartwater.model.Plant
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -45,6 +49,13 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //working viewmodel reference
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
+        //database reference
+        val db = Firebase.database.reference
 
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
@@ -102,12 +113,13 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         }
 
         //variabili per nuova pianta
+        var newPlantResourceId = ""
         var newPlantName = ""
-        var newPlantIrrigation = -1
+        var newPlantIrrigationMode = -1
         var newPlantStartDate = ""
         var newPlantStartTime = ""
-        var newPlantDays = -1
-        var newPlantHumidity = 50
+        var newPlantIrrigationDays = -1
+        var newPlantHumidityThreshold = 50
         var newPlantNote = ""
 
 
@@ -160,7 +172,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     // In this Listener we are getting values
                     // such as year, month and day of month
                     // on below line we are creating a variable
-                    // in which we are adding all the cariables in it.
+                    // in which we are adding all the variables in it.
                     val date = (dayOfMonth.toString() + "-"
                             + (month + 1) + "-" + year)
 
@@ -169,22 +181,22 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 })
 
         buttonAdd.setOnClickListener(){
-            //viewModel.plantsList = viewModel.plantsList.plus("\n").plus(textPlantName.text.toString())
+
             //prendere nome dalla view
             //prendere radioButton selezionato
             //prendere note dalla view
             newPlantName = textPlantName.text.toString()
             if(radioGroup.checkedRadioButtonId==buttonManual.id)
-                newPlantIrrigation = 0
+                newPlantIrrigationMode = 0
             if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
-                newPlantIrrigation = 1
-                newPlantDays = pickerDays.value
+                newPlantIrrigationMode = 1
+                newPlantIrrigationDays = pickerDays.value
                 newPlantStartDate = dateDebug.text.toString()
                 newPlantStartTime = pickedTimeText.text.toString()
             }
             if(radioGroup.checkedRadioButtonId==buttonAutomatic.id) {
-                newPlantIrrigation = 2
-                newPlantHumidity = sliderHumidity.value.toInt()
+                newPlantIrrigationMode = 2
+                newPlantHumidityThreshold = sliderHumidity.value.toInt()
             }
             newPlantNote = textPlantNote.text.toString()
 
@@ -194,15 +206,28 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
-            else if(newPlantIrrigation == -1){
+            else if(newPlantIrrigationMode == -1){
                 Snackbar
                     .make(buttonAdd, "Please, choose an irrigation mode", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
-            else if(newPlantIrrigation == 1 && newPlantDays == -1){
+            else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays == -1){
                 Snackbar
                     .make(buttonAdd, "Please, specify irrigation days", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xff7f0000.toInt())
+                    .show()
+            }
+
+            else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays != -1 && newPlantStartDate == ""){
+                Snackbar
+                    .make(buttonAdd, "Please, specify irrigation starting date", Snackbar.LENGTH_LONG)
+                    .setBackgroundTint(0xff7f0000.toInt())
+                    .show()
+            }
+            else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays != -1 && newPlantStartDate != ""  && newPlantStartTime == "Orario"){
+                Snackbar
+                    .make(buttonAdd, "Please, specify irrigation time", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
@@ -212,6 +237,17 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     .make(buttonAdd, "Plant added succesfully!", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff00BB2D.toInt())
                     .show()
+                //code to create a new Plant.kt object on the viewmodel
+                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantIrrigationDays,0f, newPlantNote ))
+                //code to write new plant info on the database
+                db.child("piantaTest").child("id").setValue(0)
+                db.child("piantaTest").child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
+                db.child("piantaTest").child("irrigationMode").setValue((newPlantIrrigationMode))
+                db.child("piantaTest").child("startDate").setValue(newPlantStartDate)
+                db.child("piantaTest").child("irrigationDays").setValue(newPlantIrrigationDays)
+                db.child("piantaTest").child("humidityLevel").setValue(0f)
+                db.child("piantaTest").child("note").setValue(newPlantNote)
+
             }
         }
     }

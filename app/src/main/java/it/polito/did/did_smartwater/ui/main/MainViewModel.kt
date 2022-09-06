@@ -33,4 +33,6 @@ class MainViewModel : ViewModel() {
     suspend fun updateViewModel(){
             currentPlant.postValue(FirebaseProfileService.getProfileData())
     }
+
+
 }
