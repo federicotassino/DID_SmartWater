@@ -1,13 +1,16 @@
 package it.polito.did.did_smartwater
 
+import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import android.widget.*
+import android.widget.NumberPicker.OnValueChangeListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,6 +24,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,13 +98,25 @@ class SpecificPlant : Fragment() {
         val textViewNote = view.findViewById<TextView>(R.id.textViewNote)
         val layoutParams = textViewNote.layoutParams as ViewGroup.MarginLayoutParams
         layoutParams.setMargins(0, 40, 0, 0)
+        val plantNote = view.findViewById<EditText>(R.id.plantNote)
         val donutHumidity = view.findViewById<DonutProgressView>(R.id.donut_view)
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
+
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
+        sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+            @SuppressLint("RestrictedApi")
+            override fun onStartTrackingTouch(slider: Slider) {
+                // Responds to when slider's touch event is being started
+            }
+
+            @SuppressLint("RestrictedApi")
+            override fun onStopTrackingTouch(slider: Slider) {
+                db.child("piantaTest").child("humidityThreshold").setValue(sliderHumidity.value)
+            }
+        })
         sliderHumidity.setVisibility(View.GONE)
 
 
-        //inserire codice per spostare le note di conseguenza
 
         val pickerDays = view.findViewById<NumberPicker>(R.id.pickerDays)
         pickerDays.minValue = 1
@@ -118,6 +134,7 @@ class SpecificPlant : Fragment() {
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
                 pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
+                db.child("piantaTest").child("startTime").setValue(pickedTimeText.text.toString())
             }
             TimePickerDialog(activity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(
                 Calendar.MINUTE), true).show()
@@ -131,6 +148,63 @@ class SpecificPlant : Fragment() {
             color = Color.parseColor("#356CFF") // Optional, pass color if you want to create new section
         )
 
+        //recupero note
+        plantNote.setText(viewModelRoutesFragment.currentPlant.value!!.note)
+        plantNote.setOnEditorActionListener(TextView.OnEditorActionListener { textView, actionId, keyEvent -> //triggered when done editing (as clicked done on keyboard)
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                plantNote.clearFocus()
+                db.child("piantaTest").child("note").setValue(plantNote.text.toString())
+            }
+            false
+        })
+
+
+        //recupero info modalità irrigazione
+        if(viewModelRoutesFragment.currentPlant.value!!.irrigationMode == 0) {
+            buttonManual.isChecked = true
+            calendarView.setVisibility(View.GONE)
+            pickerDays.setVisibility(View.GONE)
+            buttonWater.setVisibility(View.VISIBLE)
+            sliderHumidity.setVisibility(View.GONE)
+            layoutParams.setMargins(0, 40, 0, 0)
+            buttonTime.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
+            textViewGiorni.setVisibility(View.GONE)
+        }
+        else if (viewModelRoutesFragment.currentPlant.value!!.irrigationMode == 1){
+            buttonScheduled.isChecked = true
+            calendarView.setVisibility(View.VISIBLE)
+            pickerDays.setVisibility(View.VISIBLE)
+            textViewGiorni.setVisibility(View.VISIBLE)
+            buttonWater.setVisibility(View.GONE)
+            sliderHumidity.setVisibility(View.GONE)
+            layoutParams.setMargins(0, 1500, 0, 0)
+            buttonTime.setVisibility(View.VISIBLE)
+            pickedTimeText.setVisibility(View.VISIBLE)
+
+            //recupero data
+            val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+            val date = formatDate.parse(viewModelRoutesFragment.currentPlant.value!!.startDate)
+            calendarView.setDate(date.time)
+
+            //recupero ora
+            pickedTimeText.text = viewModelRoutesFragment.currentPlant.value!!.startTime
+
+            //recupero giorni
+            pickerDays.value = viewModelRoutesFragment.currentPlant.value!!.irrigationDays
+        }
+        else if (viewModelRoutesFragment.currentPlant.value!!.irrigationMode == 2){
+            buttonAutomatic.isChecked = true
+            calendarView.setVisibility(View.GONE)
+            pickerDays.setVisibility(View.GONE)
+            buttonWater.setVisibility(View.GONE)
+            sliderHumidity.setVisibility(View.VISIBLE)
+            layoutParams.setMargins(0, 300, 0, 0)
+            buttonTime.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
+            textViewGiorni.setVisibility(View.GONE)
+        }
+
         //far leggere da DB la modalità e selezionarla subito
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
@@ -138,6 +212,9 @@ class SpecificPlant : Fragment() {
             textViewGiorni.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
             db.child("piantaTest").child("irrigationMode").setValue(1)
+            GlobalScope.launch {
+                viewModelRoutesFragment.updateViewModel()
+            }
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 1500, 0, 0)
             buttonTime.setVisibility(View.VISIBLE)
@@ -149,6 +226,9 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
             db.child("piantaTest").child("irrigationMode").setValue(0)
+            GlobalScope.launch {
+                viewModelRoutesFragment.updateViewModel()
+            }
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 40, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -161,12 +241,37 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
             db.child("piantaTest").child("irrigationMode").setValue(2)
+            GlobalScope.launch {
+                viewModelRoutesFragment.updateViewModel()
+            }
             sliderHumidity.setVisibility(View.VISIBLE)
             layoutParams.setMargins(0, 300, 0, 0)
             buttonTime.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewGiorni.setVisibility(View.GONE)
         }
+
+        //aggiornamento data
+        calendarView
+            .setOnDateChangeListener(
+                CalendarView.OnDateChangeListener { view, year, month, dayOfMonth ->
+                    // In this Listener we are getting values
+                    // such as year, month and day of month
+                    // on below line we are creating a variable
+                    // in which we are adding all the variables in it.
+                    val date_string = (dayOfMonth.toString() + "-"
+                            + (month + 1) + "-" + year)
+
+                    // set this date in TextView for Display
+                    db.child("piantaTest").child("startDate").setValue(date_string)
+                })
+
+        //aggiornamento giorni irrigazione
+        pickerDays.setOnValueChangedListener(object : OnValueChangeListener {
+            override fun onValueChange(numberPicker: NumberPicker, i: Int, i2: Int) {
+                db.child("piantaTest").child("irrigationDays").setValue(pickerDays.value)
+            }
+        })
 
         buttonWater.setOnClickListener(){
             //scrivere l'avviso di irrigare sul DB
@@ -177,11 +282,11 @@ class SpecificPlant : Fragment() {
             .show()
         }
 
-        //codice per aggiornare la progressbar
-
 
 
     }
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

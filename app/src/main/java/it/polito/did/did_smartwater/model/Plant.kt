@@ -9,10 +9,10 @@ data class Plant(
     val name: String,
     val irrigationMode: Int,
     val startDate: String,
-    //val startTime: String,
+    val startTime: String,
     val irrigationDays: Int,
     val humidityLevel: Float,
-    //val humidiyThreshold: Float
+    val humidiyThreshold: Float,
     val note: String
     ) {
     companion object{

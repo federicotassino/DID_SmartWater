@@ -31,11 +31,13 @@ object FirebaseProfileService {
             var name = db.child("piantaTest").child("name").get().await().value.toString()
             var irrigationMode = db.child("piantaTest").child("irrigationMode").get().await().value.toString().toInt()
             var startDate = db.child("piantaTest").child("startDate").get().await().value.toString()
+            var startTime = db.child("piantaTest").child("startTime").get().await().value.toString()
             var irrigationDays = db.child("piantaTest").child("irrigationDays").get().await().value.toString().toInt()
             var humidityLevel = db.child("piantaTest").child("humidityLevel").get().await().value.toString().toFloat()
+            var humidityThreshold = db.child("piantaTest").child("humidityThreshold").get().await().value.toString().toFloat()
             var note = db.child("piantaTest").child("note").get().await().value.toString()
 
-            return Plant(id, name, irrigationMode, startDate, irrigationDays, humidityLevel, note)
+            return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note)
         }
         catch (e: Exception){
             return null

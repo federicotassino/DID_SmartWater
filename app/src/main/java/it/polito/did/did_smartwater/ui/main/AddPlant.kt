@@ -102,15 +102,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         buttonTime.setVisibility(View.GONE)
         val pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
         pickedTimeText.setVisibility(View.GONE)
-        buttonTime.setOnClickListener(){
-            val cal = Calendar.getInstance()
-            val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker : TimePicker, hour: Int, minute: Int ->
-                cal.set(Calendar.HOUR_OF_DAY, hour)
-                cal.set(Calendar.MINUTE, minute)
-                pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
-            }
-            TimePickerDialog(activity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
-        }
+
 
         //variabili per nuova pianta
         var newPlantResourceId = ""
@@ -180,6 +172,18 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     dateDebug.text = date
                 })
 
+        //Time picker
+        buttonTime.setOnClickListener(){
+            val cal = Calendar.getInstance()
+            val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker : TimePicker, hour: Int, minute: Int ->
+                cal.set(Calendar.HOUR_OF_DAY, hour)
+                cal.set(Calendar.MINUTE, minute)
+                pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
+                newPlantStartTime = pickedTimeText.text.toString()
+            }
+            TimePickerDialog(activity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+        }
+
         buttonAdd.setOnClickListener(){
 
             //prendere nome dalla view
@@ -238,14 +242,16 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     .setBackgroundTint(0xff00BB2D.toInt())
                     .show()
                 //code to create a new Plant.kt object on the viewmodel
-                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantIrrigationDays,0f, newPlantNote ))
+                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, 0f, newPlantNote ))
                 //code to write new plant info on the database
                 db.child("piantaTest").child("id").setValue(0)
                 db.child("piantaTest").child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
                 db.child("piantaTest").child("irrigationMode").setValue((newPlantIrrigationMode))
                 db.child("piantaTest").child("startDate").setValue(newPlantStartDate)
+                db.child("piantaTest").child("startTime").setValue(newPlantStartTime)
                 db.child("piantaTest").child("irrigationDays").setValue(newPlantIrrigationDays)
                 db.child("piantaTest").child("humidityLevel").setValue(0f)
+                db.child("piantaTest").child("humidityThreshold").setValue(0f)
                 db.child("piantaTest").child("note").setValue(newPlantNote)
 
             }
