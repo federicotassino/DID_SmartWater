@@ -1,7 +1,11 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.app.Activity
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -26,6 +30,8 @@ import java.util.*
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
+private const val REQUEST_CODE = 42
+
 /**
  * A simple [Fragment] subclass.
  * Use the [AddPlant.newInstance] factory method to
@@ -44,7 +50,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -96,6 +101,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val dateDebug = view.findViewById<TextView>(R.id.dateDebug) //debug per data select
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.setVisibility(View.GONE)
+        val buttonCamera = view.findViewById<Button>(R.id.buttonCamera)
+
 
         //time picker
         val buttonTime = view.findViewById<Button>(R.id.buttonTime)
@@ -184,6 +191,12 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             TimePickerDialog(activity, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
         }
 
+        //lancia un intent per aprire la camera
+        buttonCamera.setOnClickListener(){
+            val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(takePictureIntent, REQUEST_CODE)
+        }
+
         buttonAdd.setOnClickListener(){
 
             //prendere nome dalla view
@@ -255,6 +268,17 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 db.child("piantaTest").child("note").setValue(newPlantNote)
 
             }
+        }
+    }
+
+    //mette la foto nell'imageView
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
+            val takenImage = data?.extras?.get("data") as Bitmap
+            val imageViewPhoto = view?.findViewById<ImageView>(R.id.imageViewPhoto)
+            imageViewPhoto?.setImageBitmap(takenImage)
+        }else {
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 
