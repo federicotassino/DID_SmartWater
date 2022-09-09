@@ -255,7 +255,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     .setBackgroundTint(0xff00BB2D.toInt())
                     .show()
                 //code to create a new Plant.kt object on the viewmodel
-                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, 0f, newPlantNote ))
+                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, newPlantHumidityThreshold, newPlantNote ))
                 //code to write new plant info on the database
                 db.child("piantaTest").child("id").setValue(0)
                 db.child("piantaTest").child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
@@ -264,7 +264,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 db.child("piantaTest").child("startTime").setValue(newPlantStartTime)
                 db.child("piantaTest").child("irrigationDays").setValue(newPlantIrrigationDays)
                 db.child("piantaTest").child("humidityLevel").setValue(0f)
-                db.child("piantaTest").child("humidityThreshold").setValue(0f)
+                db.child("piantaTest").child("humidityThreshold").setValue(newPlantHumidityThreshold)
                 db.child("piantaTest").child("note").setValue(newPlantNote)
 
             }

@@ -1,9 +1,10 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -70,6 +71,7 @@ class Plants : Fragment(R.layout.plants) {
 
         GlobalScope.launch {
             viewModelRoutesFragment.updateViewModel()
+            
         }
 
         //viewModelRoutesFragment.updateViewModel()

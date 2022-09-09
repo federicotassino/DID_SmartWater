@@ -103,6 +103,7 @@ class SpecificPlant : Fragment() {
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
 
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
+        sliderHumidity.value = viewModelRoutesFragment.currentPlant.value!!.humidiyThreshold.toFloat()
         sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {

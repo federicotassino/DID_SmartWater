@@ -1,14 +1,20 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.content.ContentValues
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -42,8 +48,6 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
-        val buttonWifi = view.findViewById<Button>(R.id.buttonWifi)
-
         buttonPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_settings_to_plants)
         }
@@ -56,9 +60,42 @@ class Settings : Fragment(R.layout.fragment_settings) {
             findNavController().navigate(R.id.action_settings_to_profile)
         }
 
+        val buttonWifi = view.findViewById<Button>(R.id.buttonWifi)
+        val textViewWaterLevel = view.findViewById<TextView>(R.id.textViewWaterLevel)
+        val imageViewLevel = view.findViewById<ImageView>(R.id.imageViewLevel)
+
         buttonWifi.setOnClickListener(){
             findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
         }
+        //references immagini
+        val id_0 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_spento", null, null)
+        val id_1 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_acceso", null, null)
+
+        val db = Firebase.database.reference
+        val refLevel = db.child("waterLevel")
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                textViewWaterLevel.text = post.toString()
+                //da inserire immagini icona cisterna
+                if(textViewWaterLevel.text == "0"){
+                    imageViewLevel.setImageResource(id_0)
+                }
+                if(textViewWaterLevel.text == "1"){
+                    imageViewLevel.setImageResource(id_1)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        refLevel.addValueEventListener(postListener)
+
+
     }
 
 

@@ -103,6 +103,15 @@
         <action
             android:id="@+id/action_settings_WifiEsp2_to_settings"
             app:destination="@id/settings" />
+        <action
+            android:id="@+id/action_settings_WifiEsp2_to_addPlant"
+            app:destination="@id/addPlant" />
+        <action
+            android:id="@+id/action_settings_WifiEsp2_to_profile"
+            app:destination="@id/profile" />
+        <action
+            android:id="@+id/action_settings_WifiEsp2_to_plants"
+            app:destination="@id/plants" />
     </fragment>
     <fragment
         android:id="@+id/specificPlant"

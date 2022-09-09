@@ -12,7 +12,7 @@ data class Plant(
     val startTime: String,
     val irrigationDays: Int,
     val humidityLevel: Float,
-    val humidiyThreshold: Float,
+    val humidiyThreshold: Int,
     val note: String
     ) {
     companion object{

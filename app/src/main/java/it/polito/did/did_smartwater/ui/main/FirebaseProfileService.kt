@@ -34,7 +34,7 @@ object FirebaseProfileService {
             var startTime = db.child("piantaTest").child("startTime").get().await().value.toString()
             var irrigationDays = db.child("piantaTest").child("irrigationDays").get().await().value.toString().toInt()
             var humidityLevel = db.child("piantaTest").child("humidityLevel").get().await().value.toString().toFloat()
-            var humidityThreshold = db.child("piantaTest").child("humidityThreshold").get().await().value.toString().toFloat()
+            var humidityThreshold = db.child("piantaTest").child("humidityThreshold").get().await().value.toString().toInt()
             var note = db.child("piantaTest").child("note").get().await().value.toString()
 
             return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note)

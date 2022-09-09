@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.navigation.fragment.findNavController
 import it.polito.did.did_smartwater.R
 
@@ -44,10 +46,39 @@ class Settings_WifiEsp : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val buttonBack = view.findViewById<Button>(R.id.buttonBack)
+        val buttonConnect = view.findViewById<Button>(R.id.buttonConnect)
+        val editTextNetworkName = view.findViewById<EditText>(R.id.editTextTextNetworkName)
+        val editTextPassword = view.findViewById<EditText>(R.id.editTextTextPassword)
 
         buttonBack.setOnClickListener(){
             findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
         }
+        //navbar references
+        val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
+        val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
+        val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
+        val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
+
+        buttonPlants.setOnClickListener(){
+            findNavController().navigate(R.id.action_settings_WifiEsp2_to_plants)
+        }
+
+        buttonAddPlants.setOnClickListener(){
+            findNavController().navigate(R.id.action_settings_WifiEsp2_to_addPlant)
+        }
+
+        buttonProfile.setOnClickListener(){
+            findNavController().navigate(R.id.action_settings_WifiEsp2_to_profile)
+        }
+
+        buttonSettings.setOnClickListener(){
+            findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
+        }
+
+        buttonConnect.setOnClickListener(){
+            //codice per inviare nome e password all'ESP
+        }
+
     }
 
     companion object {
