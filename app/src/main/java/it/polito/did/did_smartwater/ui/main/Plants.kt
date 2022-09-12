@@ -61,6 +61,13 @@ class Plants : Fragment(R.layout.plants) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val progressBarLoading = view.findViewById<ProgressBar>(R.id.progressBarLoading)
+        val imageBackgroundLoading = view.findViewById<ImageView>(R.id.imageBackgroundLoading)
+
+        imageBackgroundLoading.setOnClickListener(){
+            //impedisce di cliccare ciò che è sotto
+        }
+
 
         //reference viewModel
         //val viewModel by activityViewModels<MainViewModel>()
@@ -70,8 +77,10 @@ class Plants : Fragment(R.layout.plants) {
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         GlobalScope.launch {
+            progressBarLoading.setVisibility(View.VISIBLE)
+            imageBackgroundLoading.setVisibility(View.VISIBLE)
             viewModelRoutesFragment.updateViewModel()
-            
+            //progressBarLoading.setVisibility(View.GONE)
         }
 
         //viewModelRoutesFragment.updateViewModel()
@@ -92,6 +101,8 @@ class Plants : Fragment(R.layout.plants) {
         //viewModel.initialize()
         val plantObserver = Observer<Plant> { newName ->
             testPlantName.text = newName.name
+            progressBarLoading.setVisibility(View.GONE)
+            imageBackgroundLoading.setVisibility(View.GONE)
         }
         viewModelRoutesFragment.currentPlant.observe(viewLifecycleOwner, plantObserver)  //Qua si rompe!!
 
