@@ -33,63 +33,29 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/plantList"
-            android:layout_width="131dp"
-            android:layout_height="86dp"
-            android:layout_marginTop="50dp"
-            android:text="Basilico"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/message" />
-
-        <TextView
-            android:id="@+id/testPlantName"
+            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:text="plantName"
+            android:text="Le tue piante:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#FA000000"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.125"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TospecificPlants" />
-
-        <TextView
-            android:id="@+id/textViewListSize"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="398dp"
-            android:layout_height="427dp"
-            android:layout_marginTop="92dp"
+            android:layout_width="393dp"
+            android:layout_height="474dp"
+            android:layout_marginTop="30dp"
             android:scrollbars="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.568"
             app:layout_constraintStart_toStartOf="@+id/imageBackgroundLoading"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:context=".MainActivity" />
-
-        <TextView
-            android:id="@+id/message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp"
-            android:text="Plants"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TospecificPlants" />
-
-        <TextView
-            android:id="@+id/TospecificPlants"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Navigate to Specific Plant"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageBackgroundLoading" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -143,12 +109,21 @@
             android:id="@+id/imageViewClick"
             android:layout_width="399dp"
             android:layout_height="145dp"
-            android:layout_marginTop="92dp"
+            android:layout_marginTop="30dp"
             android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageBackgroundLoading"
+            app:layout_constraintTop_toBottomOf="@+id/textView2"
             tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="235dp"
+            android:layout_height="225dp"
+            android:src="@drawable/logo_smartwater"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageBackgroundLoading" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

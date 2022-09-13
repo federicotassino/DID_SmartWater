@@ -64,9 +64,9 @@ class SpecificPlant : Fragment() {
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         val cal = Calendar.getInstance()
 
-        GlobalScope.launch {
+        /*GlobalScope.launch {
             viewModelRoutesFragment.updateViewModel()
-        }
+        }*/
 
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
@@ -117,10 +117,10 @@ class SpecificPlant : Fragment() {
         val buttonSaveScheduled = view.findViewById<Button>(R.id.buttonSaveScheduled)
         buttonSaveScheduled.setVisibility(View.GONE)
 
-        specificPlantName.text = viewModelRoutesFragment.currentPlant.value!!.name.toString()
+        specificPlantName.text = viewModelRoutesFragment.plant_name.value
 
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
-        sliderHumidity.value = viewModelRoutesFragment.currentPlant.value!!.humidiyThreshold.toFloat()
+        sliderHumidity.value = viewModelRoutesFragment.plantHumidityThreshold.value!!.toFloat()
         sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {
@@ -178,7 +178,7 @@ class SpecificPlant : Fragment() {
 
 
         //recupero note
-        plantNote.setText(viewModelRoutesFragment.currentPlant.value!!.note)
+        plantNote.setText(viewModelRoutesFragment.plantNote.value)
         plantNote.setOnEditorActionListener(TextView.OnEditorActionListener { textView, actionId, keyEvent -> //triggered when done editing (as clicked done on keyboard)
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 plantNote.clearFocus()
@@ -189,7 +189,7 @@ class SpecificPlant : Fragment() {
 
 
         //recupero info modalità irrigazione
-        if(viewModelRoutesFragment.currentPlant.value!!.irrigationMode == 0) {
+        if(viewModelRoutesFragment.plantIrrigationMode.value == 0) {
             buttonManual.isChecked = true
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
@@ -204,7 +204,7 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
         }
-        else if (viewModelRoutesFragment.currentPlant.value!!.irrigationMode == 1){
+        else if (viewModelRoutesFragment.plantIrrigationMode.value == 1){
             buttonScheduled.isChecked = true
             calendarView.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
@@ -222,19 +222,20 @@ class SpecificPlant : Fragment() {
 
             //recupero data
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-            if(viewModelRoutesFragment.currentPlant.value!!.startDate!=""){
-                val date = formatDate.parse(viewModelRoutesFragment.currentPlant.value!!.startDate)
+            viewModelRoutesFragment.plantStartDate.observe(viewLifecycleOwner, Observer {
+                //your code here
+                val date = formatDate.parse(viewModelRoutesFragment.plantStartDate.value)
                 calendarView.setDate(date.time)
-            }
+            })
 
 
             //recupero ora
-            pickedTimeText.text = viewModelRoutesFragment.currentPlant.value!!.startTime
+            pickedTimeText.text = viewModelRoutesFragment.plantStartTime.value
 
             //recupero giorni
-            pickerDays.value = viewModelRoutesFragment.currentPlant.value!!.irrigationDays
+            pickerDays.value = viewModelRoutesFragment.plantIrrigationDays.value!!
         }
-        else if (viewModelRoutesFragment.currentPlant.value!!.irrigationMode == 2){
+        else if (viewModelRoutesFragment.plantIrrigationMode.value == 2){
             buttonAutomatic.isChecked = true
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
@@ -258,9 +259,9 @@ class SpecificPlant : Fragment() {
             textViewGiorni2.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
             //db.child("piantaTest").child("irrigationMode").setValue(1)
-            GlobalScope.launch {
+            /*GlobalScope.launch {
                 viewModelRoutesFragment.updateViewModel()
-            }
+            }*/
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 1800, 0, 0)
             buttonTime.setVisibility(View.VISIBLE)
@@ -276,9 +277,9 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
             db.child("piantaTest").child("irrigationMode").setValue(0)
-            GlobalScope.launch {
+            /*GlobalScope.launch {
                 viewModelRoutesFragment.updateViewModel()
-            }
+            }*/
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 40, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -295,9 +296,9 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
             db.child("piantaTest").child("irrigationMode").setValue(2)
-            GlobalScope.launch {
+            /*GlobalScope.launch {
                 viewModelRoutesFragment.updateViewModel()
-            }
+            }*/
             sliderHumidity.setVisibility(View.VISIBLE)
             layoutParams.setMargins(0, 500, 0, 0)
             buttonTime.setVisibility(View.GONE)

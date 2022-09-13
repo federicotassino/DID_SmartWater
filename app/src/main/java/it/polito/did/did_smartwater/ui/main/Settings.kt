@@ -63,6 +63,10 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val buttonWifi = view.findViewById<Button>(R.id.buttonWifi)
         val textViewWaterLevel = view.findViewById<TextView>(R.id.textViewWaterLevel)
         val imageViewLevel = view.findViewById<ImageView>(R.id.imageViewLevel)
+        val networkName = view.findViewById<TextView>(R.id.networkName)
+        val imageProximity = view.findViewById<ImageView>(R.id.imageProximity)
+        val imageUmidita = view.findViewById<ImageView>(R.id.imageUmidita)
+        val imagePompa = view.findViewById<ImageView>(R.id.imagePompa)
 
         buttonWifi.setOnClickListener(){
             findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
@@ -72,7 +76,6 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val id_1 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_acceso", null, null)
 
         val db = Firebase.database.reference
-        val refLevel = db.child("waterLevel")
         val postListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
@@ -93,8 +96,80 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
-        refLevel.addValueEventListener(postListener)
+        db.child("waterLevel").addValueEventListener(postListener)
 
+
+        val networkNameListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                networkName.text = post.toString()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        db.child("Wifi").child("networkName").addValueEventListener(networkNameListener)
+
+
+        val proximityListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                if(post == true){
+                    imageProximity.setImageResource(R.drawable.tic_smart_water)
+                }
+                if(post == false){
+                    imageProximity.setImageResource(R.drawable.x_smart_water)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        db.child("HardwareStatus").child("proximitySensor").addValueEventListener(proximityListener)
+
+        val umiditaListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                if(post == true){
+                    imageUmidita.setImageResource(R.drawable.tic_smart_water)
+                }
+                if(post == false){
+                    imageUmidita.setImageResource(R.drawable.x_smart_water)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        db.child("HardwareStatus").child("humiditySensor").addValueEventListener(umiditaListener)
+
+        val pompaListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                if(post == true){
+                    imagePompa.setImageResource(R.drawable.tic_smart_water)
+                }
+                if(post == false){
+                    imagePompa.setImageResource(R.drawable.x_smart_water)
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        db.child("HardwareStatus").child("waterPump").addValueEventListener(pompaListener)
 
     }
 

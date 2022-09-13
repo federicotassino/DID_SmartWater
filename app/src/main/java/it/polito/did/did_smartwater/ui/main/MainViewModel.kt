@@ -85,6 +85,7 @@ class MainViewModel : ViewModel() {
                     // ...
                     plantStartDate.value= post.toString()
                     plantlist[0].startDate = plantStartDate.value.toString()
+                    Log.d("StartDate",  "Osserva data" + plantStartDate.value.toString())
                 }
                 override fun onCancelled(databaseError: DatabaseError) {
                     // Getting Post failed, log a message

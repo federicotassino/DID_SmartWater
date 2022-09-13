@@ -93,20 +93,15 @@ class Plants : Fragment(R.layout.plants) {
         val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
-        val plantList = view.findViewById<TextView>(R.id.plantList)
-        val plantListSize = view.findViewById<TextView>(R.id.textViewListSize)
-        val testPlantName = view.findViewById<TextView>(R.id.testPlantName)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
-        val buttonNavigateToSpecificPlants = view.findViewById<TextView>(R.id.TospecificPlants)
 
         GlobalScope.launch {
             progressBarLoading.setVisibility(View.VISIBLE)
             imageBackgroundLoading.setVisibility(View.VISIBLE)
             Log.d("Launch", "strating update viewmodel")
-            viewModelRoutesFragment.updateViewModel()
+            //viewModelRoutesFragment.updateViewModel()
             Log.d("Launch", "finished update")
-            progressBarLoading.setVisibility(View.GONE)
-            imageBackgroundLoading.setVisibility(View.GONE)
+
 
         }
 
@@ -120,15 +115,11 @@ class Plants : Fragment(R.layout.plants) {
         //viewModel.initialize()
         val plantObserver = Observer<Plant> { newName ->
             //testPlantName.text = newName.name
-            progressBarLoading.setVisibility(View.GONE)
-            imageBackgroundLoading.setVisibility(View.GONE)
+
             //recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
         }
         viewModelRoutesFragment.currentPlant.observe(viewLifecycleOwner, plantObserver)
 
-        //testPlantName.text = viewModelRoutesFragment.currentPlant.value?.name
-
-        //recyclerView.addOnItemTouchListener(new RecyclerItemClickListener)
 
         buttonAddPlants.setOnClickListener(){
             findNavController().navigate(R.id.action_plants_to_addPlant)
@@ -142,39 +133,21 @@ class Plants : Fragment(R.layout.plants) {
             findNavController().navigate(R.id.action_plants_to_profile)
         }
 
-        //per accedere a specific plant DA RIVEDERE
-        buttonNavigateToSpecificPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_plants_to_specificPlant)
-        }
 
-        //esperimento listeners
+        //listener che crea la recyclerView
         val nameObserver = Observer<String> { name ->
             // Update the UI, in this case, a TextView.
-            buttonNavigateToSpecificPlants.text = name.toString()
             recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
-            Log.d("LISTENERS", "nome osservato: "+buttonNavigateToSpecificPlants.text)
+            progressBarLoading.setVisibility(View.GONE)
+            imageBackgroundLoading.setVisibility(View.GONE)
         }
         viewModelRoutesFragment.plant_name.observe(viewLifecycleOwner, nameObserver)
 
         val humidityObserver = Observer<Float> { humidity ->
             // Update the UI, in this case, a TextView.
             recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
-            Log.d("LISTENERS", "humidity osservata: "+buttonNavigateToSpecificPlants.text)
         }
         viewModelRoutesFragment.plantHumidityLevel.observe(viewLifecycleOwner, humidityObserver)
-
-
-
-
-        //plantList.text = myDataSet[0].name
-
-        //debug dimensione lista (da togliere)
-        plantListSize.text = DataSource().loadPlants().size.toString()
-
-        recyclerView.setOnClickListener(){
-            findNavController().navigate(R.id.action_plants_to_specificPlant)
-        }
-
 
     }
 
