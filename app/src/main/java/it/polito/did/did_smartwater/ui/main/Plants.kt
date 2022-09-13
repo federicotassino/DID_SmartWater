@@ -2,6 +2,7 @@ package it.polito.did.did_smartwater.ui.main
 
 import android.app.ProgressDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -9,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
@@ -32,10 +34,12 @@ class Plants : Fragment(R.layout.plants) {
 
         fun onItemClickedCompanion() {
            //can't call findNavController
+          //findNavController().navigate(R.id.action_plants_to_specificPlant)
+
         }
     }
 
-    fun onItemClicked(position: Int){
+    public fun onItemClicked(position: Int){
         findNavController().navigate(R.id.action_plants_to_specificPlant)
     }
 
@@ -58,11 +62,15 @@ class Plants : Fragment(R.layout.plants) {
         //viewModel.initialize()
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val progressBarLoading = view.findViewById<ProgressBar>(R.id.progressBarLoading)
         val imageBackgroundLoading = view.findViewById<ImageView>(R.id.imageBackgroundLoading)
+        progressBarLoading.setVisibility(View.VISIBLE)
+        imageBackgroundLoading.setVisibility(View.VISIBLE)
+
 
         imageBackgroundLoading.setOnClickListener(){
             //impedisce di cliccare ciò che è sotto
@@ -76,12 +84,8 @@ class Plants : Fragment(R.layout.plants) {
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-        GlobalScope.launch {
-            progressBarLoading.setVisibility(View.VISIBLE)
-            imageBackgroundLoading.setVisibility(View.VISIBLE)
-            viewModelRoutesFragment.updateViewModel()
-            //progressBarLoading.setVisibility(View.GONE)
-        }
+        progressBarLoading.setVisibility(View.VISIBLE)
+        imageBackgroundLoading.setVisibility(View.VISIBLE)
 
         //viewModelRoutesFragment.updateViewModel()
 
@@ -92,19 +96,35 @@ class Plants : Fragment(R.layout.plants) {
         val plantList = view.findViewById<TextView>(R.id.plantList)
         val plantListSize = view.findViewById<TextView>(R.id.textViewListSize)
         val testPlantName = view.findViewById<TextView>(R.id.testPlantName)
-        val myDataSet = DataSource().loadPlants()
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
         val buttonNavigateToSpecificPlants = view.findViewById<TextView>(R.id.TospecificPlants)
+
+        GlobalScope.launch {
+            progressBarLoading.setVisibility(View.VISIBLE)
+            imageBackgroundLoading.setVisibility(View.VISIBLE)
+            Log.d("Launch", "strating update viewmodel")
+            viewModelRoutesFragment.updateViewModel()
+            Log.d("Launch", "finished update")
+            progressBarLoading.setVisibility(View.GONE)
+            imageBackgroundLoading.setVisibility(View.GONE)
+
+        }
+
+        val imageViewClick = view.findViewById<ImageView>(R.id.imageViewClick)
+        imageViewClick.setOnClickListener(){
+            findNavController().navigate(R.id.action_plants_to_specificPlant)
+        }
 
         //viewModel + Firebase
         //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
         //viewModel.initialize()
         val plantObserver = Observer<Plant> { newName ->
-            testPlantName.text = newName.name
+            //testPlantName.text = newName.name
             progressBarLoading.setVisibility(View.GONE)
             imageBackgroundLoading.setVisibility(View.GONE)
+            //recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
         }
-        viewModelRoutesFragment.currentPlant.observe(viewLifecycleOwner, plantObserver)  //Qua si rompe!!
+        viewModelRoutesFragment.currentPlant.observe(viewLifecycleOwner, plantObserver)
 
         //testPlantName.text = viewModelRoutesFragment.currentPlant.value?.name
 
@@ -127,12 +147,35 @@ class Plants : Fragment(R.layout.plants) {
             findNavController().navigate(R.id.action_plants_to_specificPlant)
         }
 
-        plantList.text = myDataSet[0].name
+        //esperimento listeners
+        val nameObserver = Observer<String> { name ->
+            // Update the UI, in this case, a TextView.
+            buttonNavigateToSpecificPlants.text = name.toString()
+            recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
+            Log.d("LISTENERS", "nome osservato: "+buttonNavigateToSpecificPlants.text)
+        }
+        viewModelRoutesFragment.plant_name.observe(viewLifecycleOwner, nameObserver)
+
+        val humidityObserver = Observer<Float> { humidity ->
+            // Update the UI, in this case, a TextView.
+            recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
+            Log.d("LISTENERS", "humidity osservata: "+buttonNavigateToSpecificPlants.text)
+        }
+        viewModelRoutesFragment.plantHumidityLevel.observe(viewLifecycleOwner, humidityObserver)
+
+
+
+
+        //plantList.text = myDataSet[0].name
 
         //debug dimensione lista (da togliere)
         plantListSize.text = DataSource().loadPlants().size.toString()
 
-        recyclerView.adapter = ItemAdapter(requireContext(), myDataSet)
+        recyclerView.setOnClickListener(){
+            findNavController().navigate(R.id.action_plants_to_specificPlant)
+        }
+
+
     }
 
 }

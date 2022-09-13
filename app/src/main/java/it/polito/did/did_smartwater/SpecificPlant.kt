@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.TimePickerDialog
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.*
 import android.widget.NumberPicker.OnValueChangeListener
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -19,6 +21,7 @@ import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import it.polito.did.did_smartwater.adapter.ItemAdapter
 import it.polito.did.did_smartwater.ui.main.MainViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -114,7 +117,7 @@ class SpecificPlant : Fragment() {
         val buttonSaveScheduled = view.findViewById<Button>(R.id.buttonSaveScheduled)
         buttonSaveScheduled.setVisibility(View.GONE)
 
-        specificPlantName.text = viewModelRoutesFragment.currentPlant.value!!.name
+        specificPlantName.text = viewModelRoutesFragment.currentPlant.value!!.name.toString()
 
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.value = viewModelRoutesFragment.currentPlant.value!!.humidiyThreshold.toFloat()
@@ -155,13 +158,24 @@ class SpecificPlant : Fragment() {
                 Calendar.MINUTE), true).show()
         }
 
-        //lettura humidity dal viewmodel aggiornato a inizio attività
+        //lettura humidity dal viewmodel aggiornato a view created
         donutHumidity.cap = 100f
-        donutHumidity.addAmount(
-            sectionName = "Humidity",
-            amount = viewModelRoutesFragment.currentPlant.value!!.humidityLevel,
-            color = Color.parseColor("#356CFF") // Optional, pass color if you want to create new section
-        )
+        viewModelRoutesFragment.plantHumidityLevel.value?.let {
+            donutHumidity.addAmount(
+                sectionName = "Humidity",
+                amount = it,
+                color = Color.parseColor("#356CFF") )
+        }
+
+        viewModelRoutesFragment.plantHumidityLevel.observe(viewLifecycleOwner, Observer {
+            //your code here
+            donutHumidity.cap = 100f
+            viewModelRoutesFragment.plantHumidityLevel.value?.let { it1 ->
+                donutHumidity.setAmount("Humidity", it1)
+            }
+
+        })
+
 
         //recupero note
         plantNote.setText(viewModelRoutesFragment.currentPlant.value!!.note)

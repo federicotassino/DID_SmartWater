@@ -2,6 +2,7 @@ package it.polito.did.did_smartwater.ui.main
 
 import android.content.ContentValues
 import android.util.Log
+import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -11,10 +12,13 @@ import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.model.Plant
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.awaitAll
-
+import it.polito.did.did_smartwater.ui.main.MainViewModel
 object FirebaseProfileService {
     private const val TAG = "FirebaseProfileService"
-    suspend fun getProfileData(): Plant? {
+    // dichiarazione variabili su cui mettere observer
+
+
+     suspend fun getProfileData(): Plant? {
         /* con Firestore che non abbiamo
         val db = FirebaseFirestore.getInstance()
         return try {
@@ -24,6 +28,7 @@ object FirebaseProfileService {
             Log.e("Error firebase", "Errore firebase", e)
             null
         }*/
+
 
         try {
             val db = Firebase.database.reference

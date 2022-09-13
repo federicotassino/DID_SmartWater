@@ -4,8 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.fragment.NavHostFragment
+import androidx.annotation.DrawableRes
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
@@ -18,7 +21,9 @@ class ItemAdapter(
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.plant_item_name)
+        val plant_item_name: TextView = view.findViewById(R.id.plant_item_name)
+        val plant_item_irrigation_mode: ImageView =view.findViewById(R.id.plant_item_irrigation_mode)
+        val plant_item_humidity: TextView = view.findViewById(R.id.plant_item_humidity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -30,12 +35,27 @@ class ItemAdapter(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        // caricamento dati nel viewholder
         val item = dataset[position]
-        holder.textView.text =  dataset[position].name
-        holder.textView.setOnClickListener(){
-            //Plants.onItemClickedCompanion()
-            holder.textView.text = "Cliccato"
+        holder.plant_item_name.text =  dataset[position].name
+        holder.plant_item_humidity.text =  "Umidità: " + dataset[position].humidityLevel.toString()
+        if (item.irrigationMode == 0){
+            holder.plant_item_irrigation_mode.setImageResource(R.drawable.manual_mode_acceso)
         }
+        if (item.irrigationMode == 1){
+            holder.plant_item_irrigation_mode.setImageResource(R.drawable.timer_mode_acceso)
+        }
+        if (item.irrigationMode == 2){
+            holder.plant_item_irrigation_mode.setImageResource(R.drawable.auto_mode_accesa)
+        }
+
+
+        //on click listener
+        holder.plant_item_name.setOnClickListener(){
+            //Plants.onItemClickedCompanion()
+
+        }
+
     }
 
     override fun getItemCount(): Int {
