@@ -2,6 +2,8 @@ package it.polito.did.did_smartwater
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toolbar
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.FirebaseApp
@@ -26,6 +28,9 @@ class MainActivity : AppCompatActivity() {
         //val vm = ViewModelProvider(this).get(MainViewModel::class.java)
         //vm.initialize()
 
+        supportActionBar?.setTitle("SmartWater")
+        supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.barra_fissa_menu))
+        //supportActionBar?.hide()
     }
 
 }

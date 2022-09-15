@@ -72,8 +72,8 @@ class Settings : Fragment(R.layout.fragment_settings) {
             findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
         }
         //references immagini
-        val id_0 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_spento", null, null)
-        val id_1 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_acceso", null, null)
+        //val id_0 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_spento", null, null)
+        //val id_1 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_acceso", null, null)
 
         val db = Firebase.database.reference
         val postListener = object : ValueEventListener {
@@ -83,11 +83,36 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 // ...
                 textViewWaterLevel.text = post.toString()
                 //da inserire immagini icona cisterna
-                if(textViewWaterLevel.text == "0"){
-                    imageViewLevel.setImageResource(id_0)
+                if(textViewWaterLevel.text.toString().toInt() >= 0 && textViewWaterLevel.text.toString().toInt() < 10){
+                    //imageViewLevel.setImageResource(id_0)
+                    imageViewLevel.setImageResource(R.drawable.menu_custom_spento)
                 }
-                if(textViewWaterLevel.text == "1"){
-                    imageViewLevel.setImageResource(id_1)
+                else if(textViewWaterLevel.text.toString().toInt() >= 10 && textViewWaterLevel.text.toString().toInt() < 20){
+                    imageViewLevel.setImageResource(R.drawable.menu_custom_acceso)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 20 && textViewWaterLevel.text.toString().toInt() < 30){
+                    imageViewLevel.setImageResource(R.drawable.x_smart_water)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 30 && textViewWaterLevel.text.toString().toInt() < 40){
+                    imageViewLevel.setImageResource(R.drawable.tic_smart_water)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 40 && textViewWaterLevel.text.toString().toInt() < 50){
+                    imageViewLevel.setImageResource(R.drawable.add_custom_attivo)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 50 && textViewWaterLevel.text.toString().toInt() < 60){
+                    imageViewLevel.setImageResource(R.drawable.add_custom_spento)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 60 && textViewWaterLevel.text.toString().toInt() < 70){
+                    imageViewLevel.setImageResource(R.drawable.auto_mode_accesa)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 70 && textViewWaterLevel.text.toString().toInt() < 80){
+                    imageViewLevel.setImageResource(R.drawable.auto_mode_spento)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 80 && textViewWaterLevel.text.toString().toInt() < 90){
+                    imageViewLevel.setImageResource(R.drawable.ingranaggio_custom_acceso)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 90 && textViewWaterLevel.text.toString().toInt() <= 100){
+                    imageViewLevel.setImageResource(R.drawable.ingranaggio_custom_spento)
                 }
             }
 
