@@ -283,7 +283,10 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 plantRef.putBytes(data)
 
                 //code to create a new Plant.kt object on the viewmodel
+                viewModelRoutesFragment.bmp = bm
                 viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, newPlantHumidityThreshold, newPlantNote, bm))
+                viewModelRoutesFragment.plantlist[0] = viewModelRoutesFragment.currentPlant.value!!
+
                 //code to write new plant info on the database
                 db.child("piantaTest").child("id").setValue(0)
                 db.child("piantaTest").child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
