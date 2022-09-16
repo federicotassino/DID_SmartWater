@@ -106,6 +106,8 @@ class SpecificPlant : Fragment() {
         textViewGiorni2.setVisibility(View.GONE)
         val textViewTime = view.findViewById<TextView>(R.id.textViewTime)
         textViewTime.setVisibility(View.GONE)
+        val textViewData = view.findViewById<TextView>(R.id.textViewData)
+        textViewData.setVisibility(View.GONE)
         val textViewNote = view.findViewById<TextView>(R.id.textViewNote)
         val layoutParams = textViewNote.layoutParams as ViewGroup.MarginLayoutParams
         layoutParams.setMargins(0, 40, 0, 0)
@@ -203,6 +205,7 @@ class SpecificPlant : Fragment() {
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
+            textViewData.setVisibility(View.GONE)
         }
         else if (viewModelRoutesFragment.plantIrrigationMode.value == 1){
             buttonScheduled.isChecked = true
@@ -212,13 +215,14 @@ class SpecificPlant : Fragment() {
             textViewGiorni2.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.GONE)
-            layoutParams.setMargins(0, 1800, 0, 0)
+            layoutParams.setMargins(0, 2100, 0, 0)
             buttonTime.setVisibility(View.VISIBLE)
             pickedTimeText.setVisibility(View.VISIBLE)
             pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
             textViewTime.setVisibility(View.VISIBLE)
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
+            textViewData.setVisibility(View.VISIBLE)
 
             //recupero data
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -249,6 +253,7 @@ class SpecificPlant : Fragment() {
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
+            textViewData.setVisibility(View.GONE)
         }
 
         //far leggere da DB la modalità e selezionarla subito
@@ -258,18 +263,15 @@ class SpecificPlant : Fragment() {
             textViewGiorni.setVisibility(View.VISIBLE)
             textViewGiorni2.setVisibility(View.VISIBLE)
             buttonWater.setVisibility(View.GONE)
-            //db.child("piantaTest").child("irrigationMode").setValue(1)
-            /*GlobalScope.launch {
-                viewModelRoutesFragment.updateViewModel()
-            }*/
             sliderHumidity.setVisibility(View.GONE)
-            layoutParams.setMargins(0, 1800, 0, 0)
+            layoutParams.setMargins(0, 2100, 0, 0)
             buttonTime.setVisibility(View.VISIBLE)
             pickedTimeText.setVisibility(View.VISIBLE)
             pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
             textViewTime.setVisibility(View.VISIBLE)
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
+            textViewData.setVisibility(View.VISIBLE)
         }
 
         buttonManual.setOnClickListener(){
@@ -277,9 +279,6 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
             db.child("piantaTest").child("irrigationMode").setValue(0)
-            /*GlobalScope.launch {
-                viewModelRoutesFragment.updateViewModel()
-            }*/
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 40, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -289,6 +288,7 @@ class SpecificPlant : Fragment() {
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
+            textViewData.setVisibility(View.GONE)
         }
 
         buttonAutomatic.setOnClickListener(){
@@ -296,9 +296,6 @@ class SpecificPlant : Fragment() {
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
             db.child("piantaTest").child("irrigationMode").setValue(2)
-            /*GlobalScope.launch {
-                viewModelRoutesFragment.updateViewModel()
-            }*/
             sliderHumidity.setVisibility(View.VISIBLE)
             layoutParams.setMargins(0, 500, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -308,6 +305,7 @@ class SpecificPlant : Fragment() {
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
+            textViewData.setVisibility(View.GONE)
         }
 
         //aggiornamento data

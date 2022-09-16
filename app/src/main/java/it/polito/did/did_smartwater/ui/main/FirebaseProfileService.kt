@@ -1,6 +1,7 @@
 package it.polito.did.did_smartwater.ui.main
 
 import android.content.ContentValues
+import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.database.DataSnapshot
@@ -9,6 +10,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import it.polito.did.did_smartwater.model.Plant
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.awaitAll
@@ -42,7 +44,11 @@ object FirebaseProfileService {
             var humidityThreshold = db.child("piantaTest").child("humidityThreshold").get().await().value.toString().toInt()
             var note = db.child("piantaTest").child("note").get().await().value.toString()
 
-            return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note)
+            val storage = FirebaseStorage.getInstance().getReference().child("foto")
+            var photoBytes = storage.getBytes(100000).await()
+            var bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+
+            return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note, bmp)
         }
         catch (e: Exception){
             return null

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
@@ -19,8 +20,10 @@ import com.google.android.material.slider.Slider
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.model.Plant
+import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -62,6 +65,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         //database reference
         val db = Firebase.database.reference
 
+
+
         //menu bar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
         val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
@@ -98,10 +103,14 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         pickerDays.setVisibility(View.GONE)
         val textPlantNote = view.findViewById<EditText>(R.id.plantNote)
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
-        val dateDebug = view.findViewById<TextView>(R.id.dateDebug) //debug per data select
+        val textViewDateSelect = view.findViewById<TextView>(R.id.textViewDateSelect)
+        textViewDateSelect.setVisibility(View.GONE)
+        val dateSelected = view.findViewById<TextView>(R.id.dateDebug)
+        dateSelected.setVisibility(View.GONE)
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.setVisibility(View.GONE)
         val buttonCamera = view.findViewById<Button>(R.id.buttonCamera)
+        val imageViewPhoto = view.findViewById<ImageView>(R.id.imageViewPhoto)
 
 
         //time picker
@@ -138,13 +147,16 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
-            layoutParams.setMargins(0, 1500, 0, 0)
-            dateDebug.text = "Seleziona data inizio"
+            layoutParams.setMargins(0, 1900, 0, 0)
+            //dateDebug.text = "Seleziona data inizio"
+            textViewDateSelect.setVisibility(View.VISIBLE)
+            dateSelected.setVisibility(View.VISIBLE)
             textViewGiorni.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
             buttonTime.setVisibility(View.VISIBLE)
             pickedTimeText.setVisibility(View.VISIBLE)
             sliderHumidity.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.VISIBLE)
         }
 
         buttonManual.setOnClickListener(){
@@ -154,6 +166,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.GONE)
             buttonTime.setVisibility(View.GONE)
+            dateSelected.setVisibility(View.GONE)
+            textViewDateSelect.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
         }
 
         buttonAutomatic.setOnClickListener(){
@@ -163,6 +178,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.VISIBLE)
             buttonTime.setVisibility(View.GONE)
+            dateSelected.setVisibility(View.GONE)
+            textViewDateSelect.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
         }
 
         calendarView
@@ -176,7 +194,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                             + (month + 1) + "-" + year)
 
                     // set this date in TextView for Display
-                    dateDebug.text = date
+                    dateSelected.text = date
                 })
 
         //Time picker
@@ -208,7 +226,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
                 newPlantIrrigationMode = 1
                 newPlantIrrigationDays = pickerDays.value
-                newPlantStartDate = dateDebug.text.toString()
+                newPlantStartDate = dateSelected.text.toString()
                 newPlantStartTime = pickedTimeText.text.toString()
             }
             if(radioGroup.checkedRadioButtonId==buttonAutomatic.id) {
@@ -254,8 +272,18 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                     .make(buttonAdd, "Plant added succesfully!", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff00BB2D.toInt())
                     .show()
+
+                //upload photo
+                val storage = FirebaseStorage.getInstance().getReference()
+                val plantRef = storage.child("foto")
+                val baos = ByteArrayOutputStream()
+                val bm = (imageViewPhoto.getDrawable() as BitmapDrawable).bitmap
+                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                plantRef.putBytes(data)
+
                 //code to create a new Plant.kt object on the viewmodel
-                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, newPlantHumidityThreshold, newPlantNote ))
+                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, newPlantHumidityThreshold, newPlantNote, bm))
                 //code to write new plant info on the database
                 db.child("piantaTest").child("id").setValue(0)
                 db.child("piantaTest").child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
@@ -281,6 +309,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             super.onActivityResult(requestCode, resultCode, data)
         }
     }
+
+
 
 
     companion object {

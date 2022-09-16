@@ -1,5 +1,6 @@
 package it.polito.did.did_smartwater.model
 
+import android.graphics.Bitmap
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.DocumentSnapshot
@@ -14,7 +15,8 @@ data class Plant(
     var irrigationDays: Int = 1,
     var humidityLevel: Float = 0f,
     var humidiyThreshold: Int = 0,
-    var note: String = ""
+    var note: String = "",
+    var bmp: Bitmap
     ) {
     companion object{
         /*fun DocumentSnapshot.toPlant(): Plant? {

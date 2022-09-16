@@ -101,7 +101,7 @@ class Plants : Fragment(R.layout.plants) {
             Log.d("Launch", "strating update viewmodel")
             //viewModelRoutesFragment.updateViewModel()
             Log.d("Launch", "finished update")
-
+            viewModelRoutesFragment.updatePhoto()
 
         }
 

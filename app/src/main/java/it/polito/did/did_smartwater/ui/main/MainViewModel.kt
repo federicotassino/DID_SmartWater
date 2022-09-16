@@ -1,6 +1,8 @@
 package it.polito.did.did_smartwater.ui.main
 
 import android.content.ContentValues
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +12,11 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
 import it.polito.did.did_smartwater.model.Plant
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.newCoroutineContext
+import kotlinx.coroutines.tasks.await
 
 class MainViewModel : ViewModel() {
     //viewModel + Firebase
@@ -22,7 +26,7 @@ class MainViewModel : ViewModel() {
     public val plantlist = mutableListOf<Plant>()
     val db = Firebase.database.reference
 
-    //variabili esperimento
+    //variabili
     var plant_name = MutableLiveData<String>()
     var plantIrrigationMode =MutableLiveData<Int>()
     var plantStartDate = MutableLiveData<String>()
@@ -31,6 +35,8 @@ class MainViewModel : ViewModel() {
     var plantHumidityLevel = MutableLiveData<Float>()
     var plantHumidityThreshold = MutableLiveData<Int>()
     var plantNote = MutableLiveData<String>()
+    lateinit var bmp: Bitmap
+    //var bmp = MutableLiveData<Bitmap>()
 
 
 
@@ -175,14 +181,21 @@ class MainViewModel : ViewModel() {
             db.child("piantaTest").child("note").addValueEventListener(noteListener)
 
 
-            test = FirebaseProfileService.getTest()!!
-            Log.d("NomePianta", "Nome della pianta: " + test)
+            //test = FirebaseProfileService.getTest()!!
+            //Log.d("NomePianta", "Nome della pianta: " + test)
+            val storage = FirebaseStorage.getInstance().getReference().child("foto")
+            val photoBytes = storage.getBytes(100000).await()
+            bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
         }
     }
 
-    suspend fun updateViewModel(){
-            currentPlant.postValue(FirebaseProfileService.getProfileData())
-            plantlist[0].name = plant_name.value.toString()
+    suspend fun updatePhoto(){
+        //currentPlant.postValue(FirebaseProfileService.getProfileData())
+        val storage = FirebaseStorage.getInstance().getReference().child("foto")
+        val photoBytes = storage.getBytes(100000).await()
+        bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+        if(plantlist.size != 0)
+            plantlist[0].bmp = bmp
     }
 
     fun updateList(){
