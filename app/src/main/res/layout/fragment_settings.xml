@@ -13,8 +13,9 @@
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="377dp"
-            android:layout_height="652dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -58,13 +59,10 @@
 
                 <ImageView
                     android:id="@+id/imageViewLevel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:src="@drawable/ic_launcher_background"
+                    android:layout_width="197dp"
+                    android:layout_height="220dp"
+                    android:src="@drawable/cisterna_0"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.48"
-                    app:layout_constraintStart_toEndOf="@+id/textViewWaterLevel"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView

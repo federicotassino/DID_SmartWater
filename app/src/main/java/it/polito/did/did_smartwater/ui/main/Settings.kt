@@ -83,36 +83,39 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 // ...
                 textViewWaterLevel.text = post.toString()
                 //da inserire immagini icona cisterna
-                if(textViewWaterLevel.text.toString().toInt() >= 0 && textViewWaterLevel.text.toString().toInt() < 10){
+                if(textViewWaterLevel.text.toString().toInt() >= 0 && textViewWaterLevel.text.toString().toInt() < 5){
                     //imageViewLevel.setImageResource(id_0)
-                    imageViewLevel.setImageResource(R.drawable.menu_custom_spento)
+                    imageViewLevel.setImageResource(R.drawable.cisterna_0)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 10 && textViewWaterLevel.text.toString().toInt() < 20){
-                    imageViewLevel.setImageResource(R.drawable.menu_custom_acceso)
+                else if(textViewWaterLevel.text.toString().toInt() >= 5 && textViewWaterLevel.text.toString().toInt() < 15){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_10)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 20 && textViewWaterLevel.text.toString().toInt() < 30){
-                    imageViewLevel.setImageResource(R.drawable.x_smart_water)
+                else if(textViewWaterLevel.text.toString().toInt() >= 15 && textViewWaterLevel.text.toString().toInt() < 25){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_20)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 30 && textViewWaterLevel.text.toString().toInt() < 40){
-                    imageViewLevel.setImageResource(R.drawable.tic_smart_water)
+                else if(textViewWaterLevel.text.toString().toInt() >= 25 && textViewWaterLevel.text.toString().toInt() < 35){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_30)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 40 && textViewWaterLevel.text.toString().toInt() < 50){
-                    imageViewLevel.setImageResource(R.drawable.add_custom_attivo)
+                else if(textViewWaterLevel.text.toString().toInt() >= 35 && textViewWaterLevel.text.toString().toInt() < 45){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_40)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 50 && textViewWaterLevel.text.toString().toInt() < 60){
-                    imageViewLevel.setImageResource(R.drawable.add_custom_spento)
+                else if(textViewWaterLevel.text.toString().toInt() >= 45 && textViewWaterLevel.text.toString().toInt() < 55){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_50)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 60 && textViewWaterLevel.text.toString().toInt() < 70){
-                    imageViewLevel.setImageResource(R.drawable.auto_mode_accesa)
+                else if(textViewWaterLevel.text.toString().toInt() >= 55 && textViewWaterLevel.text.toString().toInt() < 65){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_60)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 70 && textViewWaterLevel.text.toString().toInt() < 80){
-                    imageViewLevel.setImageResource(R.drawable.auto_mode_spento)
+                else if(textViewWaterLevel.text.toString().toInt() >= 65 && textViewWaterLevel.text.toString().toInt() < 75){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_70)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 80 && textViewWaterLevel.text.toString().toInt() < 90){
-                    imageViewLevel.setImageResource(R.drawable.ingranaggio_custom_acceso)
+                else if(textViewWaterLevel.text.toString().toInt() >= 75 && textViewWaterLevel.text.toString().toInt() < 85){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_80)
                 }
-                else if(textViewWaterLevel.text.toString().toInt() >= 90 && textViewWaterLevel.text.toString().toInt() <= 100){
-                    imageViewLevel.setImageResource(R.drawable.ingranaggio_custom_spento)
+                else if(textViewWaterLevel.text.toString().toInt() >= 85 && textViewWaterLevel.text.toString().toInt() < 95){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_90)
+                }
+                else if(textViewWaterLevel.text.toString().toInt() >= 95 && textViewWaterLevel.text.toString().toInt() <= 100){
+                    imageViewLevel.setImageResource(R.drawable.cisterna_100)
                 }
             }
 
