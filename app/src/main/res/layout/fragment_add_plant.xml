@@ -15,7 +15,8 @@
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="0dp"
-            android:layout_height="650dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -29,7 +30,7 @@
                     android:id="@+id/specificPlantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="96dp"
+                    android:layout_marginTop="40dp"
                     android:text="Name"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -43,13 +44,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="48dp"
                     android:ems="10"
+                    android:imeOptions="actionDone"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.497"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/specificPlantName"
-                    android:imeOptions="actionDone"/>
+                    app:layout_constraintTop_toBottomOf="@+id/specificPlantName" />
 
                 <TextView
                     android:id="@+id/textViewIrrigation"
@@ -67,8 +68,8 @@
                     android:layout_width="271dp"
                     android:layout_height="89dp"
                     android:layout_marginTop="40dp"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation">
@@ -136,15 +137,15 @@
                     android:layout_marginTop="40dp"
                     android:max="10"
                     android:progress="3"
+                    android:stepSize="5.0"
                     android:valueFrom="0.0"
                     android:valueTo="100.0"
-                    android:stepSize="5.0"
-                    app:trackHeight="10dp"
-                    app:thumbRadius="10dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                    app:thumbRadius="10dp"
+                    app:trackHeight="10dp" />
 
                 <TextView
                     android:id="@+id/textViewNote"
@@ -276,39 +277,49 @@
 
             <ImageView
                 android:id="@+id/buttonProfile"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:src="@drawable/profilo_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonSettings" />
 
             <ImageView
                 android:id="@+id/buttonSettings"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:src="@drawable/ingranaggio_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
+                app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
+                app:layout_constraintStart_toEndOf="@+id/buttonAddPlants" />
 
             <ImageView
                 android:id="@+id/buttonAddPlants"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
-                android:scaleX="1.2"
-                android:scaleY="1.2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:src="@drawable/add_custom_attivo"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
                 app:layout_constraintStart_toEndOf="@+id/buttonPlants" />
 
             <ImageView
                 android:id="@+id/buttonPlants"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 android:scrollbarThumbHorizontal="@drawable/menu_custom_spento"
                 android:scrollbarThumbVertical="@drawable/menu_custom_spento"
                 android:scrollbarTrackVertical="@drawable/menu_custom_spento"
                 android:src="@drawable/menu_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/buttonAddPlants"
                 app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
