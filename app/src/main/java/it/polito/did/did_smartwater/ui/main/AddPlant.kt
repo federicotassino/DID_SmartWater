@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Matrix
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
@@ -329,12 +330,21 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
             //val takenImage = data?.extras?.get("data") as Bitmap  //low quality
-            val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath) //high quality
+            val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)  //high quality
             val imageViewPhoto = view?.findViewById<ImageView>(R.id.imageViewPhoto)
-            imageViewPhoto?.setImageBitmap(takenImage)
+            imageViewPhoto?.setImageBitmap(rotateBitmap(takenImage, 90f))
         }else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    //la foto a qualità maggiore deve essere ruotata
+    fun rotateBitmap(source: Bitmap, degrees: Float): Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degrees)
+        return Bitmap.createBitmap(
+            source, 0, 0, source.width, source.height, matrix, true
+        )
     }
 
 
