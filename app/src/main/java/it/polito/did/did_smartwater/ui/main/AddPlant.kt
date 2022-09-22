@@ -4,14 +4,17 @@ import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
 import android.widget.TextView.OnEditorActionListener
+import androidx.core.content.FileProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -24,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.model.Plant
 import java.io.ByteArrayOutputStream
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +38,8 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 private const val REQUEST_CODE = 42
+private lateinit var photoFile: File //High quality
+private const val FILE_NAME = "photo.jpg" //High quality
 
 /**
  * A simple [Fragment] subclass.
@@ -212,6 +218,14 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         //lancia un intent per aprire la camera
         buttonCamera.setOnClickListener(){
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+
+            //high quality
+            photoFile = getPhotoFile(FILE_NAME)
+            //val fileProvider = FileProvider.getUriForFile(this, "it.polito.did.did_smartwater.fileprovider", photoFile) //problemi con this quindi -->
+            val fileProvider = activity?.let { it1 -> FileProvider.getUriForFile(it1, "it.polito.did.did_smartwater.fileprovider", photoFile) }
+            takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
+            //fine high quality
+
             startActivityForResult(takePictureIntent, REQUEST_CODE)
         }
 
@@ -302,10 +316,20 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         }
     }
 
+    //High quality
+    private fun getPhotoFile(fileName: String): File {
+        // Use `getExternalFilesDir` on Context to access package-specific directories.
+        //val storageDirectory = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val storageDirectory = getActivity()?.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        return File.createTempFile(fileName, ".jpg", storageDirectory)
+    }
+    //fine high quality
+
     //mette la foto nell'imageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            val takenImage = data?.extras?.get("data") as Bitmap
+            //val takenImage = data?.extras?.get("data") as Bitmap  //low quality
+            val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath) //high quality
             val imageViewPhoto = view?.findViewById<ImageView>(R.id.imageViewPhoto)
             imageViewPhoto?.setImageBitmap(takenImage)
         }else {

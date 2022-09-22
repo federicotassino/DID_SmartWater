@@ -45,7 +45,7 @@ object FirebaseProfileService {
             var note = db.child("piantaTest").child("note").get().await().value.toString()
 
             val storage = FirebaseStorage.getInstance().getReference().child("foto")
-            var photoBytes = storage.getBytes(100000).await()
+            var photoBytes = storage.getBytes(10000000).await()
             var bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
 
             return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note, bmp)

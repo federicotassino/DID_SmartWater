@@ -184,7 +184,7 @@ class MainViewModel : ViewModel() {
             //test = FirebaseProfileService.getTest()!!
             //Log.d("NomePianta", "Nome della pianta: " + test)
             val storage = FirebaseStorage.getInstance().getReference().child("foto")
-            val photoBytes = storage.getBytes(100000).await()
+            val photoBytes = storage.getBytes(10000000).await()
             bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
         }
     }
@@ -192,7 +192,7 @@ class MainViewModel : ViewModel() {
     suspend fun updatePhoto(){
         //currentPlant.postValue(FirebaseProfileService.getProfileData())
         val storage = FirebaseStorage.getInstance().getReference().child("foto")
-        val photoBytes = storage.getBytes(100000).await()
+        val photoBytes = storage.getBytes(10000000).await()
         bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
         if(plantlist.size != 0)
             plantlist[0].bmp = bmp
