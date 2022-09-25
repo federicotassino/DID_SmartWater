@@ -220,14 +220,14 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         buttonCamera.setOnClickListener(){
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
-            /*
+
             //high quality
             photoFile = getPhotoFile(FILE_NAME)
             //val fileProvider = FileProvider.getUriForFile(this, "it.polito.did.did_smartwater.fileprovider", photoFile) //problemi con this quindi -->
             val fileProvider = activity?.let { it1 -> FileProvider.getUriForFile(it1, "it.polito.did.did_smartwater.fileprovider", photoFile) }
             takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider)
             //fine high quality
-            */
+
 
             startActivityForResult(takePictureIntent, REQUEST_CODE)
         }
@@ -331,11 +331,11 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
     //mette la foto nell'imageView
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK){
-            val takenImage = data?.extras?.get("data") as Bitmap  //low quality
-            //val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)  //high quality
+            //val takenImage = data?.extras?.get("data") as Bitmap  //low quality
+            val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)  //high quality
             val imageViewPhoto = view?.findViewById<ImageView>(R.id.imageViewPhoto)
-            //imageViewPhoto?.setImageBitmap(rotateBitmap(takenImage, 90f))  //high quality
-            imageViewPhoto?.setImageBitmap(takenImage)
+            imageViewPhoto?.setImageBitmap(rotateBitmap(takenImage, 90f))  //high quality
+            //imageViewPhoto?.setImageBitmap(takenImage)  //low quality
         }else {
             super.onActivityResult(requestCode, resultCode, data)
         }

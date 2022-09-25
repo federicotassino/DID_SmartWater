@@ -1,6 +1,7 @@
 package it.polito.did.did_smartwater.ui.main
 
 import android.content.ContentValues
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,8 @@ object FirebaseProfileService {
     private const val TAG = "FirebaseProfileService"
     // dichiarazione variabili su cui mettere observer
 
+    private lateinit var bmp: Bitmap
+    private var bmpSetted: Boolean = false
 
      suspend fun getProfileData(): Plant? {
         /* con Firestore che non abbiamo
@@ -33,6 +36,7 @@ object FirebaseProfileService {
 
 
         try {
+            Log.d("foto", "profile service started")
             val db = Firebase.database.reference
             var id = db.child("piantaTest").child("id").get().await().value.toString().toInt()
             var name = db.child("piantaTest").child("name").get().await().value.toString()
@@ -44,15 +48,30 @@ object FirebaseProfileService {
             var humidityThreshold = db.child("piantaTest").child("humidityThreshold").get().await().value.toString().toInt()
             var note = db.child("piantaTest").child("note").get().await().value.toString()
 
+            /*
             val storage = FirebaseStorage.getInstance().getReference().child("foto")
             var photoBytes = storage.getBytes(10000000).await()
             var bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+            */
+
+            //in teoria non ci entra mai
+            while(!bmpSetted) {
+                Log.d("foto", "waiting bmp")
+                Thread.sleep(1000)
+            }
+
+            Log.d("foto", "profile service finished")
 
             return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note, bmp)
         }
         catch (e: Exception){
             return null
         }
+    }
+
+    fun setBmp(bitmap: Bitmap){
+        bmp = bitmap
+        bmpSetted = true
     }
 
     suspend fun getTest(): Int? {

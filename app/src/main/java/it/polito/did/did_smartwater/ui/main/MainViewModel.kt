@@ -38,10 +38,13 @@ class MainViewModel : ViewModel() {
     lateinit var bmp: Bitmap
     //var bmp = MutableLiveData<Bitmap>()
 
+    var viewModelSetted: Boolean = false
+
 
 
     init {
         viewModelScope.launch {
+            updatePhoto()
             currentPlant.value = FirebaseProfileService.getProfileData()
             plantlist.add(currentPlant.value!!)
             Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
@@ -183,19 +186,33 @@ class MainViewModel : ViewModel() {
 
             //test = FirebaseProfileService.getTest()!!
             //Log.d("NomePianta", "Nome della pianta: " + test)
+            /*
             val storage = FirebaseStorage.getInstance().getReference().child("foto")
             val photoBytes = storage.getBytes(10000000).await()
             bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+            */
+
+            viewModelSetted = true
+            Log.d("foto", "viewModel init")
         }
     }
 
     suspend fun updatePhoto(){
         //currentPlant.postValue(FirebaseProfileService.getProfileData())
+        Log.d("foto", "viewModel updatePhoto 1")
         val storage = FirebaseStorage.getInstance().getReference().child("foto")
         val photoBytes = storage.getBytes(10000000).await()
         bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
-        if(plantlist.size != 0)
+
+        Log.d("foto", "viewModel updatePhoto 2")
+        FirebaseProfileService.setBmp(bmp)
+
+        //in teoria non ci entra mai
+        if(plantlist.size != 0) {
             plantlist[0].bmp = bmp
+            Log.d("foto", "viewModel updatePhoto 3")
+        }
+
     }
 
     fun updateList(){

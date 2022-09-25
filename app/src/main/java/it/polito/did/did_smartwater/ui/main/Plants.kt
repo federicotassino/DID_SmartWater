@@ -96,12 +96,14 @@ class Plants : Fragment(R.layout.plants) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         GlobalScope.launch {
-            progressBarLoading.setVisibility(View.VISIBLE)
-            imageBackgroundLoading.setVisibility(View.VISIBLE)
-            Log.d("Launch", "strating update viewmodel")
-            //viewModelRoutesFragment.updateViewModel()
-            Log.d("Launch", "finished update")
-            viewModelRoutesFragment.updatePhoto()
+            if(!viewModelRoutesFragment.viewModelSetted) {
+                progressBarLoading.setVisibility(View.VISIBLE)
+                imageBackgroundLoading.setVisibility(View.VISIBLE)
+                Log.d("Launch", "strating update viewmodel")
+                //viewModelRoutesFragment.updateViewModel()
+                Log.d("Launch", "finished update")
+                //viewModelRoutesFragment.updatePhoto()
+            }
 
         }
 
