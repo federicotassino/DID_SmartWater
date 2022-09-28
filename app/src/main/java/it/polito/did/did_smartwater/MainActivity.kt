@@ -28,9 +28,9 @@ class MainActivity : AppCompatActivity() {
         //val vm = ViewModelProvider(this).get(MainViewModel::class.java)
         //vm.initialize()
 
-        supportActionBar?.setTitle("SmartWater")
-        supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.barra_fissa_menu))
-        //supportActionBar?.hide()
+       // supportActionBar?.setTitle("SmartWater")
+        //supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.barra_fissa_menu))
+        supportActionBar?.hide()
     }
 
 }

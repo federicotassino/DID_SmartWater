@@ -116,7 +116,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         dateSelected.setVisibility(View.GONE)
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.setVisibility(View.GONE)
-        val buttonCamera = view.findViewById<Button>(R.id.buttonCamera)
+        val buttonCamera = view.findViewById<ImageView>(R.id.buttonCamera)
         val imageViewPhoto = view.findViewById<ImageView>(R.id.imageViewPhoto)
 
 
@@ -295,7 +295,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 val plantRef = storage.child("foto")
                 val baos = ByteArrayOutputStream()
                 val bm = (imageViewPhoto.getDrawable() as BitmapDrawable).bitmap
-                bm.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                bm.compress(Bitmap.CompressFormat.PNG, 100, baos)
                 val data = baos.toByteArray()
                 plantRef.putBytes(data)
 

@@ -68,4 +68,7 @@ dependencies {
 
     //FirebaseProfileService
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.4.1'
+
+    //CircleImageView
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }
