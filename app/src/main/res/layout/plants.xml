@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F1FCFF"
     tools:context=".ui.main.Plants">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,25 +19,11 @@
             android:text="Le tue piante:"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#FA000000"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.125"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="30dp"
-            android:scrollbars="vertical"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
-            app:layout_constraintVertical_bias="1.0"
-            tools:context=".MainActivity" />
+            tools:layout_editor_absoluteY="200dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -98,32 +85,51 @@
 
         <ImageView
             android:id="@+id/imageViewClick"
-            android:layout_width="399dp"
-            android:layout_height="145dp"
-            android:layout_marginTop="30dp"
+            android:layout_width="411dp"
+            android:layout_height="254dp"
+            android:layout_marginTop="320dp"
             android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/imageView6"
             tools:src="@tools:sample/avatars" />
 
         <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="235dp"
-            android:layout_height="225dp"
-            android:src="@drawable/logo_smartwater"
+            android:id="@+id/imageView6"
+            android:layout_width="413dp"
+            android:layout_height="374dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo_smartwater_sfondo_home"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageBackgroundLoading"
+            app:srcCompat="@drawable/logo_smartwater_sfondo_home" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="405dp"
+            android:layout_height="342dp"
+            android:layout_marginTop="240dp"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/imageView6"
+            tools:context=".MainActivity">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <ImageView
             android:id="@+id/imageBackgroundLoading"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:alpha="0.5"
+            android:alpha="1"
+            android:background="#436BFF"
             android:scaleX="2"
             android:scaleY="2"
-            android:src="@drawable/ic_launcher_background"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -137,7 +143,9 @@
             android:layout_width="130dp"
             android:layout_height="142dp"
             android:alpha="1"
-            android:progressTint="#356CFF"
+            android:indeterminateTint="#67E3A7"
+            android:progressTint="#67E3A7"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
