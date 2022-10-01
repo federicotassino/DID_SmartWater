@@ -12,24 +12,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Le tue piante:"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="#FA000000"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.125"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="200dp" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#90E17D"
+            android:layout_width="411dp"
+            android:layout_height="68dp"
+            android:background="#0090E17D"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -38,62 +25,54 @@
                 android:id="@+id/buttonProfile"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:src="@drawable/profilo_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/buttonSettings" />
+                app:layout_constraintStart_toEndOf="@+id/buttonSettings"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/buttonSettings"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:src="@drawable/ingranaggio_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
-                app:layout_constraintStart_toEndOf="@+id/buttonAddPlants" />
+                app:layout_constraintStart_toEndOf="@+id/buttonAddPlants"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/buttonAddPlants"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:src="@drawable/add_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
-                app:layout_constraintStart_toEndOf="@+id/buttonPlants" />
+                app:layout_constraintStart_toEndOf="@+id/buttonPlants"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/buttonPlants"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="1.3"
+                android:scaleY="1.3"
                 android:scrollbarThumbHorizontal="@drawable/menu_custom_acceso"
                 android:scrollbarThumbVertical="@drawable/menu_custom_acceso"
                 android:scrollbarTrackVertical="@drawable/menu_custom_acceso"
                 android:src="@drawable/menu_custom_acceso"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/buttonAddPlants"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ImageView
-            android:id="@+id/imageViewClick"
-            android:layout_width="411dp"
-            android:layout_height="254dp"
-            android:layout_marginTop="320dp"
-            android:alpha="0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView6"
-            tools:src="@tools:sample/avatars" />
 
         <ImageView
             android:id="@+id/imageView6"
@@ -150,6 +129,18 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageViewClick"
+            android:layout_width="410dp"
+            android:layout_height="336dp"
+            android:layout_marginTop="244dp"
+            android:alpha="0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.09"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView6"
+            tools:src="@tools:sample/avatars" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

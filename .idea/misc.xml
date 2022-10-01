@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/drawable/ic_launcher_background.xml" value="0.185" />
+        <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/drawable/rounded_corners_bg.xml" value="0.185" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_add_plant.xml" value="0.2926829268292683" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_plants__specific_plant.xml" value="0.33" />
         <entry key="..\:/Users/Luca Donalisio/AndroidStudioProjects/DID_SmartWater/app/src/main/res/layout/fragment_profile.xml" value="0.33" />

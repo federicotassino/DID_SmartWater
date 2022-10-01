@@ -13,163 +13,188 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:alpha="0.75"
+            android:contentDescription="image"
+            android:scaleX="1.2"
+            android:scaleY="1.2"
+            android:src="@drawable/plant_example"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/specificPlantName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="243dp"
+            android:layout_height="74dp"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/card_white"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:scaleX="1"
+            android:scaleY="1"
+            app:layout_constraintEnd_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toBottomOf="@+id/specificPlantName">
+
+
+            <RadioButton
+                android:id="@+id/buttonManual"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/irrigation_manual_selector"
+                android:button="@null"
+                android:scaleX="1.25"
+                android:scaleY="1.25" />
+
+            <RadioButton
+                android:id="@+id/buttonScheduled"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/irrigation_scheduled_selector"
+                android:button="@null" />
+
+            <RadioButton
+                android:id="@+id/buttonAutomatic"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@drawable/irrigation_auto_selector"
+                android:button="@null"
+                android:scaleX="1.25"
+                android:scaleY="1.25" />
+
+        </RadioGroup>
+
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="0dp"
-            android:layout_height="696dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_corners_bg"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
 
-                <TextView
-                    android:id="@+id/specificPlantName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:text="Name"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/textViewIrrigation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="200dp"
-                    android:text="Irrigation Mode"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.099"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textHumidity" />
-
-                <RadioGroup
-                    android:id="@+id/radioGroup"
-                    android:layout_width="271dp"
-                    android:layout_height="89dp"
-                    android:layout_marginTop="40dp"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation">
-
-
-                    <RadioButton
-                        android:id="@+id/buttonManual"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/irrigation_manual_selector"
-                        android:button="@null"
-                        android:scaleX="1.25"
-                        android:scaleY="1.25" />
-
-                    <RadioButton
-                        android:id="@+id/buttonScheduled"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/irrigation_scheduled_selector"
-                        android:button="@null" />
-
-                    <RadioButton
-                        android:id="@+id/buttonAutomatic"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
-                        android:background="@drawable/irrigation_auto_selector"
-                        android:button="@null"
-                        android:scaleX="1.25"
-                        android:scaleY="1.25" />
-                </RadioGroup>
-
                 <CalendarView
                     android:id="@+id/calendarView"
-                    android:layout_width="339dp"
-                    android:layout_height="289dp"
+                    android:layout_width="346dp"
+                    android:layout_height="313dp"
                     android:layout_marginTop="30dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewData" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewData"
+                    tools:visibility="visible" />
 
                 <Button
                     android:id="@+id/buttonTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="216dp"
                     android:layout_marginTop="108dp"
+                    android:layout_marginEnd="20dp"
                     android:text="Modifica orario"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textViewGiorni" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/pickedTimeText"
+                    app:layout_constraintTop_toTopOf="@+id/textViewGiorni"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/pickedTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="96dp"
+                    android:layout_marginTop="100dp"
                     android:text="00:00"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toStartOf="@+id/buttonTime"
                     app:layout_constraintStart_toEndOf="@+id/textViewTime"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewGiorni" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewGiorni"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textViewTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="100dp"
                     android:text="Irriga alle:"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintEnd_toStartOf="@+id/pickedTimeText"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewGiorni" />
+                    app:layout_constraintTop_toBottomOf="@+id/textViewGiorni"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textViewGiorni"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginStart="32dp"
                     android:layout_marginTop="70dp"
                     android:text="Irrigazione programmata ogni"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintEnd_toStartOf="@+id/pickerDays"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+                    app:layout_constraintTop_toBottomOf="@+id/calendarView"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textViewGiorni2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="70dp"
+                    android:layout_marginEnd="30dp"
                     android:text="giorni"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pickerDays"
-                    app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+                    app:layout_constraintTop_toBottomOf="@+id/calendarView"
+                    tools:visibility="visible" />
 
                 <NumberPicker
                     android:id="@+id/pickerDays"
-                    android:layout_width="63dp"
+                    android:layout_width="0dp"
                     android:layout_height="153dp"
+                    android:layout_marginStart="40dp"
                     android:layout_marginTop="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.218"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toStartOf="@+id/textViewGiorni2"
+                    app:layout_constraintHorizontal_bias="0.357"
                     app:layout_constraintStart_toEndOf="@+id/textViewGiorni"
-                    app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+                    app:layout_constraintTop_toBottomOf="@+id/calendarView"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textViewTreshold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="42dp"
                     android:text="Soglia di umidità:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/donut_view"
+                    tools:visibility="invisible" />
 
                 <com.google.android.material.slider.Slider
                     android:id="@+id/seekbarHumidity"
@@ -187,19 +212,19 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTreshold"
                     app:thumbRadius="10dp"
-                    app:trackHeight="10dp" />
+                    app:trackHeight="10dp"
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="770dp"
+                    android:layout_marginTop="120dp"
                     android:text="Note"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
                 <EditText
                     android:id="@+id/plantNote"
@@ -209,7 +234,6 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.527"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewNote" />
 
@@ -224,53 +248,57 @@
                     android:id="@+id/buttonWater"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="200dp"
+                    android:layout_marginTop="30dp"
                     android:text="Water!"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.45"
-                    app:layout_constraintStart_toEndOf="@+id/textViewIrrigation"
-                    app:layout_constraintTop_toBottomOf="@+id/textHumidity" />
-
-                <app.futured.donut.DonutProgressView
-                    android:id="@+id/donut_view"
-                    android:layout_width="148dp"
-                    android:layout_height="151dp"
-                    app:donut_gapAngle="270"
-                    app:donut_gapWidth="20"
-                    app:donut_strokeWidth="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.512"
-                    app:layout_constraintStart_toEndOf="@+id/textHumidity"
-                    app:layout_constraintTop_toTopOf="@+id/textHumidity" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textHumidity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="60dp"
-                    android:text="Humidity level:"
+                    android:layout_marginTop="44dp"
+                    android:text="Livello di umidità:"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/specificPlantName" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
 
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="150dp"
                     android:layout_height="150dp"
+                    android:layout_marginTop="4dp"
                     android:src="@drawable/albero_umidita_con_cerchio"
                     app:layout_constraintEnd_toEndOf="@+id/donut_view"
-                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/donut_view"
                     app:layout_constraintTop_toTopOf="@+id/donut_view" />
+
+                <app.futured.donut.DonutProgressView
+                    android:id="@+id/donut_view"
+                    android:layout_width="148dp"
+                    android:layout_height="151dp"
+                    android:layout_marginTop="30dp"
+                    app:donut_gapAngle="270"
+                    app:donut_gapWidth="20"
+                    app:donut_strokeWidth="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.511"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textHumidity" />
 
                 <TextView
                     android:id="@+id/textView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="300dp"
-                    android:text="TextView"
+                    android:layout_marginTop="100dp"
                     app:layout_constraintTop_toBottomOf="@+id/textViewNote"
-                    tools:layout_editor_absoluteX="63dp" />
+                    tools:layout_editor_absoluteX="63dp"
+                    tools:visibility="invisible" />
 
                 <Button
                     android:id="@+id/buttonSaveScheduled"
@@ -280,18 +308,20 @@
                     android:text="Salva programmazione"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pickedTimeText" />
+                    app:layout_constraintTop_toBottomOf="@+id/pickedTimeText"
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewData"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:text="Prossima data di irrigazione:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                    tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -299,49 +329,63 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#90E17D"
+            android:layout_width="411dp"
+            android:layout_height="68dp"
+            android:background="#F1FCFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
                 android:id="@+id/buttonProfile"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:src="@drawable/profilo_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/buttonSettings"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/buttonSettings"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:src="@drawable/ingranaggio_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/buttonProfile" />
+                app:layout_constraintEnd_toStartOf="@+id/buttonProfile"
+                app:layout_constraintStart_toEndOf="@+id/buttonAddPlants"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/buttonAddPlants"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
                 android:src="@drawable/add_custom_spento"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/buttonPlants" />
+                app:layout_constraintEnd_toStartOf="@+id/buttonSettings"
+                app:layout_constraintStart_toEndOf="@+id/buttonPlants"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/buttonPlants"
-                android:layout_width="100dp"
-                android:layout_height="68dp"
-                android:scaleX="1.2"
-                android:scaleY="1.2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:scaleX="1.3"
+                android:scaleY="1.3"
                 android:scrollbarThumbHorizontal="@drawable/menu_custom_acceso"
                 android:scrollbarThumbVertical="@drawable/menu_custom_acceso"
                 android:scrollbarTrackVertical="@drawable/menu_custom_acceso"
                 android:src="@drawable/menu_custom_acceso"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toStartOf="@+id/buttonAddPlants"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
