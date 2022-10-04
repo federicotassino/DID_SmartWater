@@ -9,20 +9,42 @@
     <!-- TODO: Update blank fragment layout -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#B2DBE1">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="476dp"
+            android:layout_height="195dp"
+            android:alpha="0.5"
+            android:src="@drawable/settings_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="0dp"
+            android:layout_width="424dp"
             android:layout_height="0dp"
+            android:layout_marginTop="90dp"
+            android:background="@drawable/rounded_corners_bg"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="@+id/imageView7">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ImageViewCard"
+                    android:layout_width="545dp"
+                    android:layout_height="379dp"
+                    android:src="@drawable/card_radio_button_v2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewLevel" />
 
                 <Button
                     android:id="@+id/buttonWifi"
@@ -36,46 +58,38 @@
 
 
                 <TextView
-                    android:id="@+id/textViewWater"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="88dp"
-                    android:text="Water level"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.102"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
                     android:id="@+id/textViewWaterLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="88dp"
-                    android:text="not found"
+                    android:layout_marginTop="162dp"
+                    android:text="---"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.04"
-                    app:layout_constraintStart_toEndOf="@+id/textViewWater"
+                    app:layout_constraintHorizontal_bias="0.277"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageViewLevel"
                     android:layout_width="197dp"
                     android:layout_height="220dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="50dp"
                     android:src="@drawable/cisterna_0"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="110dp"
                     android:text="Rete impostata per il sistema fisico:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.56"
+                    app:layout_constraintHorizontal_bias="0.575"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewWater" />
+                    app:layout_constraintTop_toTopOf="@+id/ImageViewCard" />
 
                 <TextView
                     android:id="@+id/networkName"
@@ -92,12 +106,12 @@
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
                     android:text="Stato dell'hardware"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.501"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonWifi" />
+                    app:layout_constraintTop_toBottomOf="@+id/ImageViewCard" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -173,6 +187,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView12"
                     tools:layout_editor_absoluteX="134dp" />
 
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" %"
+                    app:layout_constraintStart_toEndOf="@+id/textViewWaterLevel"
+                    app:layout_constraintTop_toTopOf="@+id/textViewWaterLevel" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
@@ -238,7 +260,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

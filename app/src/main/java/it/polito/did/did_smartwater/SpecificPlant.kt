@@ -118,6 +118,10 @@ class SpecificPlant : Fragment() {
         textViewTreshold.setVisibility(View.GONE)
         val buttonSaveScheduled = view.findViewById<Button>(R.id.buttonSaveScheduled)
         buttonSaveScheduled.setVisibility(View.GONE)
+        //cards image views to scale
+        val card_manual = view.findViewById<ImageView>(R.id.card_manual)
+        val card_scheduled = view.findViewById<ImageView>(R.id.card_scheduled)
+        val card_auto = view.findViewById<ImageView>(R.id.card_auto)
 
         specificPlantName.text = viewModelRoutesFragment.plant_name.value
 
@@ -206,6 +210,25 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
+
+            card_manual.scaleX = 1.15f
+            card_manual.scaleY = 1.15f
+            card_manual.alpha = 1f
+            card_scheduled.scaleX = 0.9f
+            card_scheduled.scaleY = 0.9f
+            card_manual.alpha = 0.9f
+            card_auto.scaleX =  0.9f
+            card_auto.scaleY = 0.9f
+            card_manual.alpha = 0.9f
+
+            buttonManual.scaleX = 0.7f
+            buttonManual.scaleY = 0.7f
+            buttonScheduled.scaleX = 0.4f
+            buttonScheduled.scaleY = 0.4f
+            buttonAutomatic.scaleX = 0.4f
+            buttonAutomatic.scaleY = 0.4f
+
+
         }
         else if (viewModelRoutesFragment.plantIrrigationMode.value == 1){
             buttonScheduled.isChecked = true
@@ -223,6 +246,23 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
             textViewData.setVisibility(View.VISIBLE)
+
+            card_manual.scaleX = 0.9f
+            card_manual.scaleY = 0.9f
+            card_manual.alpha = 0.9f
+            card_scheduled.scaleX = 1.15f
+            card_scheduled.scaleY = 1.15f
+            card_scheduled.alpha = 1f
+            card_auto.scaleX =  0.9f
+            card_auto.scaleY = 0.9f
+            card_auto.alpha = 0.9f
+
+            buttonManual.scaleX = 0.4f
+            buttonManual.scaleY = 0.4f
+            buttonScheduled.scaleX = 0.7f
+            buttonScheduled.scaleY = 0.7f
+            buttonAutomatic.scaleX = 0.4f
+            buttonAutomatic.scaleY = 0.4f
 
             //recupero data
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -254,6 +294,23 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
+
+            card_manual.scaleX = 0.9f
+            card_manual.scaleY = 0.9f
+            card_manual.alpha = 0.9f
+            card_scheduled.scaleX = 0.9f
+            card_scheduled.scaleY = 0.9f
+            card_scheduled.alpha = 0.9f
+            card_auto.scaleX =  1.15f
+            card_auto.scaleY = 1.15f
+            card_auto.alpha = 1f
+
+            buttonManual.scaleX = 0.4f
+            buttonManual.scaleY = 0.4f
+            buttonScheduled.scaleX = 0.4f
+            buttonScheduled.scaleY = 0.4f
+            buttonAutomatic.scaleX = 0.7f
+            buttonAutomatic.scaleY = 0.7f
         }
 
         //far leggere da DB la modalità e selezionarla subito
@@ -272,6 +329,23 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
             textViewData.setVisibility(View.VISIBLE)
+
+            card_manual.scaleX = 0.9f
+            card_manual.scaleY = 0.9f
+            card_manual.alpha = 0.9f
+            card_scheduled.scaleX = 1.15f
+            card_scheduled.scaleY = 1.15f
+            card_scheduled.alpha = 1f
+            card_auto.scaleX =  0.9f
+            card_auto.scaleY = 0.9f
+            card_auto.alpha = 0.9f
+
+            buttonManual.scaleX = 0.4f
+            buttonManual.scaleY = 0.4f
+            buttonScheduled.scaleX = 0.7f
+            buttonScheduled.scaleY = 0.7f
+            buttonAutomatic.scaleX = 0.4f
+            buttonAutomatic.scaleY = 0.4f
         }
 
         buttonManual.setOnClickListener(){
@@ -289,6 +363,23 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
+
+            card_manual.scaleX =1.15f
+            card_manual.scaleY = 1.15f
+            card_manual.alpha = 1f
+            card_scheduled.scaleX = 0.9f
+            card_scheduled.scaleY = 0.9f
+            card_scheduled.alpha = 0.9f
+            card_auto.scaleX =  0.9f
+            card_auto.scaleY = 0.9f
+            card_auto.alpha = 0.9f
+
+            buttonManual.scaleX = 0.7f
+            buttonManual.scaleY = 0.7f
+            buttonScheduled.scaleX = 0.4f
+            buttonScheduled.scaleY = 0.4f
+            buttonAutomatic.scaleX = 0.4f
+            buttonAutomatic.scaleY = 0.4f
         }
 
         buttonAutomatic.setOnClickListener(){
@@ -306,6 +397,23 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
+
+            card_manual.scaleX = 0.9f
+            card_manual.scaleY = 0.9f
+            card_manual.alpha = 0.9f
+            card_scheduled.scaleX = 0.9f
+            card_scheduled.scaleY = 0.9f
+            card_scheduled.alpha = 0.9f
+            card_auto.scaleX =  1.15f
+            card_auto.scaleY = 1.15f
+            card_auto.alpha = 1f
+
+            buttonManual.scaleX = 0.4f
+            buttonManual.scaleY = 0.4f
+            buttonScheduled.scaleX = 0.4f
+            buttonScheduled.scaleY = 0.4f
+            buttonAutomatic.scaleX = 0.7f
+            buttonAutomatic.scaleY = 0.7f
         }
 
         //aggiornamento data
