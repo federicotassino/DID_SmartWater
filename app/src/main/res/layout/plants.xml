@@ -76,7 +76,7 @@
 
         <ImageView
             android:id="@+id/imageView6"
-            android:layout_width="413dp"
+            android:layout_width="0dp"
             android:layout_height="374dp"
             android:scaleType="centerCrop"
             android:src="@drawable/logo_smartwater_sfondo_home"

@@ -189,6 +189,8 @@
                     android:layout_marginTop="108dp"
                     android:layout_marginEnd="20dp"
                     android:text="Modifica orario"
+                    android:visibility="visible"
+                    android:backgroundTint="#356CFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pickedTimeText"
                     app:layout_constraintTop_toTopOf="@+id/textViewGiorni"
@@ -282,13 +284,19 @@
                     android:stepSize="5.0"
                     android:valueFrom="0.0"
                     android:valueTo="100.0"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.568"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewTreshold"
                     app:thumbRadius="10dp"
+                    app:trackColorActive="#aa356CFF"
+                    app:trackColorInactive="#44356CFF"
+                    app:haloColor="#44356CFF"
+                    app:tickColor="#356CFF"
+                    app:thumbColor="#88356CFF"
                     app:trackHeight="10dp"
-                    tools:visibility="invisible" />
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textViewNote"
@@ -324,11 +332,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:backgroundTint="#356CFF"
                     android:text="Water!"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                    tools:visibility="invisible" />
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/textHumidity"
@@ -381,6 +391,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
                     android:text="Salva programmazione"
+                    android:backgroundTint="#356CFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pickedTimeText"

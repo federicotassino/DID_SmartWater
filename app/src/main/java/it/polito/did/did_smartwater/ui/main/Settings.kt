@@ -67,6 +67,8 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val imageProximity = view.findViewById<ImageView>(R.id.imageProximity)
         val imageUmidita = view.findViewById<ImageView>(R.id.imageUmidita)
         val imagePompa = view.findViewById<ImageView>(R.id.imagePompa)
+        val textViewRicarica = view.findViewById<TextView>(R.id.textViewRicarica)
+        textViewRicarica.visibility = View.INVISIBLE
 
         buttonWifi.setOnClickListener(){
             findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
@@ -86,9 +88,11 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 if(textViewWaterLevel.text.toString().toInt() >= 0 && textViewWaterLevel.text.toString().toInt() < 5){
                     //imageViewLevel.setImageResource(id_0)
                     imageViewLevel.setImageResource(R.drawable.cisterna_0)
+                    textViewRicarica.visibility = View.VISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 5 && textViewWaterLevel.text.toString().toInt() < 15){
                     imageViewLevel.setImageResource(R.drawable.cisterna_10)
+                    textViewRicarica.visibility = View.VISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 15 && textViewWaterLevel.text.toString().toInt() < 25){
                     imageViewLevel.setImageResource(R.drawable.cisterna_20)

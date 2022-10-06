@@ -52,6 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:text="Cambia rete"
+                    android:backgroundTint="#356CFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/networkName" />
@@ -128,10 +129,13 @@
                     android:id="@+id/imageProximity"
                     android:layout_width="52dp"
                     android:layout_height="51dp"
+                    android:layout_marginStart="45dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="100dp"
                     android:src="@drawable/x_smart_water"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toEndOf="@+id/textView9"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <TextView
@@ -149,10 +153,12 @@
                     android:id="@+id/imageUmidita"
                     android:layout_width="52dp"
                     android:layout_height="51dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginTop="92dp"
                     android:layout_marginEnd="100dp"
                     android:src="@drawable/x_smart_water"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <TextView
@@ -173,10 +179,12 @@
                     android:id="@+id/imagePompa"
                     android:layout_width="52dp"
                     android:layout_height="51dp"
+                    android:layout_marginStart="60dp"
                     android:layout_marginTop="164dp"
                     android:layout_marginEnd="100dp"
                     android:src="@drawable/x_smart_water"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView11"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <TextView
@@ -194,6 +202,17 @@
                     android:text=" %"
                     app:layout_constraintStart_toEndOf="@+id/textViewWaterLevel"
                     app:layout_constraintTop_toTopOf="@+id/textViewWaterLevel" />
+
+                <TextView
+                    android:id="@+id/textViewRicarica"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="La cisterna deve essere ricaricata"
+                    android:background="#48FF9124"
+                    android:textColor="#f55653"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewLevel" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
