@@ -12,6 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
@@ -52,6 +53,7 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
         val buttonAccount = view.findViewById<Button>(R.id.buttonAccount)
         val buttonStoricoPiante = view.findViewById<Button>(R.id.buttonStoricoPiante)
+        val buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
 
         val textviewFB = view.findViewById<TextView>(R.id.TV)
         val db = Firebase.database.reference
@@ -93,6 +95,11 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
         buttonStoricoPiante.setOnClickListener(){
             findNavController().navigate(R.id.action_profile_to_profile_StoricoPiante)
+        }
+
+        buttonLogout.setOnClickListener(){
+            Firebase.auth.signOut()
+            findNavController().navigate(R.id.action_profile_to_loginFragment3)
         }
     }
 

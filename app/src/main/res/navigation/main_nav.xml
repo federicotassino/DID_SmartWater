@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/plants">
+    app:startDestination="@id/loginFragment3">
 
     <fragment
         android:id="@+id/plants"
@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_profile_to_profile_GestioneAccount"
             app:destination="@id/profile_GestioneAccount" />
+        <action
+            android:id="@+id/action_profile_to_loginFragment3"
+            app:destination="@id/loginFragment3" />
     </fragment>
     <fragment
         android:id="@+id/profile_GestioneAccount"
@@ -129,6 +132,27 @@
             app:destination="@id/addPlant" />
         <action
             android:id="@+id/action_specificPlant_to_plants"
+            app:destination="@id/plants" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment3"
+        android:name="it.polito.did.did_smartwater.ui.main.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment3_to_plants"
+            app:destination="@id/plants" />
+        <action
+            android:id="@+id/action_loginFragment3_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="it.polito.did.did_smartwater.ui.main.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_plants"
             app:destination="@id/plants" />
     </fragment>
 </navigation>
