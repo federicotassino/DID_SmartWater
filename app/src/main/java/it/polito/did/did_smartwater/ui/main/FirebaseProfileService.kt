@@ -22,8 +22,9 @@ object FirebaseProfileService {
 
     private lateinit var bmp: Bitmap
     private var bmpSetted: Boolean = false
+    //var currentUser = ""
 
-     suspend fun getProfileData(): Plant? {
+     suspend fun getProfileData(currentUser:  String, viewModel: MainViewModel): Plant? {
         /* con Firestore che non abbiamo
         val db = FirebaseFirestore.getInstance()
         return try {
@@ -38,15 +39,15 @@ object FirebaseProfileService {
         try {
             Log.d("foto", "profile service started")
             val db = Firebase.database.reference
-            var id = db.child("piantaTest").child("id").get().await().value.toString().toInt()
-            var name = db.child("piantaTest").child("name").get().await().value.toString()
-            var irrigationMode = db.child("piantaTest").child("irrigationMode").get().await().value.toString().toInt()
-            var startDate = db.child("piantaTest").child("startDate").get().await().value.toString()
-            var startTime = db.child("piantaTest").child("startTime").get().await().value.toString()
-            var irrigationDays = db.child("piantaTest").child("irrigationDays").get().await().value.toString().toInt()
-            var humidityLevel = db.child("piantaTest").child("humidityLevel").get().await().value.toString().toFloat()
-            var humidityThreshold = db.child("piantaTest").child("humidityThreshold").get().await().value.toString().toInt()
-            var note = db.child("piantaTest").child("note").get().await().value.toString()
+            var id = db.child(currentUser).child("id").get().await().value.toString().toInt()
+            var name = db.child(currentUser).child("name").get().await().value.toString()
+            var irrigationMode = db.child(currentUser).child("irrigationMode").get().await().value.toString().toInt()
+            var startDate = db.child(currentUser).child("startDate").get().await().value.toString()
+            var startTime = db.child(currentUser).child("startTime").get().await().value.toString()
+            var irrigationDays = db.child(currentUser).child("irrigationDays").get().await().value.toString().toInt()
+            var humidityLevel = db.child(currentUser).child("humidityLevel").get().await().value.toString().toFloat()
+            var humidityThreshold = db.child(currentUser).child("humidityThreshold").get().await().value.toString().toInt()
+            var note = db.child(currentUser).child("note").get().await().value.toString()
 
             /*
             val storage = FirebaseStorage.getInstance().getReference().child("foto")
@@ -61,8 +62,10 @@ object FirebaseProfileService {
             }
 
             Log.d("foto", "profile service finished")
+            val plant = Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note, bmp)
+            viewModel.updateList(plant)
 
-            return Plant(id, name, irrigationMode, startDate, startTime, irrigationDays, humidityLevel, humidityThreshold, note, bmp)
+            return plant
         }
         catch (e: Exception){
             return null

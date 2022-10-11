@@ -1,5 +1,7 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,10 +10,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import it.polito.did.did_smartwater.R
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -54,6 +64,9 @@ class SignUpFragment : Fragment() {
             findNavController().navigate(R.id.action_signUpFragment_to_plants)
         }
 
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
         val emailText = view.findViewById<EditText>(R.id.userEmail)
         val passwordText = view.findViewById<EditText>(R.id.userPassword)
         val username = view.findViewById<EditText>(R.id.username)
@@ -66,28 +79,59 @@ class SignUpFragment : Fragment() {
         buttonSignUp.setOnClickListener(){
             email = emailText.text.toString()
             password = passwordText.text.toString()
-            activity?.let { it1 ->
-                auth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(it1) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("SignUp", "createUserWithEmail:success")
-                            val user = auth.currentUser
-                            findNavController().navigate(R.id.action_signUpFragment_to_plants)
+            if(email != "" && password.length > 5) {
+                activity?.let { it1 ->
+                    auth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(it1) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("SignUp", "createUserWithEmail:success")
+                                val user = auth.currentUser
+                                viewModelRoutesFragment.currentUser = user?.uid.toString()
+                                postNewUser(user?.uid.toString())
+                                GlobalScope.launch {
+                                    viewModelRoutesFragment.setViewModel()
+                                }
+                                findNavController().navigate(R.id.action_signUpFragment_to_plants)
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("SignUp", "createUserWithEmail:failure", task.exception)
-                            Snackbar
-                                .make(buttonSignUp, "Authentication failed.", Snackbar.LENGTH_LONG)
-                                .setBackgroundTint(0xff7f0000.toInt())
-                                .show()
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("SignUp", "createUserWithEmail:failure", task.exception)
+                                Snackbar
+                                    .make(buttonSignUp, "Email o password non validi", Snackbar.LENGTH_LONG)
+                                    .setBackgroundTint(0xff7f0000.toInt())
+                                    .show()
+                            }
                         }
-                    }
+            }
+
             }
 
         }
 
+    }
+
+    private fun postNewUser(currentUser: String) {
+        val db = Firebase.database.reference
+        db.child(currentUser).child("humidityLevel").setValue(0.1f)
+        db.child(currentUser).child("humidityThreshold").setValue(0)
+        db.child(currentUser).child("id").setValue(0)
+        db.child(currentUser).child("irrigationDays").setValue(0)
+        db.child(currentUser).child("irrigationMode").setValue(0)
+        db.child(currentUser).child("name").setValue("pianta")
+        db.child(currentUser).child("note").setValue("note")
+        db.child(currentUser).child("startDate").setValue("01-01-1970")
+        db.child(currentUser).child("startTime").setValue("00:00")
+        db.child(currentUser).child("toWater").setValue(0)
+
+        //upload photo
+        val storage = FirebaseStorage.getInstance().getReference()
+        val plantRef = storage.child(currentUser)
+        val baos = ByteArrayOutputStream()
+        val bm = (resources.getDrawable(R.drawable.albero_umidita_con_cerchio) as BitmapDrawable).bitmap
+        bm.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        val data = baos.toByteArray()
+        plantRef.putBytes(data)
     }
 
     companion object {

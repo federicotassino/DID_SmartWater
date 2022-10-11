@@ -69,6 +69,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
+        var currentUser = viewModelRoutesFragment.currentUser
+
         //database reference
         val db = Firebase.database.reference
 
@@ -292,7 +294,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
                 //upload photo
                 val storage = FirebaseStorage.getInstance().getReference()
-                val plantRef = storage.child("foto")
+                val plantRef = storage.child(currentUser)
                 val baos = ByteArrayOutputStream()
                 val bm = (imageViewPhoto.getDrawable() as BitmapDrawable).bitmap
                 bm.compress(Bitmap.CompressFormat.PNG, 100, baos)
@@ -305,15 +307,15 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 viewModelRoutesFragment.plantlist[0] = viewModelRoutesFragment.currentPlant.value!!
 
                 //code to write new plant info on the database
-                db.child("piantaTest").child("id").setValue(0)
-                db.child("piantaTest").child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
-                db.child("piantaTest").child("irrigationMode").setValue((newPlantIrrigationMode))
-                db.child("piantaTest").child("startDate").setValue(newPlantStartDate)
-                db.child("piantaTest").child("startTime").setValue(newPlantStartTime)
-                db.child("piantaTest").child("irrigationDays").setValue(newPlantIrrigationDays)
-                db.child("piantaTest").child("humidityLevel").setValue(0f)
-                db.child("piantaTest").child("humidityThreshold").setValue(newPlantHumidityThreshold)
-                db.child("piantaTest").child("note").setValue(newPlantNote)
+                db.child(currentUser).child("id").setValue(0)
+                db.child(currentUser).child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
+                db.child(currentUser).child("irrigationMode").setValue((newPlantIrrigationMode))
+                db.child(currentUser).child("startDate").setValue(newPlantStartDate)
+                db.child(currentUser).child("startTime").setValue(newPlantStartTime)
+                db.child(currentUser).child("irrigationDays").setValue(newPlantIrrigationDays)
+                db.child(currentUser).child("humidityLevel").setValue(0f)
+                db.child(currentUser).child("humidityThreshold").setValue(newPlantHumidityThreshold)
+                db.child(currentUser).child("note").setValue(newPlantNote)
 
             }
         }

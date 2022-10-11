@@ -1,24 +1,25 @@
 package it.polito.did.did_smartwater.ui.main
 
-import android.app.ProgressDialog
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
-import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.adapter.ItemAdapter
-import it.polito.did.did_smartwater.data.DataSource
 import it.polito.did.did_smartwater.model.Plant
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class Plants : Fragment(R.layout.plants) {
@@ -84,8 +85,6 @@ class Plants : Fragment(R.layout.plants) {
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
-        progressBarLoading.setVisibility(View.VISIBLE)
-        imageBackgroundLoading.setVisibility(View.VISIBLE)
 
         //viewModelRoutesFragment.updateViewModel()
 
@@ -96,16 +95,25 @@ class Plants : Fragment(R.layout.plants) {
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
         GlobalScope.launch {
-            if(!viewModelRoutesFragment.viewModelSetted) {
-                progressBarLoading.setVisibility(View.VISIBLE)
-                imageBackgroundLoading.setVisibility(View.VISIBLE)
-                Log.d("Launch", "strating update viewmodel")
-                //viewModelRoutesFragment.updateViewModel()
-                Log.d("Launch", "finished update")
-                //viewModelRoutesFragment.updatePhoto()
-            }
+                if(!viewModelRoutesFragment.viewModelSetted) {
+                    progressBarLoading.setVisibility(View.VISIBLE)
+                    imageBackgroundLoading.setVisibility(View.VISIBLE)
+                    Log.d("Launch", progressBarLoading.isVisible.toString())
+                    Log.d("Launch", "strating update viewmodel")
+                    //viewModelRoutesFragment.updateViewModel()
+                    Log.d("Launch", "finished update")
+                    //viewModelRoutesFragment.updatePhoto()
+
+                    Handler(Looper.getMainLooper()).post(Runnable {
+                        progressBarLoading.setVisibility(View.VISIBLE)
+                        imageBackgroundLoading.setVisibility(View.VISIBLE)
+                    })
+                }
+
 
         }
+
+
 
         val imageViewClick = view.findViewById<ImageView>(R.id.imageViewClick)
         imageViewClick.setOnClickListener(){

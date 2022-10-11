@@ -11,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -56,24 +57,10 @@ class Profile : Fragment(R.layout.fragment_profile) {
         val buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
 
         val textviewFB = view.findViewById<TextView>(R.id.TV)
-        val db = Firebase.database.reference
-        val ref = db.child("message")
-        val postListener = object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue()
-                // ...
-                textviewFB.text = post.toString()
-            }
+        textviewFB.text = Firebase.auth.currentUser?.email.toString()
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Getting Post failed, log a message
-                Log.w(TAG, "loadPost:onCancelled", databaseError.toException())
-            }
-        }
-        ref.addValueEventListener(postListener)
-
-
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
 
 
@@ -99,6 +86,7 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
         buttonLogout.setOnClickListener(){
             Firebase.auth.signOut()
+            viewModelRoutesFragment.viewModelSetted = false
             findNavController().navigate(R.id.action_profile_to_loginFragment3)
         }
     }

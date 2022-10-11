@@ -62,6 +62,7 @@ class SpecificPlant : Fragment() {
         val db= Firebase.database.reference
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        val currentUser = viewModelRoutesFragment.currentUser
         val cal = Calendar.getInstance()
 
         /*GlobalScope.launch {
@@ -122,6 +123,8 @@ class SpecificPlant : Fragment() {
         val card_manual = view.findViewById<ImageView>(R.id.card_manual)
         val card_scheduled = view.findViewById<ImageView>(R.id.card_scheduled)
         val card_auto = view.findViewById<ImageView>(R.id.card_auto)
+        val imageViewProfileFoto = view.findViewById<ImageView>(R.id.imageViewProfileFoto)
+        imageViewProfileFoto.setImageBitmap(viewModelRoutesFragment.plantlist[0]?.bmp)
 
         specificPlantName.text = viewModelRoutesFragment.plant_name.value
 
@@ -135,7 +138,7 @@ class SpecificPlant : Fragment() {
 
             @SuppressLint("RestrictedApi")
             override fun onStopTrackingTouch(slider: Slider) {
-                db.child("piantaTest").child("humidityThreshold").setValue(sliderHumidity.value)
+                db.child(currentUser).child("humidityThreshold").setValue(sliderHumidity.value)
             }
         })
         sliderHumidity.setVisibility(View.GONE)
@@ -188,7 +191,7 @@ class SpecificPlant : Fragment() {
         plantNote.setOnEditorActionListener(TextView.OnEditorActionListener { textView, actionId, keyEvent -> //triggered when done editing (as clicked done on keyboard)
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 plantNote.clearFocus()
-                db.child("piantaTest").child("note").setValue(plantNote.text.toString())
+                db.child(currentUser).child("note").setValue(plantNote.text.toString())
             }
             false
         })
@@ -352,7 +355,7 @@ class SpecificPlant : Fragment() {
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.VISIBLE)
-            db.child("piantaTest").child("irrigationMode").setValue(0)
+            db.child(currentUser).child("irrigationMode").setValue(0)
             sliderHumidity.setVisibility(View.GONE)
             layoutParams.setMargins(0, 240, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -386,7 +389,7 @@ class SpecificPlant : Fragment() {
             calendarView.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             buttonWater.setVisibility(View.GONE)
-            db.child("piantaTest").child("irrigationMode").setValue(2)
+            db.child(currentUser).child("irrigationMode").setValue(2)
             sliderHumidity.setVisibility(View.VISIBLE)
             layoutParams.setMargins(0, 450, 0, 0)
             buttonTime.setVisibility(View.GONE)
@@ -442,10 +445,10 @@ class SpecificPlant : Fragment() {
             if(date_string == "") {
                 date_string = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
             }
-            db.child("piantaTest").child("startDate").setValue(date_string)
-            db.child("piantaTest").child("irrigationDays").setValue(pickerDays.value)
-            db.child("piantaTest").child("startTime").setValue(pickedTimeText.text.toString())
-            db.child("piantaTest").child("irrigationMode").setValue(1)
+            db.child(currentUser).child("startDate").setValue(date_string)
+            db.child(currentUser).child("irrigationDays").setValue(pickerDays.value)
+            db.child(currentUser).child("startTime").setValue(pickedTimeText.text.toString())
+            db.child(currentUser).child("irrigationMode").setValue(1)
         }
 
         buttonWater.setOnClickListener(){

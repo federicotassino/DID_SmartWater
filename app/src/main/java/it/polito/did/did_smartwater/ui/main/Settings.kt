@@ -128,7 +128,7 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
             }
         }
-        db.child("waterLevel").addValueEventListener(postListener)
+        db.child("HardwareStatus").child("waterLevel").addValueEventListener(postListener)
 
 
         val networkNameListener = object : ValueEventListener {

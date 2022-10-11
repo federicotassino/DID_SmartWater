@@ -39,13 +39,14 @@ class MainViewModel : ViewModel() {
     //var bmp = MutableLiveData<Bitmap>()
 
     var viewModelSetted: Boolean = false
+    var currentUser = "piantaTest"
 
 
 
-    init {
+    /*init {
         viewModelScope.launch {
             updatePhoto()
-            currentPlant.value = FirebaseProfileService.getProfileData()
+            currentPlant.value = FirebaseProfileService.getProfileData(currentUser)
             plantlist.add(currentPlant.value!!)
             Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
 
@@ -67,7 +68,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("name").addValueEventListener(nameListener)
+            db.child(currentUser).child("name").addValueEventListener(nameListener)
 
 
             val irrigationModeListener = object : ValueEventListener {
@@ -84,7 +85,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("irrigationMode").addValueEventListener(irrigationModeListener)
+            db.child(currentUser).child("irrigationMode").addValueEventListener(irrigationModeListener)
 
 
             val startDateListener = object : ValueEventListener {
@@ -101,7 +102,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("startDate").addValueEventListener(startDateListener)
+            db.child(currentUser).child("startDate").addValueEventListener(startDateListener)
 
 
             val startTimeListener = object : ValueEventListener {
@@ -117,7 +118,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("startTime").addValueEventListener(startTimeListener)
+            db.child(currentUser).child("startTime").addValueEventListener(startTimeListener)
 
 
             val irrigationDaysListener = object : ValueEventListener {
@@ -133,7 +134,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("irrigationDays").addValueEventListener(irrigationDaysListener)
+            db.child(currentUser).child("irrigationDays").addValueEventListener(irrigationDaysListener)
 
 
             val humidityLevelListener = object : ValueEventListener {
@@ -149,7 +150,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("humidityLevel").addValueEventListener(humidityLevelListener)
+            db.child(currentUser).child("humidityLevel").addValueEventListener(humidityLevelListener)
 
 
             val humidityThresholdListener = object : ValueEventListener {
@@ -165,7 +166,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("humidityThreshold").addValueEventListener(humidityThresholdListener)
+            db.child(currentUser).child("humidityThreshold").addValueEventListener(humidityThresholdListener)
 
 
             val noteListener = object : ValueEventListener {
@@ -181,7 +182,7 @@ class MainViewModel : ViewModel() {
                     Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
                 }
             }
-            db.child("piantaTest").child("note").addValueEventListener(noteListener)
+            db.child(currentUser).child("note").addValueEventListener(noteListener)
 
 
             //test = FirebaseProfileService.getTest()!!
@@ -195,13 +196,173 @@ class MainViewModel : ViewModel() {
             viewModelSetted = true
             Log.d("foto", "viewModel init")
         }
+    }*/
+
+    suspend fun setViewModel() {
+        updatePhoto()
+
+        if (plantlist.size == 0) {
+            currentPlant.postValue(FirebaseProfileService.getProfileData(currentUser, this))
+            //plantlist.add(currentPlant.value!!)
+        } else {
+            currentPlant.postValue(FirebaseProfileService.getProfileData(currentUser, this))
+            //plantlist[0] = currentPlant.value!!
+        }
+
+        //Log.d("NomePianta", "Nome della pianta: " + currentPlant.value!!.name)
+
+
+        //LISTENERS
+
+
+        val nameListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plant_name.value= post.toString()
+                plantlist[0].name = plant_name.value.toString()
+                Log.d("LISTENERS", "nome cambiato a: " + plant_name.value)
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("name").addValueEventListener(nameListener)
+
+
+        val irrigationModeListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantIrrigationMode.value= post.toString().toInt()
+                plantlist[0].irrigationMode = plantIrrigationMode.value!!
+                Log.d("LISTENERS", "modalità cambiata a: " + plantIrrigationMode.value)
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("irrigationMode").addValueEventListener(irrigationModeListener)
+
+
+        val startDateListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantStartDate.value= post.toString()
+                plantlist[0].startDate = plantStartDate.value.toString()
+                Log.d("StartDate",  "Osserva data" + plantStartDate.value.toString())
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("startDate").addValueEventListener(startDateListener)
+
+
+        val startTimeListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantStartTime.value= post.toString()
+                plantlist[0].startTime = plantStartTime.value.toString()
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("startTime").addValueEventListener(startTimeListener)
+
+
+        val irrigationDaysListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantIrrigationDays.value= post.toString().toInt()
+                plantlist[0].irrigationDays = plantIrrigationDays.value!!
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("irrigationDays").addValueEventListener(irrigationDaysListener)
+
+
+        val humidityLevelListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantHumidityLevel.value= post.toString().toFloat()
+                plantlist[0].humidityLevel = plantHumidityLevel.value!!
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("humidityLevel").addValueEventListener(humidityLevelListener)
+
+
+        val humidityThresholdListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantHumidityThreshold.value= post.toString().toInt()
+                plantlist[0].humidiyThreshold = plantHumidityThreshold.value!!
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("humidityThreshold").addValueEventListener(humidityThresholdListener)
+
+
+        val noteListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                plantNote.value= post.toString()
+                plantlist[0].note = plantNote.value!!
+            }
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+                Log.w(ContentValues.TAG, "loadPost:onCancelled", databaseError.toException())
+            }
+        }
+        db.child(currentUser).child("note").addValueEventListener(noteListener)
+
+
+        //test = FirebaseProfileService.getTest()!!
+        //Log.d("NomePianta", "Nome della pianta: " + test)
+        /*
+        val storage = FirebaseStorage.getInstance().getReference().child("foto")
+        val photoBytes = storage.getBytes(10000000).await()
+        bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
+        */
+
+        viewModelSetted = true
+        Log.d("foto", "viewModel init")
     }
 
     suspend fun updatePhoto(){
         //currentPlant.postValue(FirebaseProfileService.getProfileData())
         Log.d("foto", "viewModel updatePhoto 1")
-        val storage = FirebaseStorage.getInstance().getReference().child("foto")
-        val photoBytes = storage.getBytes(10000000).await()
+        val storage = FirebaseStorage.getInstance().getReference().child(currentUser)
+        val photoBytes = storage.getBytes(100000000).await()
         bmp = BitmapFactory.decodeByteArray(photoBytes, 0, photoBytes.size)
 
         Log.d("foto", "viewModel updatePhoto 2")
@@ -215,8 +376,12 @@ class MainViewModel : ViewModel() {
 
     }
 
-    fun updateList(){
-        plantlist.add(currentPlant.value!!)
+    fun updateList(plant: Plant){
+        if (plantlist.size == 0) {
+            plantlist.add(plant)
+        } else {
+            plantlist[0] = plant
+        }
     }
 
 }

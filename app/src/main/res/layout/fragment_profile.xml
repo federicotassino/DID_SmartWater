@@ -20,12 +20,12 @@
                 android:id="@+id/buttonAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="200dp"
-                android:text="Impostazioni account"
+                android:layout_marginTop="60dp"
                 android:backgroundTint="#356CFF"
+                android:text="Impostazioni account"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/TV" />
 
             <Button
                 android:id="@+id/buttonLogout"
@@ -51,14 +51,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/buttonAccount" />
 
             <TextView
-                android:id="@+id/TV"
+                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Utente:"
-                app:layout_constraintBottom_toTopOf="@+id/buttonAccount"
+                android:layout_marginTop="40dp"
+                android:text="Account:"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/TV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="Utente:"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,10 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import it.polito.did.did_smartwater.R
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,6 +59,7 @@ class LoginFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+
         val buttonToSignUp = view.findViewById<Button>(R.id.buttonToSignUp)
         buttonToSignUp.setOnClickListener(){
             findNavController().navigate(R.id.action_loginFragment3_to_signUpFragment)
@@ -66,28 +70,37 @@ class LoginFragment : Fragment() {
 
         var email = ""
         var password = ""
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         val buttonSignIn = view.findViewById<Button>(R.id.buttonSignIn)
         buttonSignIn.setOnClickListener(){
             email = emailText.text.toString()
             password = passwordText.text.toString()
-            activity?.let { it1 ->
-                auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(it1) { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("SignIn", "signInWithEmail:success")
-                            val user = auth.currentUser
-                            findNavController().navigate(R.id.action_loginFragment3_to_plants)
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("SignIn", "signInWithEmail:failure", task.exception)
-                            Snackbar
-                                .make(buttonSignIn, "Authentication failed.", Snackbar.LENGTH_LONG)
-                                .setBackgroundTint(0xff7f0000.toInt())
-                                .show()
+            if(email != "" && password.length > 5) {
+                activity?.let { it1 ->
+                    auth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(it1) { task ->
+                            if (task.isSuccessful) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d("SignIn", "signInWithEmail:success")
+                                val user = auth.currentUser
+                                viewModelRoutesFragment.currentUser = user?.uid.toString()
+                                GlobalScope.launch {
+                                    viewModelRoutesFragment.setViewModel()
+                                }
+                                findNavController().navigate(R.id.action_loginFragment3_to_plants)
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w("SignIn", "signInWithEmail:failure", task.exception)
+                                Snackbar
+                                    .make(buttonSignIn, "Email o password non validi", Snackbar.LENGTH_LONG)
+                                    .setBackgroundTint(0xff7f0000.toInt())
+                                    .show()
+                            }
                         }
-                    }
+                }
+
             }
         }
     }
@@ -97,6 +110,13 @@ class LoginFragment : Fragment() {
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if(currentUser != null) {
+            val viewModelRoutesFragment =
+                ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
+            viewModelRoutesFragment.currentUser = currentUser?.uid.toString()
+            GlobalScope.launch {
+                viewModelRoutesFragment.setViewModel()
+            }
             findNavController().navigate(R.id.action_loginFragment3_to_plants)
         }
     }
