@@ -63,6 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
+                android:backgroundTint="#356CFF"
                 android:layout_marginTop="40dp"
                 android:text="Registrati"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,6 +84,7 @@
             <Button
                 android:id="@+id/buttonHomeDebug"
                 android:layout_width="wrap_content"
+                android:backgroundTint="#356CFF"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="Home"

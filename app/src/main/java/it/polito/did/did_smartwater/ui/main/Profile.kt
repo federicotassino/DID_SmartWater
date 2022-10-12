@@ -1,8 +1,6 @@
 package it.polito.did.did_smartwater.ui.main
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +11,8 @@ import android.widget.TextView
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -52,8 +52,7 @@ class Profile : Fragment(R.layout.fragment_profile) {
         val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
         val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
 
-        val buttonAccount = view.findViewById<Button>(R.id.buttonAccount)
-        val buttonStoricoPiante = view.findViewById<Button>(R.id.buttonStoricoPiante)
+        val buttonResetPassword = view.findViewById<Button>(R.id.buttonResetPassword)
         val buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
 
         val textviewFB = view.findViewById<TextView>(R.id.TV)
@@ -76,13 +75,18 @@ class Profile : Fragment(R.layout.fragment_profile) {
             findNavController().navigate(R.id.action_profile_to_settings)
         }
 
-        buttonAccount.setOnClickListener(){
-            findNavController().navigate(R.id.action_profile_to_profile_GestioneAccount)
+        var auth = FirebaseAuth.getInstance()
+        var email = auth.currentUser?.email.toString()
+
+        buttonResetPassword.setOnClickListener(){
+            auth.sendPasswordResetEmail(email)
+            Snackbar
+                .make(buttonResetPassword, "Ti abbiamo inviato una mail per il reset della password", Snackbar.LENGTH_LONG)
+                .setBackgroundTint(0xff00BB2D.toInt())
+                .show()
         }
 
-        buttonStoricoPiante.setOnClickListener(){
-            findNavController().navigate(R.id.action_profile_to_profile_StoricoPiante)
-        }
+
 
         buttonLogout.setOnClickListener(){
             Firebase.auth.signOut()

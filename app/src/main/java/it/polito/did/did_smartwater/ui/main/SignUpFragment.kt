@@ -99,7 +99,7 @@ class SignUpFragment : Fragment() {
                                 Log.w("SignUp", "createUserWithEmail:failure", task.exception)
                                 Snackbar
                                     .make(buttonSignUp, "Email o password non validi", Snackbar.LENGTH_LONG)
-                                    .setBackgroundTint(0xff7f0000.toInt())
+                                    .setBackgroundTint(0xff00BB2D.toInt())
                                     .show()
                             }
                         }
@@ -117,7 +117,7 @@ class SignUpFragment : Fragment() {
         db.child(currentUser).child("humidityThreshold").setValue(0)
         db.child(currentUser).child("id").setValue(0)
         db.child(currentUser).child("irrigationDays").setValue(0)
-        db.child(currentUser).child("irrigationMode").setValue(0)
+        db.child(currentUser).child("irrigationMode").setValue(-1) //per riconoscere che p pianta default
         db.child(currentUser).child("name").setValue("pianta")
         db.child(currentUser).child("note").setValue("note")
         db.child(currentUser).child("startDate").setValue("01-01-1970")

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -94,6 +95,13 @@ class Plants : Fragment(R.layout.plants) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
+        val cardNoPLants = view.findViewById<ImageView>(R.id.CardNoPlants)
+        val textViewNoPlants = view.findViewById<TextView>(R.id.textViewNoPlants)
+        val textViewNewPlant = view.findViewById<TextView>(R.id.textViewNewPlant)
+        cardNoPLants.setVisibility(View.INVISIBLE)
+        textViewNoPlants.setVisibility(View.INVISIBLE)
+        textViewNewPlant.setVisibility(View.INVISIBLE)
+
         GlobalScope.launch {
                 if(!viewModelRoutesFragment.viewModelSetted) {
                     progressBarLoading.setVisibility(View.VISIBLE)
@@ -120,6 +128,9 @@ class Plants : Fragment(R.layout.plants) {
             findNavController().navigate(R.id.action_plants_to_specificPlant)
         }
 
+        textViewNewPlant.setOnClickListener {
+            findNavController().navigate(R.id.action_plants_to_specificPlant)
+        }
         //viewModel + Firebase
         //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
         //viewModel.initialize()
@@ -150,6 +161,12 @@ class Plants : Fragment(R.layout.plants) {
             recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
             progressBarLoading.setVisibility(View.GONE)
             imageBackgroundLoading.setVisibility(View.GONE)
+            if (viewModelRoutesFragment.currentPlant.value!!.irrigationMode == -1){
+                recyclerView.setVisibility(View.GONE)
+                textViewNoPlants.setVisibility(View.VISIBLE)
+                cardNoPLants.setVisibility(View.VISIBLE)
+                textViewNewPlant.setVisibility(View.VISIBLE)
+            }
         }
         viewModelRoutesFragment.plant_name.observe(viewLifecycleOwner, nameObserver)
 

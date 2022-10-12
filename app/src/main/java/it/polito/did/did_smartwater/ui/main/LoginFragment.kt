@@ -50,10 +50,15 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
         //debug da togliere
         val buttonHomeDebug = view.findViewById<Button>(R.id.buttonHomeDebug)
         buttonHomeDebug.setOnClickListener() {
+            GlobalScope.launch {
+                viewModelRoutesFragment.setViewModel()
+            }
             findNavController().navigate(R.id.action_loginFragment3_to_plants)
         }
 
@@ -70,8 +75,7 @@ class LoginFragment : Fragment() {
 
         var email = ""
         var password = ""
-        val viewModelRoutesFragment =
-            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
 
         val buttonSignIn = view.findViewById<Button>(R.id.buttonSignIn)
         buttonSignIn.setOnClickListener(){
@@ -95,7 +99,7 @@ class LoginFragment : Fragment() {
                                 Log.w("SignIn", "signInWithEmail:failure", task.exception)
                                 Snackbar
                                     .make(buttonSignIn, "Email o password non validi", Snackbar.LENGTH_LONG)
-                                    .setBackgroundTint(0xff7f0000.toInt())
+                                    .setBackgroundTint(0xff00BB2D.toInt())
                                     .show()
                             }
                         }

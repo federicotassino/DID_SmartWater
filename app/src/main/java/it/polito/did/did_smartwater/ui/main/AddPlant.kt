@@ -256,39 +256,39 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
             if(newPlantName == ""){
                 Snackbar
-                    .make(buttonAdd, "Please, choose a name", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, scegli un nome", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
             else if(newPlantIrrigationMode == -1){
                 Snackbar
-                    .make(buttonAdd, "Please, choose an irrigation mode", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, seleziona la modalità di irrigazione", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
             else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays == -1){
                 Snackbar
-                    .make(buttonAdd, "Please, specify irrigation days", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, specifica i giorni di irrigazione", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
 
             else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays != -1 && newPlantStartDate == ""){
                 Snackbar
-                    .make(buttonAdd, "Please, specify irrigation starting date", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, seleziona la data di inizio irrigazione", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
             else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays != -1 && newPlantStartDate != ""  && newPlantStartTime == "Orario"){
                 Snackbar
-                    .make(buttonAdd, "Please, specify irrigation time", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, seleziona l'orario di irrigazione", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
 
             else{
                 Snackbar
-                    .make(buttonAdd, "Plant added succesfully!", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Pianta aggiunta con successo!", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff00BB2D.toInt())
                     .show()
 
