@@ -21,6 +21,7 @@ import com.google.firebase.storage.ktx.storage
 import it.polito.did.did_smartwater.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
 
 // TODO: Rename parameter arguments, choose names that match
@@ -88,11 +89,13 @@ class SignUpFragment : Fragment() {
                                 Log.d("SignUp", "createUserWithEmail:success")
                                 val user = auth.currentUser
                                 viewModelRoutesFragment.currentUser = user?.uid.toString()
-                                postNewUser(user?.uid.toString())
+                                //postNewUser(user?.uid.toString())
                                 GlobalScope.launch {
+                                    postNewUser(user?.uid.toString())
                                     viewModelRoutesFragment.setViewModel()
                                 }
-                                findNavController().navigate(R.id.action_signUpFragment_to_plants)
+                                if(findNavController().currentDestination?.id == R.id.signUpFragment)
+                                    findNavController().navigate(R.id.action_signUpFragment_to_plants)
 
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -111,7 +114,7 @@ class SignUpFragment : Fragment() {
 
     }
 
-    private fun postNewUser(currentUser: String) {
+    suspend private fun postNewUser(currentUser: String) {
         val db = Firebase.database.reference
         db.child(currentUser).child("humidityLevel").setValue(0.1f)
         db.child(currentUser).child("humidityThreshold").setValue(0)
@@ -131,7 +134,7 @@ class SignUpFragment : Fragment() {
         val bm = (resources.getDrawable(R.drawable.albero_umidita_con_cerchio) as BitmapDrawable).bitmap
         bm.compress(Bitmap.CompressFormat.PNG, 100, baos)
         val data = baos.toByteArray()
-        plantRef.putBytes(data)
+        plantRef.putBytes(data).await()
     }
 
     companion object {

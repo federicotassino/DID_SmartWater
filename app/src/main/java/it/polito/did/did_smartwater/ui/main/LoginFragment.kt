@@ -67,7 +67,8 @@ class LoginFragment : Fragment() {
 
         val buttonToSignUp = view.findViewById<Button>(R.id.buttonToSignUp)
         buttonToSignUp.setOnClickListener(){
-            findNavController().navigate(R.id.action_loginFragment3_to_signUpFragment)
+            if(findNavController().currentDestination?.id == R.id.loginFragment3)
+                findNavController().navigate(R.id.action_loginFragment3_to_signUpFragment)
         }
 
         val emailText = view.findViewById<EditText>(R.id.userEmail)
@@ -93,7 +94,8 @@ class LoginFragment : Fragment() {
                                 GlobalScope.launch {
                                     viewModelRoutesFragment.setViewModel()
                                 }
-                                findNavController().navigate(R.id.action_loginFragment3_to_plants)
+                                if(findNavController().currentDestination?.id == R.id.loginFragment3)
+                                    findNavController().navigate(R.id.action_loginFragment3_to_plants)
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w("SignIn", "signInWithEmail:failure", task.exception)
@@ -121,7 +123,8 @@ class LoginFragment : Fragment() {
             GlobalScope.launch {
                 viewModelRoutesFragment.setViewModel()
             }
-            findNavController().navigate(R.id.action_loginFragment3_to_plants)
+            if(findNavController().currentDestination?.id == R.id.loginFragment3)
+                findNavController().navigate(R.id.action_loginFragment3_to_plants)
         }
     }
 

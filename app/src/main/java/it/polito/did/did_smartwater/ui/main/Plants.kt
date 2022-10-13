@@ -125,11 +125,13 @@ class Plants : Fragment(R.layout.plants) {
 
         val imageViewClick = view.findViewById<ImageView>(R.id.imageViewClick)
         imageViewClick.setOnClickListener(){
-            findNavController().navigate(R.id.action_plants_to_specificPlant)
+            if(findNavController().currentDestination?.id == R.id.plants)
+                findNavController().navigate(R.id.action_plants_to_specificPlant)
         }
 
         textViewNewPlant.setOnClickListener {
-            findNavController().navigate(R.id.action_plants_to_specificPlant)
+            if(findNavController().currentDestination?.id == R.id.plants)
+                findNavController().navigate(R.id.action_plants_to_specificPlant)
         }
         //viewModel + Firebase
         //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
@@ -143,15 +145,18 @@ class Plants : Fragment(R.layout.plants) {
 
 
         buttonAddPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_plants_to_addPlant)
+            if(findNavController().currentDestination?.id == R.id.plants)
+                findNavController().navigate(R.id.action_plants_to_addPlant)
         }
 
         buttonSettings.setOnClickListener(){
-            findNavController().navigate(R.id.action_plants_to_settings)
+            if(findNavController().currentDestination?.id == R.id.plants)
+                findNavController().navigate(R.id.action_plants_to_settings)
         }
 
         buttonProfile.setOnClickListener(){
-            findNavController().navigate(R.id.action_plants_to_profile)
+            if(findNavController().currentDestination?.id == R.id.plants)
+                findNavController().navigate(R.id.action_plants_to_profile)
         }
 
 

@@ -49,15 +49,18 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_plants)
+            if(findNavController().currentDestination?.id == R.id.settings)
+                findNavController().navigate(R.id.action_settings_to_plants)
         }
 
         buttonAddPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_addPlant)
+            if(findNavController().currentDestination?.id == R.id.settings)
+                findNavController().navigate(R.id.action_settings_to_addPlant)
         }
 
         buttonProfile.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_profile)
+            if(findNavController().currentDestination?.id == R.id.settings)
+                findNavController().navigate(R.id.action_settings_to_profile)
         }
 
         val buttonWifi = view.findViewById<Button>(R.id.buttonWifi)
@@ -71,7 +74,8 @@ class Settings : Fragment(R.layout.fragment_settings) {
         textViewRicarica.visibility = View.INVISIBLE
 
         buttonWifi.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
+            if(findNavController().currentDestination?.id == R.id.settings)
+                findNavController().navigate(R.id.action_settings_to_settings_WifiEsp2)
         }
         //references immagini
         //val id_0 = resources.getIdentifier("it.polito.did.did_smartwater:drawable/menu_custom_spento", null, null)

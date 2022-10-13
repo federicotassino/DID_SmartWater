@@ -82,15 +82,18 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_addPlant_to_plants)
+            if(findNavController().currentDestination?.id == R.id.addPlant)
+                findNavController().navigate(R.id.action_addPlant_to_plants)
         }
 
         buttonSettings.setOnClickListener(){
-            findNavController().navigate(R.id.action_addPlant_to_settings)
+            if(findNavController().currentDestination?.id == R.id.addPlant)
+                findNavController().navigate(R.id.action_addPlant_to_settings)
         }
 
         buttonProfile.setOnClickListener(){
-            findNavController().navigate(R.id.action_addPlant_to_profile)
+            if(findNavController().currentDestination?.id == R.id.addPlant)
+                findNavController().navigate(R.id.action_addPlant_to_profile)
         }
 
         //views references

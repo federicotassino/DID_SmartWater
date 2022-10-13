@@ -51,7 +51,8 @@ class Settings_WifiEsp : Fragment() {
         val editTextPassword = view.findViewById<EditText>(R.id.editTextTextPassword)
 
         buttonBack.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
+            if(findNavController().currentDestination?.id == R.id.settings_WifiEsp2)
+                findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
         }
         //navbar references
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
@@ -60,19 +61,23 @@ class Settings_WifiEsp : Fragment() {
         val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
 
         buttonPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_WifiEsp2_to_plants)
+            if(findNavController().currentDestination?.id == R.id.settings_WifiEsp2)
+                findNavController().navigate(R.id.action_settings_WifiEsp2_to_plants)
         }
 
         buttonAddPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_WifiEsp2_to_addPlant)
+            if(findNavController().currentDestination?.id == R.id.settings_WifiEsp2)
+                findNavController().navigate(R.id.action_settings_WifiEsp2_to_addPlant)
         }
 
         buttonProfile.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_WifiEsp2_to_profile)
+            if(findNavController().currentDestination?.id == R.id.settings_WifiEsp2)
+                findNavController().navigate(R.id.action_settings_WifiEsp2_to_profile)
         }
 
         buttonSettings.setOnClickListener(){
-            findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
+            if(findNavController().currentDestination?.id == R.id.settings_WifiEsp2)
+                findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
         }
 
         buttonConnect.setOnClickListener(){

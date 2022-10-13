@@ -64,15 +64,18 @@ class Profile : Fragment(R.layout.fragment_profile) {
 
 
         buttonPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_profile_to_plants)
+            if(findNavController().currentDestination?.id == R.id.profile)
+                findNavController().navigate(R.id.action_profile_to_plants)
         }
 
         buttonAddPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_profile_to_addPlant)
+            if(findNavController().currentDestination?.id == R.id.profile)
+                findNavController().navigate(R.id.action_profile_to_addPlant)
         }
 
         buttonSettings.setOnClickListener(){
-            findNavController().navigate(R.id.action_profile_to_settings)
+            if(findNavController().currentDestination?.id == R.id.profile)
+                findNavController().navigate(R.id.action_profile_to_settings)
         }
 
         var auth = FirebaseAuth.getInstance()
@@ -91,7 +94,8 @@ class Profile : Fragment(R.layout.fragment_profile) {
         buttonLogout.setOnClickListener(){
             Firebase.auth.signOut()
             viewModelRoutesFragment.viewModelSetted = false
-            findNavController().navigate(R.id.action_profile_to_loginFragment3)
+            if(findNavController().currentDestination?.id == R.id.profile)
+                findNavController().navigate(R.id.action_profile_to_loginFragment3)
         }
     }
 

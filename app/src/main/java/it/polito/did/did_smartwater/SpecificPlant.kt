@@ -76,19 +76,23 @@ class SpecificPlant : Fragment() {
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_specificPlant_to_plants)
+            if(findNavController().currentDestination?.id == R.id.specificPlant)
+                findNavController().navigate(R.id.action_specificPlant_to_plants)
         }
 
         buttonAddPlants.setOnClickListener(){
-            findNavController().navigate(R.id.action_specificPlant_to_addPlant)
+            if(findNavController().currentDestination?.id == R.id.specificPlant)
+                findNavController().navigate(R.id.action_specificPlant_to_addPlant)
         }
 
         buttonSettings.setOnClickListener(){
-            findNavController().navigate(R.id.action_specificPlant_to_settings)
+            if(findNavController().currentDestination?.id == R.id.specificPlant)
+                findNavController().navigate(R.id.action_specificPlant_to_settings)
         }
 
         buttonProfile.setOnClickListener(){
-            findNavController().navigate(R.id.action_specificPlant_to_profile)
+            if(findNavController().currentDestination?.id == R.id.specificPlant)
+                findNavController().navigate(R.id.action_specificPlant_to_profile)
         }
 
         //views references
