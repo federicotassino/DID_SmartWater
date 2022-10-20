@@ -26,8 +26,8 @@
             android:id="@+id/scrollView2"
             android:layout_width="424dp"
             android:layout_height="0dp"
-            android:layout_marginTop="90dp"
-            android:background="@drawable/rounded_corners_bg"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/rounded_corners_bg_2"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -37,42 +37,55 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+
                 <ImageView
-                    android:id="@+id/ImageViewCard"
-                    android:layout_width="545dp"
-                    android:layout_height="379dp"
-                    android:src="@drawable/card_radio_button_v2"
+                    android:id="@+id/imageViewCardWifi"
+                    android:layout_width="340dp"
+                    android:layout_height="361dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/card_white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewLevel" />
+
+                <ImageView
+                    android:id="@+id/imageViewCardHardware"
+                    android:layout_width="340dp"
+                    android:layout_height="361dp"
+                    android:src="@drawable/card_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewCardWifi" />
 
                 <Button
                     android:id="@+id/buttonWifi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
-                    android:text="Cambia rete"
+                    android:layout_marginTop="28dp"
                     android:backgroundTint="#356CFF"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:fontFamily="@font/nexa"
+                    android:text="Cambia rete"
+                    app:layout_constraintEnd_toEndOf="@+id/networkName"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/networkName"
                     app:layout_constraintTop_toBottomOf="@+id/networkName" />
-
 
                 <TextView
                     android:id="@+id/textViewWaterLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="162dp"
+                    android:fontFamily="@font/nexa"
                     android:text="---"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.277"
+                    app:layout_constraintHorizontal_bias="0.25"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageViewLevel"
-                    android:layout_width="197dp"
-                    android:layout_height="220dp"
+                    android:layout_width="256dp"
+                    android:layout_height="286dp"
                     android:layout_marginStart="60dp"
                     android:layout_marginTop="50dp"
                     android:src="@drawable/cisterna_0"
@@ -84,108 +97,110 @@
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="110dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/nexa_bold"
                     android:text="Rete impostata per il sistema fisico:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.575"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/ImageViewCard" />
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="@+id/imageViewCardWifi"
+                    app:layout_constraintHorizontal_bias="0.07"
+                    app:layout_constraintStart_toStartOf="@+id/imageViewCardWifi"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewCardWifi" />
 
                 <TextView
                     android:id="@+id/networkName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/nexa_regular"
                     android:text="TextView"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:textSize="14dp"
+                    app:layout_constraintEnd_toEndOf="@+id/textView6"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
                     android:id="@+id/textView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="120dp"
+                    android:fontFamily="@font/nexa_bold"
                     android:text="Stato dell'hardware"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.501"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ImageViewCard" />
+                    app:layout_constraintEnd_toEndOf="@+id/imageViewCardHardware"
+                    app:layout_constraintHorizontal_bias="0.078"
+                    app:layout_constraintStart_toStartOf="@+id/imageViewCardHardware"
+                    app:layout_constraintTop_toTopOf="@+id/imageViewCardHardware" />
 
                 <TextView
                     android:id="@+id/textView9"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nexa"
                     android:text="Sensore di prossimità:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/textView8"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
                 <ImageView
                     android:id="@+id/imageProximity"
-                    android:layout_width="52dp"
-                    android:layout_height="51dp"
-                    android:layout_marginStart="45dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="100dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="120dp"
+                    android:layout_marginEnd="80dp"
                     android:src="@drawable/x_smart_water"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintTop_toTopOf="@+id/textView9" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="112dp"
+                    android:layout_marginTop="24dp"
                     android:text="Sensore di umidità:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintEnd_toEndOf="@+id/textView9"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/textView9"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
                 <ImageView
                     android:id="@+id/imageUmidita"
-                    android:layout_width="52dp"
-                    android:layout_height="51dp"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="92dp"
-                    android:layout_marginEnd="100dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/x_smart_water"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintEnd_toEndOf="@+id/imageProximity"
+                    app:layout_constraintStart_toStartOf="@+id/imageProximity"
+                    app:layout_constraintTop_toTopOf="@+id/textView11" />
 
                 <TextView
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:layout_marginTop="180dp"
-                    android:layout_marginEnd="88dp"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/nexa"
                     android:text="Stato della pompa:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                    app:layout_constraintEnd_toStartOf="@+id/imagePompa"
+                    app:layout_constraintEnd_toEndOf="@+id/textView11"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintStart_toStartOf="@+id/textView11"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
                 <ImageView
                     android:id="@+id/imagePompa"
-                    android:layout_width="52dp"
-                    android:layout_height="51dp"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="164dp"
-                    android:layout_marginEnd="100dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/x_smart_water"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    app:layout_constraintEnd_toEndOf="@+id/imageProximity"
+                    app:layout_constraintStart_toStartOf="@+id/imageUmidita"
+                    app:layout_constraintTop_toTopOf="@+id/textView12" />
 
                 <TextView
                     android:id="@+id/textView13"
@@ -199,6 +214,7 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/nexa"
                     android:text=" %"
                     app:layout_constraintStart_toEndOf="@+id/textViewWaterLevel"
                     app:layout_constraintTop_toTopOf="@+id/textViewWaterLevel" />
@@ -207,8 +223,10 @@
                     android:id="@+id/textViewRicarica"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="La cisterna deve essere ricaricata"
+                    android:layout_marginTop="8dp"
                     android:background="#48FF9124"
+                    android:fontFamily="@font/nexa"
+                    android:text="La cisterna deve essere ricaricata"
                     android:textColor="#f55653"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -222,7 +240,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="411dp"
             android:layout_height="68dp"
-            android:background="#F1FCFF"
+            android:background="#FF7797B0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">

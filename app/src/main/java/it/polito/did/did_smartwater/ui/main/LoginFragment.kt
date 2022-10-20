@@ -55,6 +55,7 @@ class LoginFragment : Fragment() {
 
         //debug da togliere
         val buttonHomeDebug = view.findViewById<Button>(R.id.buttonHomeDebug)
+        buttonHomeDebug.visibility= View.GONE
         buttonHomeDebug.setOnClickListener() {
             GlobalScope.launch {
                 viewModelRoutesFragment.setViewModel()

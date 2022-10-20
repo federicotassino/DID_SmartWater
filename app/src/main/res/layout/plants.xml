@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F1FCFF"
+    android:background="#ACDBFF"
     tools:context=".ui.main.Plants">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,7 +20,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="411dp"
             android:layout_height="68dp"
-            android:background="#0090E17D"
+            android:background="#FF7797B0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -162,6 +162,7 @@
             android:layout_width="320dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="160dp"
+            android:fontFamily="@font/nexa"
             android:text="Non è stata trovata alcuna pianta registrata per questo utente"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="@+id/CardNoPlants"
@@ -173,6 +174,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="100dp"
+            android:fontFamily="@font/nexa"
             android:text="Aggiungi la tua pianta!"
             android:textColor="#2196F3"
             app:layout_constraintEnd_toEndOf="@+id/CardNoPlants"

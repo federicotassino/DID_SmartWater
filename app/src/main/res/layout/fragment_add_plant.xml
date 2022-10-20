@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.AddPlant">
+    tools:context=".ui.main.AddPlant"
+    android:background="#ACDBFF">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -14,12 +15,15 @@
 
         <ScrollView
             android:id="@+id/scrollView2"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="411dp"
+            android:layout_height="594dp"
+            android:background="@drawable/rounded_corners_bg"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -31,7 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:text="Name"
+                    android:fontFamily="@font/nexa"
+                    android:text="Nome:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.507"
@@ -42,7 +47,7 @@
                     android:id="@+id/plantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="20dp"
                     android:ems="10"
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
@@ -57,8 +62,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:text="Irrigation Mode"
+                    android:fontFamily="@font/nexa"
+                    android:text="Scegli una modalità di irrigazione:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/plantName" />
@@ -140,16 +147,16 @@
                     android:stepSize="5.0"
                     android:valueFrom="0.0"
                     android:valueTo="100.0"
+                    app:haloColor="#44356CFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-                    app:trackColorActive="#aa356CFF"
-                    app:trackColorInactive="#44356CFF"
-                    app:haloColor="#44356CFF"
-                    app:tickColor="#356CFF"
                     app:thumbColor="#88356CFF"
                     app:thumbRadius="10dp"
+                    app:tickColor="#356CFF"
+                    app:trackColorActive="#aa356CFF"
+                    app:trackColorInactive="#44356CFF"
                     app:trackHeight="10dp" />
 
                 <TextView
@@ -278,7 +285,7 @@
             android:id="@+id/constraintLayout"
             android:layout_width="411dp"
             android:layout_height="68dp"
-            android:background="#F1FCFF"
+            android:background="#7797B0"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
