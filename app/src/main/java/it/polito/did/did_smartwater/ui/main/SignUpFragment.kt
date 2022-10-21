@@ -92,7 +92,7 @@ class SignUpFragment : Fragment() {
                                 db.child("CurrentUser").setValue(user?.uid.toString())
                                 //postNewUser(user?.uid.toString())
                                 GlobalScope.launch {
-                                    postNewUser(user?.uid.toString())
+                                    postNewUser(user?.uid.toString(), username.text.toString())
                                     viewModelRoutesFragment.setViewModel()
                                 }
                                 if(findNavController().currentDestination?.id == R.id.signUpFragment)
@@ -115,7 +115,7 @@ class SignUpFragment : Fragment() {
 
     }
 
-    suspend private fun postNewUser(currentUser: String) {
+    suspend private fun postNewUser(currentUser: String, username: String) {
         val db = Firebase.database.reference
         db.child(currentUser).child("humidityLevel").setValue(0.1f)
         db.child(currentUser).child("humidityThreshold").setValue(0)
@@ -127,7 +127,7 @@ class SignUpFragment : Fragment() {
         db.child(currentUser).child("startDate").setValue("01-01-1970")
         db.child(currentUser).child("startTime").setValue("00:00")
         db.child(currentUser).child("toWater").setValue(0)
-
+        db.child(currentUser).child("username").setValue(username)
         //upload photo
         val storage = FirebaseStorage.getInstance().getReference()
         val plantRef = storage.child(currentUser)

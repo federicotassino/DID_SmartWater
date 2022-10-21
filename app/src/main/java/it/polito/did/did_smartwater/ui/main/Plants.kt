@@ -124,24 +124,27 @@ class Plants : Fragment(R.layout.plants) {
 
 
         val imageViewClick = view.findViewById<ImageView>(R.id.imageViewClick)
+
         imageViewClick.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.plants)
-                findNavController().navigate(R.id.action_plants_to_specificPlant)
+
+            if(findNavController().currentDestination?.id == R.id.plants) {
+                if (viewModelRoutesFragment.currentPlant!!.value!!.irrigationMode == -1) {
+                    findNavController().navigate(R.id.action_plants_to_addPlant)
+                } else {
+                    findNavController().navigate(R.id.action_plants_to_specificPlant)
+                }
+            }
         }
 
         textViewNewPlant.setOnClickListener {
             if(findNavController().currentDestination?.id == R.id.plants)
-                findNavController().navigate(R.id.action_plants_to_specificPlant)
+                findNavController().navigate(R.id.action_plants_to_addPlant)
         }
         //viewModel + Firebase
         //viewModel.currentPlant.observe(viewLifecycleOwner, Observer {  })
         //viewModel.initialize()
-        val plantObserver = Observer<Plant> { newName ->
-            //testPlantName.text = newName.name
 
-            //recyclerView.adapter = ItemAdapter(requireContext(), viewModelRoutesFragment.plantlist)
-        }
-        viewModelRoutesFragment.currentPlant.observe(viewLifecycleOwner, plantObserver)
+
 
 
         buttonAddPlants.setOnClickListener(){
@@ -171,6 +174,7 @@ class Plants : Fragment(R.layout.plants) {
                 textViewNoPlants.setVisibility(View.VISIBLE)
                 cardNoPLants.setVisibility(View.VISIBLE)
                 textViewNewPlant.setVisibility(View.VISIBLE)
+
             }
         }
         viewModelRoutesFragment.plant_name.observe(viewLifecycleOwner, nameObserver)

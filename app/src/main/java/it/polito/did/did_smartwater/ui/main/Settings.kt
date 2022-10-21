@@ -87,7 +87,7 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 // Get Post object and use the values to update the UI
                 val post = dataSnapshot.getValue()
                 // ...
-                textViewWaterLevel.text = post.toString().substring(0, post.toString().length-2)
+                textViewWaterLevel.text = post.toString()
                 Log.d("TEXT", textViewWaterLevel.text.toString())
                 //da inserire immagini icona cisterna
                 if(textViewWaterLevel.text.toString().toInt() >= 0 && textViewWaterLevel.text.toString().toInt() < 5){
@@ -154,12 +154,12 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val proximityListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue()
+                val post = dataSnapshot.getValue().toString()
                 // ...
-                if(post == true){
+                if(post == "1"){
                     imageProximity.setImageResource(R.drawable.tic_smart_water)
                 }
-                if(post == false){
+                if(post == "0"){
                     imageProximity.setImageResource(R.drawable.x_smart_water)
                 }
             }
@@ -173,12 +173,12 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val umiditaListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue()
+                val post = dataSnapshot.getValue().toString()
                 // ...
-                if(post == true){
+                if(post == "1"){
                     imageUmidita.setImageResource(R.drawable.tic_smart_water)
                 }
-                if(post == false){
+                if(post == "0"){
                     imageUmidita.setImageResource(R.drawable.x_smart_water)
                 }
             }
@@ -192,12 +192,13 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val pompaListener = object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 // Get Post object and use the values to update the UI
-                val post = dataSnapshot.getValue()
+                val post = dataSnapshot.getValue().toString()
+                Log.d("POST", post)
                 // ...
-                if(post == true){
+                if(post == "1"){
                     imagePompa.setImageResource(R.drawable.tic_smart_water)
                 }
-                if(post == false){
+                if(post == "0"){
                     imagePompa.setImageResource(R.drawable.x_smart_water)
                 }
             }

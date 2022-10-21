@@ -48,12 +48,16 @@ class Profile : Fragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val db = Firebase.database.reference
+
         val buttonPlants = view.findViewById<ImageView>(R.id.buttonPlants)
         val buttonAddPlants = view.findViewById<ImageView>(R.id.buttonAddPlants)
         val buttonSettings = view.findViewById<ImageView>(R.id.buttonSettings)
 
+        val textViewNome = view.findViewById<TextView>(R.id.textView16)
         val buttonResetPassword = view.findViewById<Button>(R.id.buttonResetPassword)
         val buttonLogout = view.findViewById<Button>(R.id.buttonLogout)
+
 
         val textviewFB = view.findViewById<TextView>(R.id.TV)
         textviewFB.text = Firebase.auth.currentUser?.email.toString()
@@ -89,7 +93,19 @@ class Profile : Fragment(R.layout.fragment_profile) {
                 .show()
         }
 
+        val userNameListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                textViewNome.text = post.toString()
+            }
 
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        db.child(viewModelRoutesFragment.currentUser).child("username").addValueEventListener(userNameListener)
 
         buttonLogout.setOnClickListener(){
             Firebase.auth.signOut()

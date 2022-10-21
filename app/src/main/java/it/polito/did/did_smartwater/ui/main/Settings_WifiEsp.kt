@@ -1,6 +1,7 @@
 package it.polito.did.did_smartwater.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.R
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,10 +53,37 @@ class Settings_WifiEsp : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        val db = Firebase.database.reference
         val buttonBack = view.findViewById<Button>(R.id.buttonBack)
-        val buttonConnect = view.findViewById<Button>(R.id.buttonConnect)
-        val editTextNetworkName = view.findViewById<EditText>(R.id.editTextTextNetworkName)
-        val editTextPassword = view.findViewById<EditText>(R.id.editTextTextPassword)
+
+        val button = view.findViewById<Button>(R.id.button)
+        button.setOnClickListener(){
+            Log.d("CONNECT", "premuto")
+            db.child("HardwareStatus").child("modeAccessPoint").setValue(1)
+            Snackbar
+                .make(button, "Puoi collegarti alla rete del sistema", Snackbar.LENGTH_LONG)
+                .setBackgroundTint(0xff00BB2D.toInt())
+                .show()
+        }
+
+        val networkName2 = view.findViewById<TextView>(R.id.networkName2)
+
+        val networkNameListener = object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // Get Post object and use the values to update the UI
+                val post = dataSnapshot.getValue()
+                // ...
+                networkName2.text = post.toString()
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Getting Post failed, log a message
+            }
+        }
+        db.child("Wifi").child("networkName").addValueEventListener(networkNameListener)
+
+
 
         buttonBack.setOnClickListener(){
             if(findNavController().currentDestination?.id == R.id.settings_WifiEsp2)
@@ -80,9 +115,7 @@ class Settings_WifiEsp : Fragment() {
                 findNavController().navigate(R.id.action_settings_WifiEsp2_to_settings)
         }
 
-        buttonConnect.setOnClickListener(){
-            //codice per inviare nome e password all'ESP
-        }
+
 
     }
 

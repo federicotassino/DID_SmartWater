@@ -106,9 +106,9 @@
 
         <ImageView
             android:id="@+id/imageViewClick"
-            android:layout_width="0dp"
-            android:layout_height="107dp"
-            android:layout_marginTop="350dp"
+            android:layout_width="365dp"
+            android:layout_height="37dp"
+            android:layout_marginTop="412dp"
             android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
