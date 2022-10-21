@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import it.polito.did.did_smartwater.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -53,6 +55,7 @@ class LoginFragment : Fragment() {
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
+        val db = Firebase.database.reference
         //debug da togliere
         val buttonHomeDebug = view.findViewById<Button>(R.id.buttonHomeDebug)
         buttonHomeDebug.visibility= View.GONE
@@ -92,6 +95,7 @@ class LoginFragment : Fragment() {
                                 Log.d("SignIn", "signInWithEmail:success")
                                 val user = auth.currentUser
                                 viewModelRoutesFragment.currentUser = user?.uid.toString()
+                                db.child("CurrentUser").setValue(user?.uid.toString())
                                 GlobalScope.launch {
                                     viewModelRoutesFragment.setViewModel()
                                 }
@@ -116,11 +120,13 @@ class LoginFragment : Fragment() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
+        val db = Firebase.database.reference
         if(currentUser != null) {
             val viewModelRoutesFragment =
                 ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
             viewModelRoutesFragment.currentUser = currentUser?.uid.toString()
+            db.child("CurrentUser").setValue(currentUser?.uid.toString())
             GlobalScope.launch {
                 viewModelRoutesFragment.setViewModel()
             }

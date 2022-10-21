@@ -64,7 +64,7 @@ class SignUpFragment : Fragment() {
         buttonHomeDebug.setOnClickListener() {
             findNavController().navigate(R.id.action_signUpFragment_to_plants)
         }
-
+        val db = Firebase.database.reference
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
 
@@ -89,6 +89,7 @@ class SignUpFragment : Fragment() {
                                 Log.d("SignUp", "createUserWithEmail:success")
                                 val user = auth.currentUser
                                 viewModelRoutesFragment.currentUser = user?.uid.toString()
+                                db.child("CurrentUser").setValue(user?.uid.toString())
                                 //postNewUser(user?.uid.toString())
                                 GlobalScope.launch {
                                     postNewUser(user?.uid.toString())

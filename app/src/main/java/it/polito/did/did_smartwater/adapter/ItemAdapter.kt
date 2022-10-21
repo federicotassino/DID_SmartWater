@@ -38,7 +38,7 @@ class ItemAdapter(
         // caricamento dati nel viewholder
         val item = dataset[position]
         holder.plant_item_name.text =  dataset[position].name
-        holder.plant_item_humidity.text =  dataset[position].humidityLevel.toString()
+        holder.plant_item_humidity.text =  dataset[position].humidityLevel.toInt().toString()
         if (item.irrigationMode == 0){
             holder.plant_item_irrigation_mode.setImageResource(R.drawable.manual_mode_acceso)
         }

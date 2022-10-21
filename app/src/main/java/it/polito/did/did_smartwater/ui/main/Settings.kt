@@ -87,7 +87,8 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 // Get Post object and use the values to update the UI
                 val post = dataSnapshot.getValue()
                 // ...
-                textViewWaterLevel.text = post.toString()
+                textViewWaterLevel.text = post.toString().substring(0, post.toString().length-2)
+                Log.d("TEXT", textViewWaterLevel.text.toString())
                 //da inserire immagini icona cisterna
                 if(textViewWaterLevel.text.toString().toInt() >= 0 && textViewWaterLevel.text.toString().toInt() < 5){
                     //imageViewLevel.setImageResource(id_0)
