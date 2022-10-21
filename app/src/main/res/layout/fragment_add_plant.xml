@@ -34,12 +34,12 @@
                     android:id="@+id/specificPlantName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="76dp"
                     android:fontFamily="@font/nexa"
                     android:text="Nome:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.507"
+                    app:layout_constraintHorizontal_bias="0.196"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -52,9 +52,7 @@
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.497"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/specificPlantName"
                     app:layout_constraintTop_toBottomOf="@+id/specificPlantName" />
 
                 <TextView
@@ -72,8 +70,8 @@
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
-                    android:layout_width="271dp"
-                    android:layout_height="89dp"
+                    android:layout_width="300dp"
+                    android:layout_height="127dp"
                     android:layout_marginTop="40dp"
                     android:gravity="center"
                     android:orientation="horizontal"
@@ -110,9 +108,11 @@
 
                 <CalendarView
                     android:id="@+id/calendarView"
-                    android:layout_width="339dp"
-                    android:layout_height="289dp"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="75dp"
                     android:layout_marginTop="40dp"
+                    android:layout_marginEnd="75dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dateDebug" />
@@ -121,19 +121,17 @@
                     android:id="@+id/textViewGiorni"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="80dp"
                     android:fontFamily="@font/nexa"
-                    android:text="Seleziona intervallo irrigazione:"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:text="Seleziona intervallo irrigazione (giorni)"
+                    app:layout_constraintStart_toStartOf="@+id/calendarView"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
                 <NumberPicker
                     android:id="@+id/pickerDays"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="16dp"
                     app:layout_constraintStart_toEndOf="@+id/textViewGiorni"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
@@ -142,7 +140,7 @@
                     style="@style/Widget.AppCompat.SeekBar.Discrete"
                     android:layout_width="346dp"
                     android:layout_height="66dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="32dp"
                     android:max="10"
                     android:progress="3"
                     android:stepSize="5.0"
@@ -152,7 +150,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.506"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewThreshold"
                     app:thumbColor="#88356CFF"
                     app:thumbRadius="10dp"
                     app:tickColor="#356CFF"
@@ -168,9 +166,7 @@
                     android:fontFamily="@font/nexa"
                     android:text="Note"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/specificPlantName"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
                 <EditText
@@ -180,30 +176,43 @@
                     android:layout_marginTop="40dp"
                     android:ems="10"
                     android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.527"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textViewNote"
                     app:layout_constraintTop_toBottomOf="@+id/textViewNote" />
 
                 <Button
                     android:id="@+id/buttonAdd"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:layout_marginEnd="40dp"
+                    android:layout_marginEnd="75dp"
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
                     android:text="Aggiungi"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/imageViewPhoto"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewPhoto" />
 
                 <TextView
                     android:id="@+id/textViewDateSelect"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/nexa"
                     android:text="Seleziona data di inizio irrigazione"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.165"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+                <TextView
+                    android:id="@+id/textViewThreshold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="40dp"
+                    android:fontFamily="@font/nexa"
+                    android:text="Seleziona la soglia di umidità sotto a cui irrigare"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.165"
                     app:layout_constraintStart_toStartOf="parent"
@@ -227,22 +236,20 @@
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
                     android:text="Seleziona orario"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.207"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textViewGiorni"
                     app:layout_constraintTop_toBottomOf="@+id/textViewGiorni" />
 
                 <TextView
                     android:id="@+id/pickedTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginStart="32dp"
                     android:fontFamily="@font/nexa"
                     android:text="Orario"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.257"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/buttonTime" />
+                    android:textSize="18sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/buttonTime"
+                    app:layout_constraintStart_toEndOf="@+id/buttonTime"
+                    app:layout_constraintTop_toTopOf="@+id/buttonTime" />
 
                 <TextView
                     android:id="@+id/textView3"
@@ -266,22 +273,20 @@
                 <ImageView
                     android:id="@+id/imageViewPhoto"
                     android:layout_width="217dp"
-                    android:layout_height="263dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_height="266dp"
+                    android:layout_marginTop="36dp"
                     android:src="@drawable/albero_umidita_con_cerchio"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView10"
                     app:layout_constraintTop_toBottomOf="@+id/buttonCamera" />
 
                 <TextView
                     android:id="@+id/textView10"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
                     android:layout_marginTop="64dp"
                     android:fontFamily="@font/nexa"
                     android:text="Scatta una foto della tua pianta"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/plantNote"
                     app:layout_constraintTop_toBottomOf="@+id/plantNote" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

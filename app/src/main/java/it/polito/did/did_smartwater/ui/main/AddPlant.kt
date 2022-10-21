@@ -104,6 +104,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val buttonAutomatic = view.findViewById<RadioButton>(R.id.buttonAutomatic)
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
         val textViewNote = view.findViewById<TextView>(R.id.textViewNote)
+        val textViewTheshold = view.findViewById<TextView>(R.id.textViewThreshold)
+        textViewTheshold.setVisibility(View.GONE)
         val layoutParams = textViewNote.layoutParams as ViewGroup.MarginLayoutParams
         calendarView.setVisibility(View.GONE)
         layoutParams.setMargins(0, 40, 0, 0)
@@ -169,6 +171,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.VISIBLE)
             sliderHumidity.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.VISIBLE)
+            textViewTheshold.setVisibility(View.GONE)
         }
 
         buttonManual.setOnClickListener(){
@@ -181,11 +184,12 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             dateSelected.setVisibility(View.GONE)
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
+            textViewTheshold.setVisibility(View.GONE)
         }
 
         buttonAutomatic.setOnClickListener(){
             calendarView.setVisibility(View.GONE)
-            layoutParams.setMargins(0, 200, 0, 0)
+            layoutParams.setMargins(0, 500, 0, 0)
             textViewGiorni.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.VISIBLE)
@@ -193,6 +197,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             dateSelected.setVisibility(View.GONE)
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
+            textViewTheshold.setVisibility(View.VISIBLE)
         }
 
         calendarView
