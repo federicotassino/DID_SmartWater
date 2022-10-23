@@ -56,10 +56,10 @@ class ItemAdapter(
 
 
         //on click listener
-        holder.plant_item_name.setOnClickListener(){
+        //holder.plant_item_name.setOnClickListener(){
             //Plants.onItemClickedCompanion()
 
-        }
+        //}
 
     }
 

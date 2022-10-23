@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.ktx.storage
 import it.polito.did.did_smartwater.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -70,17 +69,19 @@ class SignUpFragment : Fragment() {
 
         val emailText = view.findViewById<EditText>(R.id.userEmail)
         val passwordText = view.findViewById<EditText>(R.id.userPassword)
-        val username = view.findViewById<EditText>(R.id.username)
+        val usernameText = view.findViewById<EditText>(R.id.username)
         auth = FirebaseAuth.getInstance()
 
         var email = ""
         var password = ""
+        var username = ""
 
         val buttonSignUp = view.findViewById<Button>(R.id.buttonSignUp)
         buttonSignUp.setOnClickListener(){
             email = emailText.text.toString()
             password = passwordText.text.toString()
-            if(email != "" && password.length > 5) {
+            username = usernameText.text.toString()
+            if(email != "" && password.length > 5 && username != "") {
                 activity?.let { it1 ->
                     auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(it1) { task ->
@@ -92,7 +93,7 @@ class SignUpFragment : Fragment() {
                                 db.child("CurrentUser").setValue(user?.uid.toString())
                                 //postNewUser(user?.uid.toString())
                                 GlobalScope.launch {
-                                    postNewUser(user?.uid.toString(), username.text.toString())
+                                    postNewUser(user?.uid.toString(), usernameText.text.toString())
                                     viewModelRoutesFragment.setViewModel()
                                 }
                                 if(findNavController().currentDestination?.id == R.id.signUpFragment)
