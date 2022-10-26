@@ -344,7 +344,7 @@
                     android:layout_marginTop="30dp"
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
-                    android:text="Water!"
+                    android:text="Irriga"
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

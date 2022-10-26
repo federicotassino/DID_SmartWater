@@ -72,6 +72,8 @@ class Settings : Fragment(R.layout.fragment_settings) {
         val imagePompa = view.findViewById<ImageView>(R.id.imagePompa)
         val textViewRicarica = view.findViewById<TextView>(R.id.textViewRicarica)
         textViewRicarica.visibility = View.INVISIBLE
+        val textViewProximityError = view.findViewById<TextView>(R.id.textViewProximityError)
+        textViewProximityError.visibility = View.INVISIBLE
 
         buttonWifi.setOnClickListener(){
             if(findNavController().currentDestination?.id == R.id.settings)
@@ -101,30 +103,39 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 15 && textViewWaterLevel.text.toString().toInt() < 25){
                     imageViewLevel.setImageResource(R.drawable.cisterna_20)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 25 && textViewWaterLevel.text.toString().toInt() < 35){
                     imageViewLevel.setImageResource(R.drawable.cisterna_30)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 35 && textViewWaterLevel.text.toString().toInt() < 45){
                     imageViewLevel.setImageResource(R.drawable.cisterna_40)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 45 && textViewWaterLevel.text.toString().toInt() < 55){
                     imageViewLevel.setImageResource(R.drawable.cisterna_50)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 55 && textViewWaterLevel.text.toString().toInt() < 65){
                     imageViewLevel.setImageResource(R.drawable.cisterna_60)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 65 && textViewWaterLevel.text.toString().toInt() < 75){
                     imageViewLevel.setImageResource(R.drawable.cisterna_70)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 75 && textViewWaterLevel.text.toString().toInt() < 85){
                     imageViewLevel.setImageResource(R.drawable.cisterna_80)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 85 && textViewWaterLevel.text.toString().toInt() < 95){
                     imageViewLevel.setImageResource(R.drawable.cisterna_90)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
                 else if(textViewWaterLevel.text.toString().toInt() >= 95 && textViewWaterLevel.text.toString().toInt() <= 100){
                     imageViewLevel.setImageResource(R.drawable.cisterna_100)
+                    textViewRicarica.visibility = View.INVISIBLE
                 }
             }
 
@@ -158,9 +169,11 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 // ...
                 if(post == "1"){
                     imageProximity.setImageResource(R.drawable.tic_smart_water)
+                    textViewProximityError.visibility = View.INVISIBLE
                 }
                 if(post == "0"){
                     imageProximity.setImageResource(R.drawable.x_smart_water)
+                    textViewProximityError.visibility = View.VISIBLE
                 }
             }
 

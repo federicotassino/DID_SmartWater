@@ -13,17 +13,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="425dp"
+            android:layout_height="238dp"
+            android:layout_marginTop="-80dp"
+            android:alpha="0.5"
+            android:src="@drawable/background_addplants"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="411dp"
             android:layout_height="594dp"
+            android:layout_marginTop="100dp"
             android:background="@drawable/rounded_corners_bg"
             app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -146,6 +157,7 @@
                     android:stepSize="5.0"
                     android:valueFrom="0.0"
                     android:valueTo="100.0"
+                    android:visibility="invisible"
                     app:haloColor="#44356CFF"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.506"
@@ -184,11 +196,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="50dp"
-                    android:layout_marginEnd="75dp"
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
                     android:text="Aggiungi"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageViewPhoto"
                     app:layout_constraintStart_toStartOf="@+id/imageViewPhoto"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewPhoto" />
 
@@ -196,7 +207,7 @@
                     android:id="@+id/textViewDateSelect"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="50dp"
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/nexa"
                     android:text="Seleziona data di inizio irrigazione"
@@ -213,6 +224,7 @@
                     android:layout_marginTop="40dp"
                     android:fontFamily="@font/nexa"
                     android:text="Seleziona la soglia di umidità sotto a cui irrigare"
+                    android:visibility="invisible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.165"
                     app:layout_constraintStart_toStartOf="parent"
@@ -263,20 +275,21 @@
                     android:id="@+id/buttonCamera"
                     android:layout_width="68dp"
                     android:layout_height="62dp"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginStart="16dp"
                     android:src="@android:drawable/ic_menu_camera"
                     android:text="Camera"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
                     app:layout_constraintStart_toEndOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/plantNote" />
+                    app:layout_constraintTop_toTopOf="@+id/textView10" />
 
                 <ImageView
                     android:id="@+id/imageViewPhoto"
                     android:layout_width="217dp"
                     android:layout_height="266dp"
                     android:layout_marginTop="36dp"
-                    android:src="@drawable/albero_umidita_con_cerchio"
-                    app:layout_constraintStart_toStartOf="@+id/textView10"
+                    android:src="@drawable/photoplant_default"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/buttonCamera" />
 
                 <TextView
@@ -285,7 +298,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="64dp"
                     android:fontFamily="@font/nexa"
-                    android:text="Scatta una foto della tua pianta"
+                    android:text="Scatta una foto della tua pianta!"
                     app:layout_constraintStart_toStartOf="@+id/plantNote"
                     app:layout_constraintTop_toBottomOf="@+id/plantNote" />
 

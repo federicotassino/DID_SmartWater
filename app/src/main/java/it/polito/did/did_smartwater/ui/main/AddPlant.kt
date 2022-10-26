@@ -344,8 +344,13 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             //val takenImage = data?.extras?.get("data") as Bitmap  //low quality
             val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)  //high quality
             val imageViewPhoto = view?.findViewById<ImageView>(R.id.imageViewPhoto)
-            imageViewPhoto?.setImageBitmap(rotateBitmap(takenImage, 90f))  //high quality
-            //imageViewPhoto?.setImageBitmap(takenImage)  //low quality
+            if(takenImage.height > takenImage.width) {
+                imageViewPhoto?.setImageBitmap(rotateBitmap(takenImage, 90f))  //high quality
+                //imageViewPhoto?.setImageBitmap(takenImage)  //low quality}
+            }
+            else{
+                imageViewPhoto?.setImageBitmap(takenImage)  //high quality
+            }
         }else {
             super.onActivityResult(requestCode, resultCode, data)
         }

@@ -459,7 +459,7 @@ class SpecificPlant : Fragment() {
             //scrivere l'avviso di irrigare sul DB
             db.child(viewModelRoutesFragment.currentUser).child("toWater").setValue(1)  //settarlo a false da ESP dopo aver irrigato
             Snackbar
-            .make(buttonWater, "Watering your plant...", Snackbar.LENGTH_LONG)
+            .make(buttonWater, "Irrigando la tua pianta...", Snackbar.LENGTH_LONG)
             .setBackgroundTint(0xff00BB2D.toInt())
             .show()
         }

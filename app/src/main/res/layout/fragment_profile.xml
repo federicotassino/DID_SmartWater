@@ -12,6 +12,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/imageView12"
+            android:layout_width="976dp"
+            android:layout_height="248dp"
+            android:layout_marginTop="-32dp"
+            android:alpha="0.5"
+            android:src="@drawable/background_profile"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="419dp"
@@ -146,6 +157,19 @@
                 app:layout_constraintStart_toStartOf="@id/imageView9"
                 app:layout_constraintTop_toBottomOf="@+id/TV" />
 
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nexa_bold"
+                android:text="Nome Utente"
+                android:textColor="#67E3A7"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageView9"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -210,19 +234,6 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView16"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:fontFamily="@font/nexa_bold"
-            android:text="Nome Utente"
-            android:textColor="#67E3A7"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

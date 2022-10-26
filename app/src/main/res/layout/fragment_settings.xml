@@ -232,6 +232,21 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageViewLevel" />
 
+                <TextView
+                    android:id="@+id/textViewProximityError"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="50dp"
+                    android:background="#48FF9124"
+                    android:fontFamily="@font/nexa"
+                    android:text="Impossibile misurare correttamente il livello dell'acqua"
+                    android:textColor="#f55653"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewLevel" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
