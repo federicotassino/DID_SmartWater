@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import it.polito.did.did_smartwater.MainActivity
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.adapter.ItemAdapter
 import it.polito.did.did_smartwater.model.Plant
@@ -73,6 +74,7 @@ class Plants : Fragment(R.layout.plants) {
         progressBarLoading.setVisibility(View.VISIBLE)
         imageBackgroundLoading.setVisibility(View.VISIBLE)
 
+        (activity as MainActivity?)?.setGoBack(true)
 
         imageBackgroundLoading.setOnClickListener(){
             //impedisce di cliccare ciò che è sotto

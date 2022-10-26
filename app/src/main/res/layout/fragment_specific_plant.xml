@@ -17,6 +17,7 @@
             android:id="@+id/imageViewProfileFoto"
             android:layout_width="420dp"
             android:layout_height="388dp"
+            android:layout_marginTop="-100dp"
             android:adjustViewBounds="true"
             android:alpha="0.6"
             android:contentDescription="image"
@@ -41,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.049"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageViewProfileFoto" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/card_manual"
@@ -57,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="@+id/scrollView2"
             app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageViewProfileFoto" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/card_scheduled"
@@ -73,7 +74,7 @@
             app:layout_constraintEnd_toEndOf="@+id/scrollView2"
             app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageViewProfileFoto" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/card_auto"
@@ -89,7 +90,7 @@
             app:layout_constraintEnd_toEndOf="@+id/scrollView2"
             app:layout_constraintHorizontal_bias="0.266"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageViewProfileFoto" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageViewShadow"
@@ -311,23 +312,28 @@
                     android:id="@+id/textViewNote"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="70dp"
                     android:layout_marginTop="120dp"
                     android:fontFamily="@font/nexa"
-                    android:text="Note"
+                    android:text="Note sulla pianta"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
                 <EditText
                     android:id="@+id/plantNote"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="16dp"
+                    android:background="#ACDBFF"
                     android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:gravity="top|start"
+                    android:inputType="textMultiLine"
+                    android:lines="8"
+                    android:maxLines="1"
+                    android:minLines="1"
+                    app:layout_constraintStart_toStartOf="@+id/textViewNote"
                     app:layout_constraintTop_toBottomOf="@+id/textViewNote" />
 
                 <TextView
@@ -422,6 +428,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
                     tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/plantNote" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

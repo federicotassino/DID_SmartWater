@@ -14,6 +14,7 @@ import it.polito.did.did_smartwater.ui.main.Plants
 
 class MainActivity : AppCompatActivity() {
 
+    public var canGoBack = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,15 @@ class MainActivity : AppCompatActivity() {
        // supportActionBar?.setTitle("SmartWater")
         //supportActionBar?.setBackgroundDrawable(getDrawable(R.drawable.barra_fissa_menu))
         supportActionBar?.hide()
+    }
+
+    override fun onBackPressed() {
+        if(canGoBack)
+            super.onBackPressed()
+    }
+
+    public fun setGoBack(value : Boolean) {
+        canGoBack = value
     }
 
 }

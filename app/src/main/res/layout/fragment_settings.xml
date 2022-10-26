@@ -46,12 +46,24 @@
                     android:src="@drawable/card_white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageViewLevel" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageViewCardCisterna" />
+
+                <ImageView
+                    android:id="@+id/imageViewCardCisterna"
+                    android:layout_width="340dp"
+                    android:layout_height="361dp"
+                    android:layout_marginTop="70dp"
+                    android:scaleY="1.5"
+                    android:src="@drawable/card_white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageViewCardHardware"
                     android:layout_width="340dp"
                     android:layout_height="361dp"
+                    android:layout_marginTop="-50dp"
                     android:src="@drawable/card_white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -74,22 +86,22 @@
                     android:id="@+id/textViewWaterLevel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="100dp"
                     android:layout_marginTop="162dp"
                     android:fontFamily="@font/nexa"
                     android:text="---"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.25"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageViewLevel"
-                    android:layout_width="256dp"
-                    android:layout_height="286dp"
-                    android:layout_marginStart="60dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_width="415dp"
+                    android:layout_height="340dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="60dp"
                     android:src="@drawable/cisterna_0"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.494"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -223,7 +235,7 @@
                     android:id="@+id/textViewRicarica"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="-16dp"
                     android:background="#48FF9124"
                     android:fontFamily="@font/nexa"
                     android:text="La cisterna deve essere ricaricata"
@@ -236,9 +248,9 @@
                     android:id="@+id/textViewProximityError"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="50dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="-16dp"
+                    android:layout_marginEnd="60dp"
                     android:background="#48FF9124"
                     android:fontFamily="@font/nexa"
                     android:text="Impossibile misurare correttamente il livello dell'acqua"

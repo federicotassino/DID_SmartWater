@@ -2,18 +2,19 @@ package it.polito.did.did_smartwater.ui.main
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import it.polito.did.did_smartwater.MainActivity
 import it.polito.did.did_smartwater.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -68,12 +69,14 @@ class LoginFragment : Fragment() {
 
         auth = FirebaseAuth.getInstance()
 
+        (activity as MainActivity?)?.setGoBack(false)
 
         val buttonToSignUp = view.findViewById<Button>(R.id.buttonToSignUp)
         buttonToSignUp.setOnClickListener(){
             if(findNavController().currentDestination?.id == R.id.loginFragment3)
                 findNavController().navigate(R.id.action_loginFragment3_to_signUpFragment)
         }
+
 
         val emailText = view.findViewById<EditText>(R.id.userEmail)
         val passwordText = view.findViewById<EditText>(R.id.userPassword)
@@ -115,6 +118,7 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
 
     override fun onStart() {
         super.onStart()

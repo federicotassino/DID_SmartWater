@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
+import it.polito.did.did_smartwater.MainActivity
 import it.polito.did.did_smartwater.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -66,6 +67,8 @@ class SignUpFragment : Fragment() {
         val db = Firebase.database.reference
         val viewModelRoutesFragment =
             ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+
+        (activity as MainActivity?)?.setGoBack(true)
 
         val emailText = view.findViewById<EditText>(R.id.userEmail)
         val passwordText = view.findViewById<EditText>(R.id.userPassword)

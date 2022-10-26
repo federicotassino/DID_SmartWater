@@ -174,6 +174,7 @@ class Settings : Fragment(R.layout.fragment_settings) {
                 if(post == "0"){
                     imageProximity.setImageResource(R.drawable.x_smart_water)
                     textViewProximityError.visibility = View.VISIBLE
+                    textViewRicarica.visibility= View.INVISIBLE
                 }
             }
 

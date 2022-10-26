@@ -20,6 +20,7 @@
             android:alpha="0.5"
             android:src="@drawable/background_profile"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.499"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,9 +41,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginEnd="20dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="60dp"
                 android:scaleX="1"
                 android:scaleY="1"
                 android:src="@drawable/card_profile"
@@ -67,6 +68,7 @@
                 android:id="@+id/buttonLogout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:backgroundTint="#356CFF"
                 android:fontFamily="@font/nexa"
                 android:text="LogOut"
@@ -93,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="36dp"
+                android:layout_marginBottom="60dp"
                 android:fontFamily="@font/nexa"
                 android:text="Mail_Utente"
                 app:layout_constraintBottom_toTopOf="@+id/bar"
@@ -135,15 +137,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="60dp"
+                android:layout_marginBottom="28dp"
                 android:fontFamily="@font/nexa_bold"
                 android:text="I miei contatti"
                 android:textColor="#356CFF"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView"
                 app:layout_constraintEnd_toEndOf="@+id/imageView9"
                 app:layout_constraintHorizontal_bias="0.091"
-                app:layout_constraintStart_toStartOf="@+id/imageView9"
-                app:layout_constraintTop_toTopOf="@+id/imageView9" />
+                app:layout_constraintStart_toStartOf="@+id/imageView9" />
 
             <View
                 android:id="@+id/bar"
@@ -152,18 +154,19 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:background="#CDCDCD"
-                app:layout_constraintBottom_toTopOf="@+id/textView18"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintEnd_toEndOf="@+id/imageView9"
                 app:layout_constraintStart_toStartOf="@id/imageView9"
-                app:layout_constraintTop_toBottomOf="@+id/TV" />
+                app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
             <TextView
                 android:id="@+id/textView16"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/nexa_bold"
                 android:text="Nome Utente"
-                android:textColor="#67E3A7"
+                android:textColor="#356CFF"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/imageView9"
                 app:layout_constraintEnd_toEndOf="parent"
