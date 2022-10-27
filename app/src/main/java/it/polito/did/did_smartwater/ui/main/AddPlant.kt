@@ -10,6 +10,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
@@ -27,6 +28,8 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.model.Plant
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
@@ -41,6 +44,8 @@ private const val ARG_PARAM2 = "param2"
 private const val REQUEST_CODE = 42
 private lateinit var photoFile: File //High quality
 private const val FILE_NAME = "photo.jpg" //High quality
+private var setPhoto = false
+private lateinit var temporaryImage: Bitmap
 
 /**
  * A simple [Fragment] subclass.
@@ -125,6 +130,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         sliderHumidity.setVisibility(View.GONE)
         val buttonCamera = view.findViewById<ImageView>(R.id.buttonCamera)
         val imageViewPhoto = view.findViewById<ImageView>(R.id.imageViewPhoto)
+
+        if(setPhoto)
+            applyPhoto(imageViewPhoto, temporaryImage)
 
 
         //time picker
@@ -344,6 +352,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             //val takenImage = data?.extras?.get("data") as Bitmap  //low quality
             val takenImage = BitmapFactory.decodeFile(photoFile.absolutePath)  //high quality
             val imageViewPhoto = view?.findViewById<ImageView>(R.id.imageViewPhoto)
+            setPhoto = true
+            temporaryImage = takenImage
             if(takenImage.height > takenImage.width) {
                 imageViewPhoto?.setImageBitmap(rotateBitmap(takenImage, 90f))  //high quality
                 //imageViewPhoto?.setImageBitmap(takenImage)  //low quality}
@@ -354,6 +364,12 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         }else {
             super.onActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    fun applyPhoto(imageViewPhoto: ImageView?, takenImage: Bitmap?) {
+        Log.d("foto", "applying photo")
+        setPhoto = false
+        imageViewPhoto?.setImageBitmap(takenImage)
     }
 
     //la foto a qualità maggiore deve essere ruotata
