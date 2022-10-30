@@ -1,11 +1,17 @@
 package it.polito.did.did_smartwater
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -35,8 +41,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(canGoBack)
-            super.onBackPressed()
+        if(canGoBack) {
+            if(findNavController(R.id.fragmentContainerView).currentDestination?.id == R.id.plants) {
+                Log.d("back", "exit application")
+                finishAffinity()
+            }
+            else
+                super.onBackPressed()
+        }
+        else
+            finishAffinity()
     }
 
     public fun setGoBack(value : Boolean) {

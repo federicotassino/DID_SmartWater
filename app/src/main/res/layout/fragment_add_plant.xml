@@ -71,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:ems="10"
+                    android:hint="Nome della pianta"
                     android:imeOptions="actionDone"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
@@ -135,6 +136,7 @@
                     android:layout_marginTop="40dp"
                     android:layout_marginEnd="75dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.466"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dateDebug" />
 
@@ -200,10 +202,13 @@
                     android:background="#ACDBFF"
                     android:ems="10"
                     android:gravity="top|start"
-                    android:inputType="textMultiLine"
+                    android:hint="Note"
+                    android:inputType="textShortMessage"
                     android:lines="8"
+                    android:maxLength="30"
                     android:maxLines="1"
                     android:minLines="1"
+                    app:layout_constraintEnd_toEndOf="@id/buttonCamera"
                     app:layout_constraintStart_toStartOf="@+id/textViewNote"
                     app:layout_constraintTop_toBottomOf="@+id/textViewNote" />
 
@@ -276,7 +281,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:fontFamily="@font/nexa"
-                    android:text="Orario"
+                    android:hint="12:00"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="@+id/buttonTime"
                     app:layout_constraintStart_toEndOf="@+id/buttonTime"
