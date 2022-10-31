@@ -67,6 +67,12 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
     }
 
 
+    override fun onResume() {
+        super.onResume()
+        val radioGroup = view?.findViewById<RadioGroup>(R.id.radioGroup)
+        radioGroup?.clearCheck()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -101,6 +107,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 findNavController().navigate(R.id.action_addPlant_to_profile)
         }
 
+        //calendar reference
+        val cal = Calendar.getInstance()
+
         //views references
         val textPlantName = view.findViewById<EditText>(R.id.plantName)
         val radioGroup = view.findViewById<RadioGroup>(R.id.radioGroup)
@@ -124,8 +133,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
         val textViewDateSelect = view.findViewById<TextView>(R.id.textViewDateSelect)
         textViewDateSelect.setVisibility(View.GONE)
-        val dateSelected = view.findViewById<TextView>(R.id.dateDebug)
-        dateSelected.setVisibility(View.GONE)
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.setVisibility(View.GONE)
         val buttonCamera = view.findViewById<ImageView>(R.id.buttonCamera)
@@ -136,9 +143,11 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
 
         //time picker
+
         val buttonTime = view.findViewById<Button>(R.id.buttonTime)
         buttonTime.setVisibility(View.GONE)
-        val pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
+        var pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
+        pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
         pickedTimeText.setVisibility(View.GONE)
 
 
@@ -146,7 +155,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         var newPlantResourceId = ""
         var newPlantName = ""
         var newPlantIrrigationMode = -1
-        var newPlantStartDate = ""
+        var newPlantStartDate = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
         var newPlantStartTime = ""
         var newPlantIrrigationDays = -1
         var newPlantHumidityThreshold = 50
@@ -172,7 +181,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             layoutParams.setMargins(0, 1900, 0, 0)
             //dateDebug.text = "Seleziona data inizio"
             textViewDateSelect.setVisibility(View.VISIBLE)
-            dateSelected.setVisibility(View.VISIBLE)
             textViewGiorni.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
             buttonTime.setVisibility(View.VISIBLE)
@@ -189,7 +197,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.GONE)
             buttonTime.setVisibility(View.GONE)
-            dateSelected.setVisibility(View.GONE)
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.GONE)
@@ -202,7 +209,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.VISIBLE)
             buttonTime.setVisibility(View.GONE)
-            dateSelected.setVisibility(View.GONE)
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.VISIBLE)
@@ -219,12 +225,11 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                             + (month + 1) + "-" + year)
 
                     // set this date in TextView for Display
-                    dateSelected.text = date
+                    newPlantStartDate = date
                 })
 
         //Time picker
         buttonTime.setOnClickListener(){
-            val cal = Calendar.getInstance()
             val timeSetListener = TimePickerDialog.OnTimeSetListener{timePicker : TimePicker, hour: Int, minute: Int ->
                 cal.set(Calendar.HOUR_OF_DAY, hour)
                 cal.set(Calendar.MINUTE, minute)
@@ -261,7 +266,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
                 newPlantIrrigationMode = 1
                 newPlantIrrigationDays = pickerDays.value
-                newPlantStartDate = dateSelected.text.toString()
                 newPlantStartTime = pickedTimeText.text.toString()
             }
             if(radioGroup.checkedRadioButtonId==buttonAutomatic.id) {
@@ -285,19 +289,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays == -1){
                 Snackbar
                     .make(buttonAdd, "Per favore, specifica i giorni di irrigazione", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(0xff7f0000.toInt())
-                    .show()
-            }
-
-            else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays != -1 && newPlantStartDate == ""){
-                Snackbar
-                    .make(buttonAdd, "Per favore, seleziona la data di inizio irrigazione", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(0xff7f0000.toInt())
-                    .show()
-            }
-            else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays != -1 && newPlantStartDate != ""  && newPlantStartTime == "Orario"){
-                Snackbar
-                    .make(buttonAdd, "Per favore, seleziona l'orario di irrigazione", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
