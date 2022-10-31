@@ -179,7 +179,6 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
             layoutParams.setMargins(0, 1900, 0, 0)
-            //dateDebug.text = "Seleziona data inizio"
             textViewDateSelect.setVisibility(View.VISIBLE)
             textViewGiorni.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
@@ -276,7 +275,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
             if(newPlantName == ""){
                 Snackbar
-                    .make(buttonAdd, "Per favore, scegli un nome", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, scegli un nome per la tua pianta", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
@@ -288,7 +287,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             }
             else if(newPlantIrrigationMode == 1 && newPlantIrrigationDays == -1){
                 Snackbar
-                    .make(buttonAdd, "Per favore, specifica i giorni di irrigazione", Snackbar.LENGTH_LONG)
+                    .make(buttonAdd, "Per favore, specifica l'intervallo di irrigazione", Snackbar.LENGTH_LONG)
                     .setBackgroundTint(0xff7f0000.toInt())
                     .show()
             }
