@@ -270,7 +270,7 @@
                     android:layout_marginTop="70dp"
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
-                    android:text="Seleziona orario"
+                    android:text="Modifica orario"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@+id/textViewGiorni"
                     app:layout_constraintTop_toBottomOf="@+id/textViewGiorni" />
