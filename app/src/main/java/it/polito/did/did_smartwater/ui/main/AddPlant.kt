@@ -34,6 +34,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.time.Duration.Companion.days
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -263,6 +264,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             if(radioGroup.checkedRadioButtonId==buttonManual.id)
                 newPlantIrrigationMode = 0
             if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
+                val date = SimpleDateFormat("dd-MM-yyyy").format(calendarView.date)
+                newPlantStartDate = date
                 newPlantIrrigationMode = 1
                 newPlantIrrigationDays = pickerDays.value
                 newPlantStartTime = pickedTimeText.text.toString()

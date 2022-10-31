@@ -55,6 +55,7 @@ class SpecificPlant : Fragment() {
 
     private val viewModel by activityViewModels<MainViewModel>()
     private var date_string = ""
+    public var comingBack = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -104,6 +105,7 @@ class SpecificPlant : Fragment() {
         val buttonWater = view.findViewById<Button>(R.id.buttonWater)
         buttonWater.setVisibility(View.GONE)
         val calendarView = view.findViewById<CalendarView>(R.id.calendarView)
+        //var date_string = SimpleDateFormat("dd-MM-yyyy").format(calendarView.date)
         calendarView.setVisibility(View.GONE)
         val textViewGiorni = view.findViewById<TextView>(R.id.textViewGiorni)
         textViewGiorni.setVisibility(View.GONE)
@@ -146,6 +148,7 @@ class SpecificPlant : Fragment() {
             }
         })
         sliderHumidity.setVisibility(View.GONE)
+
 
 
 
@@ -320,7 +323,7 @@ class SpecificPlant : Fragment() {
             buttonAutomatic.scaleY = 0.7f
         }
 
-        //far leggere da DB la modalità e selezionarla subito
+
         buttonScheduled.setOnClickListener(){
             calendarView.setVisibility(View.VISIBLE)
             pickerDays.setVisibility(View.VISIBLE)
@@ -336,6 +339,13 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
             textViewData.setVisibility(View.VISIBLE)
+            if(viewModelRoutesFragment.plantIrrigationMode.value != 1) {
+                viewModelRoutesFragment.plantStartDate.value = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
+                val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+                val date = formatDate.parse(viewModelRoutesFragment.plantStartDate.value)
+                calendarView.setDate(date.time)
+                date_string = viewModelRoutesFragment.plantStartDate.value.toString()
+            }
 
             card_manual.scaleX = 0.9f
             card_manual.scaleY = 0.9f
@@ -446,13 +456,26 @@ class SpecificPlant : Fragment() {
         })*/
 
         buttonSaveScheduled.setOnClickListener(){
-            if(date_string == "") {
-                date_string = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
-            }
+            //val date = SimpleDateFormat("dd-MM-yyyy").format(calendarView.date)
+            //date_string = date
+            if(date_string == "")
+                date_string = viewModelRoutesFragment.plantStartDate.value.toString()
+
             db.child(currentUser).child("startDate").setValue(date_string)
             db.child(currentUser).child("irrigationDays").setValue(pickerDays.value)
             db.child(currentUser).child("startTime").setValue(pickedTimeText.text.toString())
             db.child(currentUser).child("irrigationMode").setValue(1)
+
+
+            val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+            val date = formatDate.parse(viewModelRoutesFragment.plantStartDate.value)
+            calendarView.setDate(date.time)
+
+
+            Snackbar
+                .make(buttonSaveScheduled, "Programmazione salvata con successo!", Snackbar.LENGTH_LONG)
+                .setBackgroundTint(0xff00BB2D.toInt())
+                .show()
         }
 
         buttonWater.setOnClickListener(){
@@ -466,6 +489,31 @@ class SpecificPlant : Fragment() {
 
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val viewModelRoutesFragment =
+            ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        val radioGroup = view?.findViewById<RadioGroup>(R.id.radioGroup)
+        val buttonManual = view?.findViewById<RadioButton>(R.id.buttonManual)
+        val buttonScheduled = view?.findViewById<RadioButton>(R.id.buttonScheduled)
+        val buttonAutomatic = view?.findViewById<RadioButton>(R.id.buttonAutomatic)
+        if (viewModelRoutesFragment.plantIrrigationMode.value == 0) {
+            buttonManual?.isChecked = true
+            buttonScheduled?.isChecked = false
+            buttonAutomatic?.isChecked = false
+        }
+        else if (viewModelRoutesFragment.plantIrrigationMode.value == 1) {
+            buttonManual?.isChecked = false
+            buttonScheduled?.isChecked = true
+            buttonAutomatic?.isChecked = false
+        }
+        else if (viewModelRoutesFragment.plantIrrigationMode.value == 2) {
+            buttonManual?.isChecked = false
+            buttonScheduled?.isChecked = false
+            buttonAutomatic?.isChecked = true
+        }
     }
 
 
