@@ -47,6 +47,10 @@ private lateinit var photoFile: File //High quality
 private const val FILE_NAME = "photo.jpg" //High quality
 private var setPhoto = false
 private lateinit var temporaryImage: Bitmap
+private var temporaryIrrigationMode = -1
+private var temporaryDate = ""
+private var temporaryDays = 0
+private var temporaryHours = ""
 
 /**
  * A simple [Fragment] subclass.
@@ -70,9 +74,45 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
     override fun onResume() {
         super.onResume()
-        val radioGroup = view?.findViewById<RadioGroup>(R.id.radioGroup)
-        radioGroup?.clearCheck()
+        Log.d("onResume", temporaryIrrigationMode.toString())
+        if(temporaryIrrigationMode != -1){
+            //setIrrigationMode()
+        }
+        else {
+            val radioGroup = view?.findViewById<RadioGroup>(R.id.radioGroup)
+            radioGroup?.clearCheck()
+
+            val textPlantName = view?.findViewById<EditText>(R.id.plantName)
+            textPlantName?.setText("")
+            val textPlantNote = view?.findViewById<EditText>(R.id.plantNote)
+            textPlantNote?.setText("")
+        }
+
+        Log.d("onResume", "onResume")
     }
+
+    /*private fun setIrrigationMode() {
+        //reimposta la modalità di irrigazione
+        val buttonManual = view?.findViewById<RadioButton>(R.id.buttonManual)
+        val buttonScheduled = view?.findViewById<RadioButton>(R.id.buttonScheduled)
+        val buttonAutomatic = view?.findViewById<RadioButton>(R.id.buttonAutomatic)
+        if (temporaryIrrigationMode == 0) {
+            buttonManual?.isChecked = true
+            buttonScheduled?.isChecked = false
+            buttonAutomatic?.isChecked = false
+            Log.d("onResume", "setIrrigationMode")
+        }
+        if (temporaryIrrigationMode == 1) {
+            buttonManual?.isChecked = false
+            buttonScheduled?.isChecked = true
+            buttonAutomatic?.isChecked = false
+        }
+        if (temporaryIrrigationMode == 2) {
+            buttonManual?.isChecked = false
+            buttonScheduled?.isChecked = false
+            buttonAutomatic?.isChecked = true
+        }
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,18 +134,24 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.addPlant)
+            if(findNavController().currentDestination?.id == R.id.addPlant) {
+                setPhotoValue(false)
                 findNavController().navigate(R.id.action_addPlant_to_plants)
+            }
         }
 
         buttonSettings.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.addPlant)
+            if(findNavController().currentDestination?.id == R.id.addPlant) {
+                setPhotoValue(false)
                 findNavController().navigate(R.id.action_addPlant_to_settings)
+            }
         }
 
         buttonProfile.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.addPlant)
+            if(findNavController().currentDestination?.id == R.id.addPlant) {
+                setPhotoValue(false)
                 findNavController().navigate(R.id.action_addPlant_to_profile)
+            }
         }
 
         //calendar reference
@@ -152,11 +198,17 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         pickedTimeText.setVisibility(View.GONE)
 
 
+        Log.d("irrigationMode", "valore tempDate " + temporaryDate)
+        Log.d("irrigationMode", "valore irrMode " + temporaryIrrigationMode)
         //variabili per nuova pianta
         var newPlantResourceId = ""
         var newPlantName = ""
         var newPlantIrrigationMode = -1
-        var newPlantStartDate = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
+        var newPlantStartDate: String
+        if(setPhoto && temporaryDate != "")
+            newPlantStartDate = temporaryDate
+        else
+            newPlantStartDate = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
         var newPlantStartTime = ""
         var newPlantIrrigationDays = -1
         var newPlantHumidityThreshold = 50
@@ -188,6 +240,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             sliderHumidity.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.VISIBLE)
             textViewTheshold.setVisibility(View.GONE)
+            temporaryIrrigationMode = 1
         }
 
         buttonManual.setOnClickListener(){
@@ -200,6 +253,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.GONE)
+            temporaryIrrigationMode = 0
         }
 
         buttonAutomatic.setOnClickListener(){
@@ -212,7 +266,66 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.VISIBLE)
+            temporaryIrrigationMode = 2
         }
+
+        //setta tutte le viste dopo aver fatto la foto
+        if (temporaryIrrigationMode == 0) {
+            Log.d("irrigationMode", "manual")
+            buttonManual?.isChecked = true
+            buttonScheduled?.isChecked = false
+            buttonAutomatic?.isChecked = false
+            calendarView.setVisibility(View.GONE)
+            layoutParams.setMargins(0, 40, 0, 0)
+            textViewGiorni.setVisibility(View.GONE)
+            pickerDays.setVisibility(View.GONE)
+            sliderHumidity.setVisibility(View.GONE)
+            buttonTime.setVisibility(View.GONE)
+            textViewDateSelect.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
+            textViewTheshold.setVisibility(View.GONE)
+        }
+        if (temporaryIrrigationMode == 1) {
+            Log.d("irrigationMode", "scheduled")
+            buttonManual?.isChecked = false
+            buttonScheduled?.isChecked = true
+            buttonAutomatic?.isChecked = false
+            calendarView.setVisibility(View.VISIBLE)
+            layoutParams.setMargins(0, 1900, 0, 0)
+            textViewDateSelect.setVisibility(View.VISIBLE)
+            textViewGiorni.setVisibility(View.VISIBLE)
+            pickerDays.setVisibility(View.VISIBLE)
+            buttonTime.setVisibility(View.VISIBLE)
+            pickedTimeText.setVisibility(View.VISIBLE)
+            sliderHumidity.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.VISIBLE)
+            textViewTheshold.setVisibility(View.GONE)
+
+            //setta tutte le info di programmazione
+            val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+            val date = formatDate.parse(temporaryDate)
+            calendarView.setDate(date.time)
+            newPlantStartDate = temporaryDate
+            pickerDays.value = temporaryDays
+            pickedTimeText.text = temporaryHours
+        }
+        if (temporaryIrrigationMode == 2) {
+            Log.d("irrigationMode", "automatic")
+            buttonManual?.isChecked = false
+            buttonScheduled?.isChecked = false
+            buttonAutomatic?.isChecked = true
+            calendarView.setVisibility(View.GONE)
+            layoutParams.setMargins(0, 500, 0, 0)
+            textViewGiorni.setVisibility(View.GONE)
+            pickerDays.setVisibility(View.GONE)
+            sliderHumidity.setVisibility(View.VISIBLE)
+            buttonTime.setVisibility(View.GONE)
+            textViewDateSelect.setVisibility(View.GONE)
+            pickedTimeText.setVisibility(View.GONE)
+            textViewTheshold.setVisibility(View.VISIBLE)
+        }
+
+
 
         calendarView
             .setOnDateChangeListener(
@@ -241,6 +354,23 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
         //lancia un intent per aprire la camera
         buttonCamera.setOnClickListener(){
+            //per reimpostare la modalità di irrigazione dopo la foto
+            if(buttonManual.isChecked)
+                temporaryIrrigationMode = 0
+            if(buttonScheduled.isChecked) {
+                temporaryIrrigationMode = 1
+                temporaryDate = newPlantStartDate
+                temporaryDays = pickerDays.value
+                temporaryHours = pickedTimeText.text.toString()
+                Log.d("irrigationMode", temporaryDate)
+                Log.d("irrigationMode", temporaryDays.toString())
+                Log.d("irrigationMode", temporaryHours)
+            }
+            if(buttonAutomatic.isChecked)
+                temporaryIrrigationMode = 2
+
+            Log.d("irrigationMode", temporaryIrrigationMode.toString())
+
             val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
 
 
@@ -264,8 +394,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             if(radioGroup.checkedRadioButtonId==buttonManual.id)
                 newPlantIrrigationMode = 0
             if(radioGroup.checkedRadioButtonId==buttonScheduled.id){
-                val date = SimpleDateFormat("dd-MM-yyyy").format(calendarView.date)
-                newPlantStartDate = date
+                Log.d("startDate", newPlantStartDate)
+                //val date = SimpleDateFormat("dd-MM-yyyy").format(calendarView.date)
+                //newPlantStartDate = date
                 newPlantIrrigationMode = 1
                 newPlantIrrigationDays = pickerDays.value
                 newPlantStartTime = pickedTimeText.text.toString()
@@ -365,6 +496,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         imageViewPhoto?.setImageBitmap(takenImage)
     }
 
+
     //la foto a qualità maggiore deve essere ruotata
     fun rotateBitmap(source: Bitmap, degrees: Float): Bitmap {
         val matrix = Matrix()
@@ -372,6 +504,14 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         return Bitmap.createBitmap(
             source, 0, 0, source.width, source.height, matrix, true
         )
+    }
+
+    fun setPhotoValue(value: Boolean){
+        setPhoto = value
+        temporaryIrrigationMode = -1
+        temporaryDate = ""
+        temporaryDays = 0
+        temporaryHours = ""
     }
 
 

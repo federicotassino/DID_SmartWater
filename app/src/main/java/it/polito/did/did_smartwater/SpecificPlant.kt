@@ -56,6 +56,7 @@ class SpecificPlant : Fragment() {
     private val viewModel by activityViewModels<MainViewModel>()
     private var date_string = ""
     public var comingBack = false
+    private var temporaryScheduled = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,23 +78,31 @@ class SpecificPlant : Fragment() {
         val buttonProfile = view.findViewById<ImageView>(R.id.buttonProfile)
 
         buttonPlants.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.specificPlant)
+            if(findNavController().currentDestination?.id == R.id.specificPlant) {
+                setTemporaryScheduled(false)
                 findNavController().navigate(R.id.action_specificPlant_to_plants)
+            }
         }
 
         buttonAddPlants.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.specificPlant)
+            if(findNavController().currentDestination?.id == R.id.specificPlant) {
+                setTemporaryScheduled(false)
                 findNavController().navigate(R.id.action_specificPlant_to_addPlant)
+            }
         }
 
         buttonSettings.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.specificPlant)
+            if(findNavController().currentDestination?.id == R.id.specificPlant) {
+                setTemporaryScheduled(false)
                 findNavController().navigate(R.id.action_specificPlant_to_settings)
+            }
         }
 
         buttonProfile.setOnClickListener(){
-            if(findNavController().currentDestination?.id == R.id.specificPlant)
+            if(findNavController().currentDestination?.id == R.id.specificPlant) {
+                setTemporaryScheduled(false)
                 findNavController().navigate(R.id.action_specificPlant_to_profile)
+            }
         }
 
         //views references
@@ -347,6 +356,8 @@ class SpecificPlant : Fragment() {
                 date_string = viewModelRoutesFragment.plantStartDate.value.toString()
             }
 
+            temporaryScheduled = true
+
             card_manual.scaleX = 0.9f
             card_manual.scaleY = 0.9f
             card_manual.alpha = 0.9f
@@ -381,6 +392,8 @@ class SpecificPlant : Fragment() {
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
 
+            temporaryScheduled = false
+
             card_manual.scaleX =1.15f
             card_manual.scaleY = 1.15f
             card_manual.alpha = 1f
@@ -414,6 +427,8 @@ class SpecificPlant : Fragment() {
             textViewTreshold.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
+
+            temporaryScheduled = false
 
             card_manual.scaleX = 0.9f
             card_manual.scaleY = 0.9f
@@ -468,7 +483,7 @@ class SpecificPlant : Fragment() {
 
 
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-            val date = formatDate.parse(viewModelRoutesFragment.plantStartDate.value)
+            val date = formatDate.parse(date_string)
             calendarView.setDate(date.time)
 
 
@@ -499,21 +514,30 @@ class SpecificPlant : Fragment() {
         val buttonManual = view?.findViewById<RadioButton>(R.id.buttonManual)
         val buttonScheduled = view?.findViewById<RadioButton>(R.id.buttonScheduled)
         val buttonAutomatic = view?.findViewById<RadioButton>(R.id.buttonAutomatic)
-        if (viewModelRoutesFragment.plantIrrigationMode.value == 0) {
-            buttonManual?.isChecked = true
-            buttonScheduled?.isChecked = false
-            buttonAutomatic?.isChecked = false
+        if(!temporaryScheduled) {
+            if (viewModelRoutesFragment.plantIrrigationMode.value == 0) {
+                buttonManual?.isChecked = true
+                buttonScheduled?.isChecked = false
+                buttonAutomatic?.isChecked = false
+            } else if (viewModelRoutesFragment.plantIrrigationMode.value == 1) {
+                buttonManual?.isChecked = false
+                buttonScheduled?.isChecked = true
+                buttonAutomatic?.isChecked = false
+            } else if (viewModelRoutesFragment.plantIrrigationMode.value == 2) {
+                buttonManual?.isChecked = false
+                buttonScheduled?.isChecked = false
+                buttonAutomatic?.isChecked = true
+            }
         }
-        else if (viewModelRoutesFragment.plantIrrigationMode.value == 1) {
+        else {
             buttonManual?.isChecked = false
             buttonScheduled?.isChecked = true
             buttonAutomatic?.isChecked = false
         }
-        else if (viewModelRoutesFragment.plantIrrigationMode.value == 2) {
-            buttonManual?.isChecked = false
-            buttonScheduled?.isChecked = false
-            buttonAutomatic?.isChecked = true
-        }
+    }
+
+    public fun setTemporaryScheduled(value: Boolean) {
+        temporaryScheduled = value
     }
 
 

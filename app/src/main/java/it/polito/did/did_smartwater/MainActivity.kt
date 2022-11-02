@@ -15,12 +15,15 @@ import androidx.navigation.fragment.NavHostFragment
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import it.polito.did.did_smartwater.ui.main.AddPlant
 import it.polito.did.did_smartwater.ui.main.MainViewModel
 import it.polito.did.did_smartwater.ui.main.Plants
 
 class MainActivity : AppCompatActivity() {
 
     public var canGoBack = true
+    val addPlant = AddPlant()
+    val specificPlant = SpecificPlant()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +51,8 @@ class MainActivity : AppCompatActivity() {
             }
             else
                 super.onBackPressed()
+                addPlant.setPhotoValue(false)
+                specificPlant.setTemporaryScheduled(false)
         }
         else
             finishAffinity()
