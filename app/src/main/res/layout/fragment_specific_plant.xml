@@ -185,22 +185,22 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewData"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <Button
                     android:id="@+id/buttonTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="108dp"
                     android:layout_marginEnd="20dp"
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
                     android:text="Modifica orario"
                     android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/pickedTimeText"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pickedTimeText"
-                    app:layout_constraintTop_toTopOf="@+id/textViewGiorni"
-                    tools:visibility="visible" />
+                    app:layout_constraintTop_toTopOf="@+id/pickedTimeText"
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/pickedTimeText"
@@ -214,7 +214,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/buttonTime"
                     app:layout_constraintStart_toEndOf="@+id/textViewTime"
                     app:layout_constraintTop_toBottomOf="@+id/textViewGiorni"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewTime"
@@ -228,7 +228,7 @@
                     app:layout_constraintEnd_toStartOf="@+id/pickedTimeText"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textViewGiorni"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewGiorni"
@@ -237,12 +237,12 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="70dp"
                     android:fontFamily="@font/nexa"
-                    android:text="Irrigazione programmata ogni"
+                    android:text="Irrigazione programmata ogni (giorni)"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintEnd_toStartOf="@+id/pickerDays"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewGiorni2"
@@ -251,12 +251,11 @@
                     android:layout_marginTop="70dp"
                     android:layout_marginEnd="30dp"
                     android:fontFamily="@font/nexa"
-                    android:text="giorni"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/pickerDays"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <NumberPicker
                     android:id="@+id/pickerDays"
@@ -269,7 +268,7 @@
                     app:layout_constraintHorizontal_bias="0.357"
                     app:layout_constraintStart_toEndOf="@+id/textViewGiorni"
                     app:layout_constraintTop_toBottomOf="@+id/calendarView"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewTreshold"
@@ -277,12 +276,26 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="42dp"
                     android:fontFamily="@font/nexa"
-                    android:text="Soglia di umidità:"
+                    android:text="Soglia minima di umidità:"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/donut_view"
-                    tools:visibility="invisible" />
+                    tools:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/textViewThreshold_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/nexa"
+                    android:text="0"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="#099FC5"
+                    android:textSize="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textViewTreshold"
+                    app:layout_constraintStart_toEndOf="@id/textViewTreshold"
+                    app:layout_constraintTop_toTopOf="@id/textViewTreshold" />
 
                 <com.google.android.material.slider.Slider
                     android:id="@+id/seekbarHumidity"
@@ -361,7 +374,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textHumidity"
@@ -434,7 +447,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView4"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textView22"

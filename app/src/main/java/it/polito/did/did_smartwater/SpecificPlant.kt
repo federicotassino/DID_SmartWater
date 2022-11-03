@@ -132,6 +132,8 @@ class SpecificPlant : Fragment() {
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
         val textViewTreshold = view.findViewById<TextView>(R.id.textViewTreshold)
         textViewTreshold.setVisibility(View.GONE)
+        val textViewThreshold_value = view.findViewById<TextView>(R.id.textViewThreshold_value)
+        textViewThreshold_value.setVisibility(View.GONE)
         val buttonSaveScheduled = view.findViewById<Button>(R.id.buttonSaveScheduled)
         buttonSaveScheduled.setVisibility(View.GONE)
         //cards image views to scale
@@ -145,6 +147,7 @@ class SpecificPlant : Fragment() {
 
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.value = viewModelRoutesFragment.plantHumidityThreshold.value!!.toFloat()
+        textViewThreshold_value.text = viewModelRoutesFragment.plantHumidityThreshold.value!!.toString()
         sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {
@@ -154,6 +157,7 @@ class SpecificPlant : Fragment() {
             @SuppressLint("RestrictedApi")
             override fun onStopTrackingTouch(slider: Slider) {
                 db.child(currentUser).child("humidityThreshold").setValue(sliderHumidity.value)
+                textViewThreshold_value.text = sliderHumidity.value.toInt().toString()
             }
         })
         sliderHumidity.setVisibility(View.GONE)
@@ -227,6 +231,7 @@ class SpecificPlant : Fragment() {
             textViewGiorni2.setVisibility(View.GONE)
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
 
@@ -263,6 +268,7 @@ class SpecificPlant : Fragment() {
             pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
             textViewTime.setVisibility(View.VISIBLE)
             textViewTreshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
             textViewData.setVisibility(View.VISIBLE)
 
@@ -311,6 +317,7 @@ class SpecificPlant : Fragment() {
             textViewGiorni2.setVisibility(View.GONE)
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.VISIBLE)
+            textViewThreshold_value.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
 
@@ -346,6 +353,7 @@ class SpecificPlant : Fragment() {
             pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
             textViewTime.setVisibility(View.VISIBLE)
             textViewTreshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.VISIBLE)
             textViewData.setVisibility(View.VISIBLE)
             if(viewModelRoutesFragment.plantIrrigationMode.value != 1) {
@@ -389,6 +397,7 @@ class SpecificPlant : Fragment() {
             textViewGiorni2.setVisibility(View.GONE)
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
 
@@ -425,6 +434,7 @@ class SpecificPlant : Fragment() {
             textViewGiorni2.setVisibility(View.GONE)
             textViewTime.setVisibility(View.GONE)
             textViewTreshold.setVisibility(View.VISIBLE)
+            textViewThreshold_value.setVisibility(View.VISIBLE)
             buttonSaveScheduled.setVisibility(View.GONE)
             textViewData.setVisibility(View.GONE)
 

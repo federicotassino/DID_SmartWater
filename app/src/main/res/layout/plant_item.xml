@@ -65,6 +65,7 @@
         android:fontFamily="@font/nexa"
         android:text="TextView"
         android:textSize="16sp"
+        android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/imageViewProfilePhoto"
         app:layout_constraintTop_toBottomOf="@+id/plant_item_name2" />
 

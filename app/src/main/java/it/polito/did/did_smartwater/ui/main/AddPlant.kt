@@ -1,5 +1,6 @@
 package it.polito.did.did_smartwater.ui.main
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -180,8 +181,23 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
         val textViewDateSelect = view.findViewById<TextView>(R.id.textViewDateSelect)
         textViewDateSelect.setVisibility(View.GONE)
+
+        val textViewThreshold_value = view.findViewById<TextView>(R.id.textViewThreshold_value2)
+        textViewThreshold_value.setVisibility(View.GONE)
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.setVisibility(View.GONE)
+        sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+            @SuppressLint("RestrictedApi")
+            override fun onStartTrackingTouch(slider: Slider) {
+                // Responds to when slider's touch event is being started
+            }
+
+            @SuppressLint("RestrictedApi")
+            override fun onStopTrackingTouch(slider: Slider) {
+                textViewThreshold_value.text = sliderHumidity.value.toInt().toString()
+            }
+        })
+
         val buttonCamera = view.findViewById<ImageView>(R.id.buttonCamera)
         val imageViewPhoto = view.findViewById<ImageView>(R.id.imageViewPhoto)
 
@@ -240,6 +256,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             sliderHumidity.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.VISIBLE)
             textViewTheshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
             temporaryIrrigationMode = 1
         }
 
@@ -253,12 +270,13 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
             temporaryIrrigationMode = 0
         }
 
         buttonAutomatic.setOnClickListener(){
             calendarView.setVisibility(View.GONE)
-            layoutParams.setMargins(0, 500, 0, 0)
+            layoutParams.setMargins(0, 600, 0, 0)
             textViewGiorni.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.VISIBLE)
@@ -266,6 +284,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.VISIBLE)
+            textViewThreshold_value.setVisibility(View.VISIBLE)
             temporaryIrrigationMode = 2
         }
 
@@ -284,6 +303,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
         }
         if (temporaryIrrigationMode == 1) {
             Log.d("irrigationMode", "scheduled")
@@ -300,6 +320,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             sliderHumidity.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.VISIBLE)
             textViewTheshold.setVisibility(View.GONE)
+            textViewThreshold_value.setVisibility(View.GONE)
 
             //setta tutte le info di programmazione
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -315,7 +336,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             buttonScheduled?.isChecked = false
             buttonAutomatic?.isChecked = true
             calendarView.setVisibility(View.GONE)
-            layoutParams.setMargins(0, 500, 0, 0)
+            layoutParams.setMargins(0, 600, 0, 0)
             textViewGiorni.setVisibility(View.GONE)
             pickerDays.setVisibility(View.GONE)
             sliderHumidity.setVisibility(View.VISIBLE)
@@ -323,6 +344,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             textViewDateSelect.setVisibility(View.GONE)
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.VISIBLE)
+            textViewThreshold_value.setVisibility(View.VISIBLE)
         }
 
 
@@ -384,6 +406,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
             startActivityForResult(takePictureIntent, REQUEST_CODE)
         }
+
+
 
         buttonAdd.setOnClickListener(){
 
