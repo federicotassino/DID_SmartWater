@@ -107,7 +107,7 @@ class SignUpFragment : Fragment() {
                                 Log.w("SignUp", "createUserWithEmail:failure", task.exception)
                                 Snackbar
                                     .make(buttonSignUp, "Email o password non validi", Snackbar.LENGTH_LONG)
-                                    .setBackgroundTint(0xff00BB2D.toInt())
+                                    .setBackgroundTint(0xff7f0000.toInt())
                                     .show()
                             }
                         }

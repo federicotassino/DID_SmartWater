@@ -52,6 +52,7 @@ private var temporaryIrrigationMode = -1
 private var temporaryDate = ""
 private var temporaryDays = 0
 private var temporaryHours = ""
+private var temporaryThreshold = "0%"
 
 /**
  * A simple [Fragment] subclass.
@@ -184,6 +185,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
         val textViewThreshold_value = view.findViewById<TextView>(R.id.textViewThreshold_value2)
         textViewThreshold_value.setVisibility(View.GONE)
+        val textViewThreshold2 = view.findViewById<TextView>(R.id.textViewThreshold2)
+        textViewThreshold2.setVisibility(View.GONE)
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.setVisibility(View.GONE)
         sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
@@ -194,7 +197,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
             @SuppressLint("RestrictedApi")
             override fun onStopTrackingTouch(slider: Slider) {
-                textViewThreshold_value.text = sliderHumidity.value.toInt().toString()
+                textViewThreshold_value.text = sliderHumidity.value.toInt().toString() + "%"
             }
         })
 
@@ -212,6 +215,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         var pickedTimeText = view.findViewById<TextView>(R.id.pickedTimeText)
         pickedTimeText.text = SimpleDateFormat("HH:mm").format(cal.time)
         pickedTimeText.setVisibility(View.GONE)
+        val textTime = view.findViewById<TextView>(R.id.textTime)
+        textTime.setVisibility(View.GONE)
 
 
         Log.d("irrigationMode", "valore tempDate " + temporaryDate)
@@ -257,6 +262,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.VISIBLE)
             textViewTheshold.setVisibility(View.GONE)
             textViewThreshold_value.setVisibility(View.GONE)
+            textViewThreshold2.setVisibility(View.GONE)
+            textTime.setVisibility(View.VISIBLE)
             temporaryIrrigationMode = 1
         }
 
@@ -271,6 +278,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.GONE)
             textViewThreshold_value.setVisibility(View.GONE)
+            textViewThreshold2.setVisibility(View.GONE)
+            textTime.setVisibility(View.GONE)
             temporaryIrrigationMode = 0
         }
 
@@ -285,6 +294,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.VISIBLE)
             textViewThreshold_value.setVisibility(View.VISIBLE)
+            textViewThreshold2.setVisibility(View.VISIBLE)
+            textTime.setVisibility(View.GONE)
             temporaryIrrigationMode = 2
         }
 
@@ -304,6 +315,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.GONE)
             textViewThreshold_value.setVisibility(View.GONE)
+            textViewThreshold2.setVisibility(View.GONE)
+            textTime.setVisibility(View.GONE)
         }
         if (temporaryIrrigationMode == 1) {
             Log.d("irrigationMode", "scheduled")
@@ -321,6 +334,8 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.VISIBLE)
             textViewTheshold.setVisibility(View.GONE)
             textViewThreshold_value.setVisibility(View.GONE)
+            textViewThreshold2.setVisibility(View.GONE)
+            textTime.setVisibility(View.VISIBLE)
 
             //setta tutte le info di programmazione
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
@@ -345,6 +360,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             pickedTimeText.setVisibility(View.GONE)
             textViewTheshold.setVisibility(View.VISIBLE)
             textViewThreshold_value.setVisibility(View.VISIBLE)
+            textViewThreshold2.setVisibility(View.VISIBLE)
+            textViewThreshold_value.text = temporaryThreshold
+            textTime.setVisibility(View.GONE)
         }
 
 
@@ -388,8 +406,10 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 Log.d("irrigationMode", temporaryDays.toString())
                 Log.d("irrigationMode", temporaryHours)
             }
-            if(buttonAutomatic.isChecked)
+            if(buttonAutomatic.isChecked) {
                 temporaryIrrigationMode = 2
+                temporaryThreshold = textViewThreshold_value.text.toString()
+            }
 
             Log.d("irrigationMode", temporaryIrrigationMode.toString())
 
@@ -467,7 +487,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
 
                 //code to create a new Plant.kt object on the viewmodel
                 viewModelRoutesFragment.bmp = bm
-                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,0f, newPlantHumidityThreshold, newPlantNote, bm))
+                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,1f, newPlantHumidityThreshold, newPlantNote, bm))
                 viewModelRoutesFragment.plantlist[0] = viewModelRoutesFragment.currentPlant.value!!
 
                 //code to write new plant info on the database
@@ -477,7 +497,7 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
                 db.child(currentUser).child("startDate").setValue(newPlantStartDate)
                 db.child(currentUser).child("startTime").setValue(newPlantStartTime)
                 db.child(currentUser).child("irrigationDays").setValue(newPlantIrrigationDays)
-                db.child(currentUser).child("humidityLevel").setValue(0f)
+                db.child(currentUser).child("humidityLevel").setValue(1f)
                 db.child(currentUser).child("humidityThreshold").setValue(newPlantHumidityThreshold)
                 db.child(currentUser).child("note").setValue(newPlantNote)
 
@@ -536,6 +556,9 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         temporaryDate = ""
         temporaryDays = 0
         temporaryHours = ""
+        val sliderHumidity = view?.findViewById<Slider>(R.id.seekbarHumidity)
+        sliderHumidity?.value = 0f
+        temporaryThreshold = "0%"
     }
 
 

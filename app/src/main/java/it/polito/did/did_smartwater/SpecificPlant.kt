@@ -130,6 +130,7 @@ class SpecificPlant : Fragment() {
         val plantNote = view.findViewById<EditText>(R.id.plantNote)
         val donutHumidity = view.findViewById<DonutProgressView>(R.id.donut_view)
         val textHumidity = view.findViewById<TextView>(R.id.textHumidity)
+        val textHumidityValue = view.findViewById<TextView>(R.id.textHumidityValue)
         val textViewTreshold = view.findViewById<TextView>(R.id.textViewTreshold)
         textViewTreshold.setVisibility(View.GONE)
         val textViewThreshold_value = view.findViewById<TextView>(R.id.textViewThreshold_value)
@@ -147,7 +148,7 @@ class SpecificPlant : Fragment() {
 
         val sliderHumidity = view.findViewById<Slider>(R.id.seekbarHumidity)
         sliderHumidity.value = viewModelRoutesFragment.plantHumidityThreshold.value!!.toFloat()
-        textViewThreshold_value.text = viewModelRoutesFragment.plantHumidityThreshold.value!!.toString()
+        textViewThreshold_value.text = viewModelRoutesFragment.plantHumidityThreshold.value!!.toString() +"%"
         sliderHumidity.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
             @SuppressLint("RestrictedApi")
             override fun onStartTrackingTouch(slider: Slider) {
@@ -157,7 +158,7 @@ class SpecificPlant : Fragment() {
             @SuppressLint("RestrictedApi")
             override fun onStopTrackingTouch(slider: Slider) {
                 db.child(currentUser).child("humidityThreshold").setValue(sliderHumidity.value)
-                textViewThreshold_value.text = sliderHumidity.value.toInt().toString()
+                textViewThreshold_value.text = sliderHumidity.value.toInt().toString() + "%"
             }
         })
         sliderHumidity.setVisibility(View.GONE)
@@ -201,6 +202,7 @@ class SpecificPlant : Fragment() {
             donutHumidity.cap = 100f
             viewModelRoutesFragment.plantHumidityLevel.value?.let { it1 ->
                 donutHumidity.setAmount("Humidity", it1)
+                textHumidityValue.text = it1.toInt().toString() + "%"
             }
 
         })
@@ -295,6 +297,7 @@ class SpecificPlant : Fragment() {
                 //your code here
                 val date = formatDate.parse(viewModelRoutesFragment.plantStartDate.value)
                 calendarView.setDate(date.time)
+                Log.d("calendariObserver", viewModelRoutesFragment.plantStartDate.value.toString())
             })
 
 
@@ -358,6 +361,7 @@ class SpecificPlant : Fragment() {
             textViewData.setVisibility(View.VISIBLE)
             if(viewModelRoutesFragment.plantIrrigationMode.value != 1) {
                 viewModelRoutesFragment.plantStartDate.value = SimpleDateFormat("dd-MM-yyyy").format(cal.time)
+                Log.d("calendario", viewModelRoutesFragment.plantStartDate.value.toString())
                 val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
                 val date = formatDate.parse(viewModelRoutesFragment.plantStartDate.value)
                 calendarView.setDate(date.time)
@@ -495,6 +499,7 @@ class SpecificPlant : Fragment() {
             val formatDate = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
             val date = formatDate.parse(date_string)
             calendarView.setDate(date.time)
+            Log.d("calendarioSave", date_string)
 
 
             Snackbar

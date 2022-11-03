@@ -46,14 +46,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginTop="2dp"
                     android:fontFamily="@font/nexa"
-                    android:text="0"
+                    android:text="0%"
                     android:textAppearance="@style/TextAppearance.AppCompat.Small"
                     android:textColor="#099FC5"
                     android:textSize="16dp"
                     app:layout_constraintBottom_toBottomOf="@+id/textViewThreshold"
                     app:layout_constraintStart_toEndOf="@id/textViewThreshold"
-                    app:layout_constraintTop_toTopOf="@id/textViewThreshold" />
+                    app:layout_constraintTop_toTopOf="@id/textViewThreshold"
+                    tools:visibility="invisible" />
 
                 <ImageView
                     android:id="@+id/imageView15"
@@ -164,8 +166,7 @@
                     android:fontFamily="@font/nexa"
                     android:text="Seleziona intervallo irrigazione (giorni)"
                     app:layout_constraintStart_toStartOf="@+id/calendarView"
-                    app:layout_constraintTop_toBottomOf="@+id/calendarView"
-                    tools:visibility="invisible" />
+                    app:layout_constraintTop_toBottomOf="@+id/calendarView" />
 
                 <NumberPicker
                     android:id="@+id/pickerDays"
@@ -199,7 +200,7 @@
                     app:trackColorActive="#aa356CFF"
                     app:trackColorInactive="#44356CFF"
                     app:trackHeight="10dp"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewNote"
@@ -273,21 +274,22 @@
                     app:layout_constraintHorizontal_bias="0.165"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-                    tools:visibility="visible" />
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textViewThreshold2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="-41dp"
                     android:fontFamily="@font/nexa"
                     android:text="(rilevata un'umidità inferiore a questa soglia la pianta verrà irrigata autonomamente)"
                     android:textSize="12dp"
-                    app:layout_constraintEnd_toEndOf="@+id/textViewThreshold_value2"
+                    app:layout_constraintEnd_toEndOf="@+id/textViewThreshold"
                     app:layout_constraintStart_toStartOf="@id/textViewThreshold"
-                    app:layout_constraintTop_toBottomOf="@id/textViewThreshold"
 
-                    tools:visibility="visible" />
+                    app:layout_constraintTop_toBottomOf="@id/textViewThreshold"
+                    tools:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/dateDebug"
@@ -300,31 +302,44 @@
                     app:layout_constraintTop_toBottomOf="@+id/radioGroup"
                     tools:visibility="invisible" />
 
+                <TextView
+                    android:id="@+id/textTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="2dp"
+                    android:fontFamily="@font/nexa"
+                    android:text="Irriga alle:"
+                    app:layout_constraintBottom_toBottomOf="@+id/pickedTimeText"
+                    app:layout_constraintEnd_toStartOf="@+id/pickedTimeText"
+                    app:layout_constraintStart_toStartOf="@+id/textViewGiorni"
+                    app:layout_constraintTop_toTopOf="@+id/pickedTimeText" />
+
                 <Button
                     android:id="@+id/buttonTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="70dp"
+                    android:layout_marginTop="100dp"
+                    android:layout_marginEnd="20dp"
                     android:backgroundTint="#356CFF"
                     android:fontFamily="@font/nexa"
                     android:text="Modifica orario"
-                    android:textSize="12sp"
-                    app:layout_constraintStart_toStartOf="@+id/textViewGiorni"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewGiorni"
-                    tools:visibility="invisible" />
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/pickedTimeText"
+                    app:layout_constraintTop_toBottomOf="@+id/textViewGiorni" />
 
                 <TextView
                     android:id="@+id/pickedTimeText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="32dp"
                     android:fontFamily="@font/nexa"
                     android:hint="12:00"
-                    android:textSize="18sp"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/buttonTime"
-                    app:layout_constraintStart_toEndOf="@+id/buttonTime"
-                    app:layout_constraintTop_toTopOf="@+id/buttonTime"
-                    tools:visibility="invisible" />
+                    app:layout_constraintEnd_toStartOf="@+id/buttonTime"
+                    app:layout_constraintStart_toEndOf="@+id/textTime"
+                    app:layout_constraintTop_toTopOf="@+id/buttonTime" />
 
                 <TextView
                     android:id="@+id/textView3"
