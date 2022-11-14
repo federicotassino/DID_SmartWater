@@ -106,7 +106,8 @@
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/plantName" />
+                    app:layout_constraintTop_toBottomOf="@+id/plantName"
+                    tools:visibility="invisible" />
 
                 <RadioGroup
                     android:id="@+id/radioGroup"
@@ -116,7 +117,8 @@
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation">
+                    app:layout_constraintTop_toBottomOf="@+id/textViewIrrigation"
+                    tools:visibility="invisible">
 
 
                     <RadioButton
@@ -126,7 +128,8 @@
                         android:background="@drawable/irrigation_manual_selector"
                         android:button="@null"
                         android:scaleX="1.25"
-                        android:scaleY="1.25" />
+                        android:scaleY="1.25"
+                        tools:visibility="invisible" />
 
                     <RadioButton
                         android:id="@+id/buttonScheduled"
@@ -447,6 +450,53 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:id="@+id/imageViewPopUp"
+            android:layout_width="268dp"
+            android:layout_height="190dp"
+            android:src="@drawable/rounded_bg_3"
+            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewPopUp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            android:fontFamily="@font/nexa"
+            android:text="Attenzione: disponendo di un solo sistema hardware, aggiungere una nuova pianta cancellerà i dati dell'eventuale pianta esistente"
+            android:textAlignment="center"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewPopUp"
+            app:layout_constraintEnd_toEndOf="@+id/imageViewPopUp"
+            app:layout_constraintStart_toStartOf="@+id/imageViewPopUp"
+            app:layout_constraintTop_toTopOf="@+id/imageViewPopUp"
+            app:layout_constraintVertical_bias="0.49" />
+
+        <Button
+            android:id="@+id/buttonAnnullaPopUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="25dp"
+            android:backgroundTint="#7797B0"
+            android:fontFamily="@font/nexa"
+            android:text="Annulla"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="@+id/textViewPopUp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPopUp" />
+
+        <Button
+            android:id="@+id/buttonOKPopUP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:backgroundTint="#356CFF"
+            android:fontFamily="@font/nexa"
+            android:text="OK"
+            app:layout_constraintEnd_toEndOf="@+id/textViewPopUp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewPopUp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

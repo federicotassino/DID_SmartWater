@@ -13,6 +13,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.view.View
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.*
@@ -29,13 +30,10 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import it.polito.did.did_smartwater.R
 import it.polito.did.did_smartwater.model.Plant
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.time.Duration.Companion.days
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -182,6 +180,27 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         val buttonAdd = view.findViewById<Button>(R.id.buttonAdd)
         val textViewDateSelect = view.findViewById<TextView>(R.id.textViewDateSelect)
         textViewDateSelect.setVisibility(View.GONE)
+
+        //PopUp
+        val scrollView2 = view.findViewById<ScrollView>(R.id.scrollView2)
+        val imageViewPopUp = view.findViewById<ImageView>(R.id.imageViewPopUp)
+        val textViewPopUp = view.findViewById<TextView>(R.id.textViewPopUp)
+        val buttonOKPopUp = view.findViewById<Button>(R.id.buttonOKPopUP)
+        val buttonAnnullaPopUp = view.findViewById<Button>(R.id.buttonAnnullaPopUp)
+        imageViewPopUp.setVisibility(View.GONE)
+        textViewPopUp.setVisibility(View.GONE)
+        buttonAnnullaPopUp.setVisibility(View.GONE)
+        buttonOKPopUp.setVisibility(View.GONE)
+
+        buttonAnnullaPopUp.setOnClickListener() {
+            imageViewPopUp.setVisibility(View.GONE)
+            textViewPopUp.setVisibility(View.GONE)
+            buttonAnnullaPopUp.setVisibility(View.GONE)
+            buttonOKPopUp.setVisibility(View.GONE)
+            scrollView2.setOnTouchListener(null)
+        }
+
+
 
         val textViewThreshold_value = view.findViewById<TextView>(R.id.textViewThreshold_value2)
         textViewThreshold_value.setVisibility(View.GONE)
@@ -428,6 +447,46 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
         }
 
 
+        buttonOKPopUp.setOnClickListener() {
+            imageViewPopUp.setVisibility(View.GONE)
+            textViewPopUp.setVisibility(View.GONE)
+            buttonAnnullaPopUp.setVisibility(View.GONE)
+            buttonOKPopUp.setVisibility(View.GONE)
+
+            scrollView2.setOnTouchListener(null)
+
+            Snackbar
+                .make(buttonAdd, "Pianta aggiunta con successo!", Snackbar.LENGTH_LONG)
+                .setBackgroundTint(0xff00BB2D.toInt())
+                .show()
+
+            //upload photo
+            val storage = FirebaseStorage.getInstance().getReference()
+            val plantRef = storage.child(currentUser)
+            val baos = ByteArrayOutputStream()
+            val bm = (imageViewPhoto.getDrawable() as BitmapDrawable).bitmap
+            bm.compress(Bitmap.CompressFormat.PNG, 100, baos)
+            val data = baos.toByteArray()
+            plantRef.putBytes(data)
+
+            //code to create a new Plant.kt object on the viewmodel
+            viewModelRoutesFragment.bmp = bm
+            viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,1f, newPlantHumidityThreshold, newPlantNote, bm))
+            viewModelRoutesFragment.plantlist[0] = viewModelRoutesFragment.currentPlant.value!!
+
+            //code to write new plant info on the database
+            db.child(currentUser).child("id").setValue(0)
+            db.child(currentUser).child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
+            db.child(currentUser).child("irrigationMode").setValue((newPlantIrrigationMode))
+            db.child(currentUser).child("startDate").setValue(newPlantStartDate)
+            db.child(currentUser).child("startTime").setValue(newPlantStartTime)
+            db.child(currentUser).child("irrigationDays").setValue(newPlantIrrigationDays)
+            db.child(currentUser).child("humidityLevel").setValue(1f)
+            db.child(currentUser).child("humidityThreshold").setValue(newPlantHumidityThreshold)
+            db.child(currentUser).child("note").setValue(newPlantNote)
+        }
+
+
 
         buttonAdd.setOnClickListener(){
 
@@ -471,36 +530,13 @@ class AddPlant : Fragment(R.layout.fragment_add_plant) {
             }
 
             else{
-                Snackbar
-                    .make(buttonAdd, "Pianta aggiunta con successo!", Snackbar.LENGTH_LONG)
-                    .setBackgroundTint(0xff00BB2D.toInt())
-                    .show()
+                imageViewPopUp.setVisibility(View.VISIBLE)
+                textViewPopUp.setVisibility(View.VISIBLE)
+                buttonAnnullaPopUp.setVisibility(View.VISIBLE)
+                buttonOKPopUp.setVisibility(View.VISIBLE)
 
-                //upload photo
-                val storage = FirebaseStorage.getInstance().getReference()
-                val plantRef = storage.child(currentUser)
-                val baos = ByteArrayOutputStream()
-                val bm = (imageViewPhoto.getDrawable() as BitmapDrawable).bitmap
-                bm.compress(Bitmap.CompressFormat.PNG, 100, baos)
-                val data = baos.toByteArray()
-                plantRef.putBytes(data)
 
-                //code to create a new Plant.kt object on the viewmodel
-                viewModelRoutesFragment.bmp = bm
-                viewModelRoutesFragment.currentPlant.setValue(Plant(1, newPlantName,newPlantIrrigationMode, newPlantStartDate, newPlantStartTime, newPlantIrrigationDays,1f, newPlantHumidityThreshold, newPlantNote, bm))
-                viewModelRoutesFragment.plantlist[0] = viewModelRoutesFragment.currentPlant.value!!
-
-                //code to write new plant info on the database
-                db.child(currentUser).child("id").setValue(0)
-                db.child(currentUser).child("name").setValue(viewModelRoutesFragment.currentPlant.value!!.name)
-                db.child(currentUser).child("irrigationMode").setValue((newPlantIrrigationMode))
-                db.child(currentUser).child("startDate").setValue(newPlantStartDate)
-                db.child(currentUser).child("startTime").setValue(newPlantStartTime)
-                db.child(currentUser).child("irrigationDays").setValue(newPlantIrrigationDays)
-                db.child(currentUser).child("humidityLevel").setValue(1f)
-                db.child(currentUser).child("humidityThreshold").setValue(newPlantHumidityThreshold)
-                db.child(currentUser).child("note").setValue(newPlantNote)
-
+                scrollView2.setOnTouchListener(OnTouchListener { v, event -> true })
             }
         }
     }
